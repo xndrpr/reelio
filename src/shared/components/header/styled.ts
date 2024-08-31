@@ -5,8 +5,7 @@ import { breakPoint2, breakPoint3 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
 export const CustomTabs = styled(Tabs)`
-  width: 432px;
-  min-width: 432px;
+  min-width: 500px;
   height: 40px;
 
   @media (max-width: ${breakPoint2}px) {

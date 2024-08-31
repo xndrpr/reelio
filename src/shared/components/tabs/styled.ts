@@ -1,13 +1,15 @@
 'use client';
 
-import { darkPurple, fgColor, lightPurple, mediumPurple, radius } from "@/shared/variables";
+import { breakPoint3, darkPurple, fgColor, lightPurple, mediumPurple, radius } from "@/shared/variables";
 import styled from "@emotion/styled";
 
+
 export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
+  --padding-size: 4px;
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  gap: 2px;
+  gap: var(--padding-size);
   background-color: ${darkPurple};
   border-radius: ${radius}px;
   box-sizing: border-box;
@@ -18,9 +20,8 @@ export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
     border-radius: inherit;
     content: "";
     position: absolute;
-    inset: 2px;
-    transform: translateX(${props => props.$activeTab === props.$tabsCount - 1 ? "-4px" : "0px"});
-    width: calc(100% / ${props => props.$tabsCount});
+    inset: var(--padding-size);
+    width: calc(100% / ${props => props.$tabsCount} - var(--padding-size) * 2);
     margin-left: ${props => props.$activeTab * 100 / props.$tabsCount}%;
     background: ${mediumPurple};
 
@@ -30,7 +31,6 @@ export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
 
 export const Tab = styled.div<{ $isActive: boolean }>`
   color: ${fgColor};
-  border-radius: 6.91px;
 
   height: 100%;
   display: flex;
