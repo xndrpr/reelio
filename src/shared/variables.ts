@@ -12,8 +12,4 @@ export const darkGrey = "#444444";
 export const imdbColor = "#C49F1D";
 export const kpColor = "#CA581F";
 
-export const radius = 12;
-
-export const breakPoint1 = 900;
-export const breakPoint2 = 780;
-export const breakPoint3 = 500;
+export const radius = "12px";
