@@ -16,7 +16,7 @@ export const SearchContainer = styled.div`
 
   padding: 12px;
 
-  border-radius: ${radius};
+  border-radius: ${radius}px;
   cursor: text;
 `;
 
