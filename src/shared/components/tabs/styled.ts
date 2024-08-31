@@ -9,7 +9,7 @@ export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 2px;
   background-color: ${darkPurple};
-  border-radius: ${radius};
+  border-radius: ${radius}px;
   box-sizing: border-box;
   isolation: isolate;
 
