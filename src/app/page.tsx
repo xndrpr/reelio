@@ -1,23 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { CustomTabs, Header } from "./styled";
-import { SearchBar } from "@/shared/components/search-bar";
+import { useHeader } from "@/hooks/use-header";
+import { Header } from "@/shared/components/header";
 
 export default function Home() {
-  const tabs = ["Фильмы", "Сериалы", "Аниме", "Мультфильмы"];
-  const [activeTab, setActiveTab] = useState(0);
+  const header = useHeader();
 
   return (
     <main>
-      <Header>
-        <CustomTabs
-          tabs={tabs}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <SearchBar />
-      </Header>
+      <Header header={header} />
     </main>
   );
 }
