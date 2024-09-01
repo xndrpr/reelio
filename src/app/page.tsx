@@ -4,6 +4,7 @@ import { useGetMovies } from "@/hooks/api/use-get-movies";
 import { useHeader } from "@/hooks/use-header";
 import { Header } from "@/shared/components/header";
 import { MovieCard } from "./movie-card";
+import { CardsContainer } from "./styled";
 
 export default function Home() {
   const header = useHeader();
@@ -14,11 +15,11 @@ export default function Home() {
       <Header header={header} />
       <div>
         {header.activeTab === 0 && (
-          <div>
+          <CardsContainer>
             {movies?.data.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
-          </div>
+          </CardsContainer>
         )}
         {header.activeTab === 1 && <div>Сериалы</div>}
         {header.activeTab === 2 && <div>Аниме</div>}
