@@ -38,7 +38,7 @@ export const Tab = styled.div<{ $isActive: boolean }>`
   align-items: center;
 
   font-size: 13px;
-  font-weight: 440;
+  font-weight: 500;
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent; /* removing blue highlight */

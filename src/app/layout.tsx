@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Providers from "./providers";
 import { ContentWrapper, GlobalStyles } from "./layout-styled";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <GlobalStyles />
 
-        <ContentWrapper>{children}</ContentWrapper>
+        <Providers>
+          <ContentWrapper>{children}</ContentWrapper>
+        </Providers>
       </body>
     </html>
   );
