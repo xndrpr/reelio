@@ -22,7 +22,13 @@ export const MovieCard = ({ movie }: Props) => {
   return (
     <Container>
       <HoverContainer href={`/movie/${movie.id}`}>
-        <Poster width={200} height={280} src={movie.poster} alt="poster" />
+        <Poster
+          priority
+          width={200}
+          height={280}
+          src={movie.poster}
+          alt="poster"
+        />
         <TitleContainer>
           <Title>{movie.title}</Title>
           <Year>{movie.year}</Year>
@@ -38,7 +44,7 @@ export const MovieCard = ({ movie }: Props) => {
         <RatingBadge
           backgroundColor={kpColor}
           color={fgColor}
-          rating={movie.rating_kp}
+          rating={parseFloat(movie.rating_kp.toFixed(1))}
           icon={<KpIcon />}
         />
       </RatingContainer>

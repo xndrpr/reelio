@@ -1,11 +1,16 @@
 import React from "react";
 import { Tab, TabsSC } from "./styled";
 
+export interface Tab {
+  title: string;
+  isDisabled?: boolean;
+}
+
 interface Props {
   className?: string;
   activeTab: number;
   setActiveTab: React.Dispatch<React.SetStateAction<number>>;
-  tabs: string[];
+  tabs: Tab[];
 }
 
 export const Tabs = ({ className, activeTab, setActiveTab, tabs }: Props) => {
@@ -19,9 +24,10 @@ export const Tabs = ({ className, activeTab, setActiveTab, tabs }: Props) => {
         <Tab
           key={index}
           $isActive={activeTab === index}
-          onClick={() => setActiveTab(index)}
+          $isDisabled={tab.isDisabled || false}
+          onClick={() => !tab.isDisabled && setActiveTab(index)}
         >
-          {tab}
+          {tab.title}
         </Tab>
       ))}
     </TabsSC>

@@ -6,13 +6,16 @@ const QUERY_KEY = "getMovie";
 
 const createQueryFn = (id: number) => {
   return async () => {
+    const res = await fetch(`http://localhost:6100/api/movies/${id}`);
+    const data = await res.json();
+
     return {
-      id,
-      title: "Бегущий в лабиринте",
-      year: 2015,
-      poster: "https://statichdrezka.ac/i/2014/11/8/e92d45ae21c77an98d23n.jpg",
-      rating_imdb: 6.8,
-      rating_kp: 7.9,
+      id: data.id,
+      title: data.name,
+      rating_imdb: data.rating.imdb,
+      rating_kp: data.rating.kp,
+      poster: data.poster.url,
+      year: data.year,
     } as Movie;
   };
 };

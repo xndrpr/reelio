@@ -4,9 +4,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "statichdrezka.ac",
+        hostname: "image.openmoviedb.com",
         port: "",
-        pathname: "/i/**"
+        pathname: "/**"
       }
     ]
   }

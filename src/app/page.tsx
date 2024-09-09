@@ -8,7 +8,7 @@ import { CardsContainer } from "./styled";
 
 export default function Home() {
   const header = useHeader();
-  const { data: movies } = useGetMovies();
+  const { data: movies, isPending } = useGetMovies();
 
   return (
     <main>
@@ -16,6 +16,7 @@ export default function Home() {
       <div>
         {header.activeTab === 0 && (
           <CardsContainer>
+            {isPending && "Загрузка..."}
             {movies?.data.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}

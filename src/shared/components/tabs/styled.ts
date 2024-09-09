@@ -38,7 +38,7 @@ export const TabsSC = styled.div<{ $activeTab: number; $tabsCount: number }>`
   }
 `;
 
-export const Tab = styled.div<{ $isActive: boolean }>`
+export const Tab = styled.div<{ $isActive: boolean; $isDisabled: boolean }>`
   color: ${fgColor};
 
   height: 100%;
@@ -50,8 +50,11 @@ export const Tab = styled.div<{ $isActive: boolean }>`
   font-weight: 500;
 
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent; /* removing blue highlight */
+  -webkit-tap-highlight-color: transparent;
 
   user-select: none;
   -webkit-user-select: none;
+
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
+  cursor: ${(props) => (props.$isDisabled ? "not-allowed" : "pointer")};
 `;
