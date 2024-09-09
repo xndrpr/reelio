@@ -1,7 +1,8 @@
 "use client";
 
 import { Tabs } from "@/shared/components/tabs";
-import { darkPurple } from "@/shared/variables";
+import { breakPoint2, darkPurple } from "@/shared/variables";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 
@@ -11,9 +12,13 @@ export const Container = styled.div`
   gap: 12px;
   padding-top: 60px;
   height: 100%;
+
+  @media (max-width: ${breakPoint2}px) {
+    transform: rotate(90deg);
+  }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled(Link)<{ $isRotate?: boolean }>`
   position: fixed;
   inset: 50px;
 
@@ -27,6 +32,10 @@ export const BackButton = styled(Link)`
   align-items: center;
 
   cursor: pointer;
+
+  @media (max-width: ${breakPoint2}px) {
+    transform: ${(props) => props.$isRotate && css`rotate(90deg)`};
+  }
 `;
 
 export const Player = styled.div`
