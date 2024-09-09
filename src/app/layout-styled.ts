@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import { bgColor, breakPoint1, breakPoint2, breakPoint3, fgColor } from "@/shared/variables";
+import {
+  bgColor,
+  breakPoint1,
+  breakPoint2,
+  breakPoint3,
+  fgColor,
+} from "@/shared/variables";
 import styled from "@emotion/styled";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
   body,
   html {
@@ -35,4 +42,4 @@ export const ContentWrapper = styled.main`
   @media (max-width: ${breakPoint3}px) {
     padding: 16px;
   }
-`
+`;

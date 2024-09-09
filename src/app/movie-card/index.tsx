@@ -1,6 +1,18 @@
 import { Movie } from "@/types/api/get-movies-result";
 import React from "react";
-import { Container, Poster, Title, TitleContainer, Year } from "./styled";
+import {
+  Container,
+  HoverContainer,
+  ImdbIcon,
+  Poster,
+  RatingContainer,
+  Title,
+  TitleContainer,
+  Year,
+} from "./styled";
+import { RatingBadge } from "./rating-badge";
+import { bgColor, fgColor, imdbColor, kpColor } from "@/shared/variables";
+import { KpIcon } from "@/assets/icons/tsx-icons/kp-icon";
 
 interface Props {
   movie: Movie;
@@ -9,11 +21,27 @@ interface Props {
 export const MovieCard = ({ movie }: Props) => {
   return (
     <Container>
-      <Poster width={200} height={280} src={movie.poster} alt="poster" />
-      <TitleContainer>
-        <Title>{movie.title}</Title>
-        <Year>{movie.year}</Year>
-      </TitleContainer>
+      <HoverContainer>
+        <Poster width={200} height={280} src={movie.poster} alt="poster" />
+        <TitleContainer>
+          <Title>{movie.title}</Title>
+          <Year>{movie.year}</Year>
+        </TitleContainer>
+      </HoverContainer>
+      <RatingContainer>
+        <RatingBadge
+          backgroundColor={imdbColor}
+          color={bgColor}
+          rating={movie.rating_imdb}
+          icon={<ImdbIcon>IMDB</ImdbIcon>}
+        />
+        <RatingBadge
+          backgroundColor={kpColor}
+          color={fgColor}
+          rating={movie.rating_kp}
+          icon={<KpIcon />}
+        />
+      </RatingContainer>
     </Container>
   );
 };

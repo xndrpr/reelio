@@ -5,6 +5,8 @@ interface Movie {
   title: string;
   poster: string;
   year: number;
+  rating_imdb: number;
+  rating_kp: number;
 }
 
-interface GetMoviesResult extends Data<Movie> { }
+interface GetMoviesResult extends Data<Movie> {}

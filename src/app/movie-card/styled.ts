@@ -2,14 +2,22 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 
 export const Container = styled.div`
-  width: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 export const Poster = styled(Image)`
   border-radius: 16px;
 
-  width: 200px;
-  height: 280px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 0.75;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 `;
 
 export const TitleContainer = styled.div`
@@ -33,4 +41,26 @@ export const Year = styled.p`
   font-size: 13px;
   font-weight: 300;
   text-overflow: ellipsis;
-`
+`;
+
+export const HoverContainer = styled.div`
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const RatingContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const ImdbIcon = styled.span`
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  font-size: 11px;
+`;
