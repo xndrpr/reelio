@@ -1,4 +1,4 @@
-import { breakPoint3 } from "@/shared/variables";
+import { breakPoint3, fgColor, lightPurple } from "@/shared/variables";
 import styled from "@emotion/styled";
 
 export const CardsContainer = styled.div`
@@ -11,4 +11,23 @@ export const CardsContainer = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     margin-top: 18px;
   }
+`;
+
+export const LoadMoreButtonContainer = styled.div`
+  position: static;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 0.75;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+
+  cursor: pointer;
 `;

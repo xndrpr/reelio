@@ -23,10 +23,10 @@ export const MovieCard = ({ movie }: Props) => {
     <Container>
       <HoverContainer href={`/movie/${movie.id}`}>
         <Poster
-          priority
+          priority={true}
           width={200}
           height={280}
-          src={movie.poster}
+          src={movie.preview_poster}
           alt="poster"
         />
         <TitleContainer>
@@ -35,18 +35,22 @@ export const MovieCard = ({ movie }: Props) => {
         </TitleContainer>
       </HoverContainer>
       <RatingContainer>
-        <RatingBadge
-          backgroundColor={imdbColor}
-          color={bgColor}
-          rating={movie.rating_imdb}
-          icon={<ImdbIcon>IMDB</ImdbIcon>}
-        />
-        <RatingBadge
-          backgroundColor={kpColor}
-          color={fgColor}
-          rating={parseFloat(movie.rating_kp.toFixed(1))}
-          icon={<KpIcon />}
-        />
+        {movie.rating_imdb && (
+          <RatingBadge
+            backgroundColor={imdbColor}
+            color={bgColor}
+            rating={movie.rating_imdb}
+            icon={<ImdbIcon>IMDB</ImdbIcon>}
+          />
+        )}
+        {movie.rating_kp ? (
+          <RatingBadge
+            backgroundColor={kpColor}
+            color={fgColor}
+            rating={parseFloat(movie.rating_kp.toFixed(1))}
+            icon={<KpIcon />}
+          />
+        ) : null}
       </RatingContainer>
     </Container>
   );
