@@ -25,6 +25,8 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 
@@ -40,6 +42,6 @@ export const ContentWrapper = styled.main`
   }
 
   @media (max-width: ${breakPoint3}px) {
-    padding: 8px;
+    padding: 12px;
   }
 `;

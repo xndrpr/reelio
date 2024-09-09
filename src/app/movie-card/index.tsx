@@ -21,7 +21,7 @@ interface Props {
 export const MovieCard = ({ movie }: Props) => {
   return (
     <Container>
-      <HoverContainer>
+      <HoverContainer href={`/movie/${movie.id}`}>
         <Poster width={200} height={280} src={movie.poster} alt="poster" />
         <TitleContainer>
           <Title>{movie.title}</Title>

@@ -12,12 +12,15 @@ export const SearchContainer = styled.div`
 
   background: ${darkPurple};
   color: ${fgColor};
-  /* background: #fff; */
 
   padding: 12px;
 
   border-radius: ${radius}px;
   cursor: text;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 `;
 
 export const SearchInput = styled.input`

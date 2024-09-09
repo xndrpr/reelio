@@ -1,5 +1,7 @@
+import { fgColor } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Container = styled.div`
   width: 100%;
@@ -43,7 +45,10 @@ export const Year = styled.p`
   text-overflow: ellipsis;
 `;
 
-export const HoverContainer = styled.div`
+export const HoverContainer = styled(Link)`
+  color: ${fgColor};
+  text-decoration: none;
+
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
 

@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import { breakPoint3, darkPurple, fgColor, lightPurple, mediumPurple, radius } from "@/shared/variables";
+import {
+  breakPoint3,
+  darkPurple,
+  fgColor,
+  lightPurple,
+  mediumPurple,
+  radius,
+} from "@/shared/variables";
 import styled from "@emotion/styled";
 
-
-export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
+export const TabsSC = styled.div<{ $activeTab: number; $tabsCount: number }>`
   --padding-size: 4px;
   position: relative;
   display: grid;
@@ -14,6 +20,7 @@ export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
   border-radius: ${radius}px;
   box-sizing: border-box;
   isolation: isolate;
+  height: 40px;
 
   &::after {
     z-index: -1;
@@ -21,8 +28,10 @@ export const TabsSC = styled.div<{ $activeTab: number, $tabsCount: number }>`
     content: "";
     position: absolute;
     inset: var(--padding-size);
-    width: calc(100% / ${props => props.$tabsCount} - var(--padding-size) * 2);
-    margin-left: ${props => props.$activeTab * 100 / props.$tabsCount}%;
+    width: calc(
+      100% / ${(props) => props.$tabsCount} - var(--padding-size) * 2
+    );
+    margin-left: ${(props) => (props.$activeTab * 100) / props.$tabsCount}%;
     background: ${mediumPurple};
 
     transition: all 0.15s ease-in-out;
