@@ -9,5 +9,6 @@ export const CardsContainer = styled.div`
 
   @media (max-width: ${breakPoint3}px) {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    margin-top: 18px;
   }
 `;

@@ -36,10 +36,10 @@ export const ContentWrapper = styled.main`
   }
 
   @media (max-width: ${breakPoint2}px) {
-    padding: 24px;
+    padding: 16px;
   }
 
   @media (max-width: ${breakPoint3}px) {
-    padding: 16px;
+    padding: 8px;
   }
 `;
