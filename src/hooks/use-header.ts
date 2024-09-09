@@ -12,8 +12,8 @@ export function useHeader(): IHeaderState {
   const tabs: Tab[] = [
     { title: "Фильмы" },
     { title: "Сериалы" },
-    { title: "Аниме" },
     { title: "Мультфильмы" },
+    { title: "Аниме" },
   ];
 
   return {
