@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { SearchContainer, SearchInput } from "./styled";
 import { SearchIcon } from "@/assets/icons/tsx-icons/search";
 import { useGetSearch } from "@/hooks/api/use-get-search";
@@ -15,10 +15,15 @@ export const SearchBar = ({ state }: Props) => {
   useEffect(() => {
     if (data) {
       state.setResult(data);
-    } else {
-      state.setResult([]);
     }
   }, [data, state]);
+
+  useEffect(() => {
+    if (state.value === "") {
+      state.setResult([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.value]);
 
   useEffect(() => {
     state.setIsLoading(isLoading);

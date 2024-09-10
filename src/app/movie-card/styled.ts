@@ -45,15 +45,17 @@ export const Year = styled.p`
   text-overflow: ellipsis;
 `;
 
-export const HoverContainer = styled(Link)`
+export const HoverContainer = styled.a`
   color: ${fgColor};
   text-decoration: none;
 
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
 
-  &:hover {
-    opacity: 0.7;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;
 

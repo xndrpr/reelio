@@ -18,7 +18,6 @@ const createQueryFn = (query: string) => {
       poster: doc.poster.url,
       year: doc.year,
     })) as Movie[];
-    console.log(result);
 
     return result;
   };

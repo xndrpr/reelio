@@ -12,10 +12,6 @@ export default function Home() {
   const header = useHeader();
   const search = useSearch();
 
-  useEffect(() => {
-    console.log(search.result);
-  }, [search.result]);
-
   return (
     <main>
       <Header searchState={search} headerState={header} />
