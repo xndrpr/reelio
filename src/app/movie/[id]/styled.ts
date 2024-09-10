@@ -15,7 +15,7 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const BackButton = styled(Link)<{ $isRotate?: boolean }>`
+export const BackButton = styled(Link)`
   position: fixed;
   inset: 50px;
 
@@ -29,6 +29,11 @@ export const BackButton = styled(Link)<{ $isRotate?: boolean }>`
   align-items: center;
 
   cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(0.9);
+  }
 `;
 
 export const Player = styled.div`
