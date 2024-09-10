@@ -4,6 +4,7 @@ import { Tabs } from "@/shared/components/tabs";
 import { breakPoint2, darkPurple } from "@/shared/variables";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import Link from "next/link";
 
 export const Container = styled.div`
@@ -61,4 +62,12 @@ export const TabsContainer = styled.div`
 
 export const StyledTabs = styled(Tabs)`
   width: 225px;
+`;
+
+export const Backdrop = styled(Image)`
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

@@ -4,6 +4,7 @@ import { useGetMovie } from "@/hooks/api/use-get-movie";
 import React, { useCallback, useEffect, useMemo } from "react";
 import {
   BackButton,
+  Backdrop,
   Container,
   Player,
   StyledTabs,

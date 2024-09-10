@@ -24,7 +24,7 @@ function KinoboxPlayer({ movie }: Props) {
           },
           params: {
             all: {
-              poster: movie.poster,
+              poster: movie.backdrop || movie.poster,
             },
           },
         });
@@ -32,9 +32,11 @@ function KinoboxPlayer({ movie }: Props) {
     };
 
     return () => {
-      document.body.removeChild(script);
+      try {
+        document.body.removeChild(script);
+      } catch (e) {}
     };
-  }, [movie.id, movie.poster]);
+  }, [movie.backdrop, movie.id, movie.poster]);
 
   return <Container ref={containerRef} className="kinobox_player"></Container>;
 }

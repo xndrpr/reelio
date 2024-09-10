@@ -15,6 +15,7 @@ const createQueryFn = (id: number) => {
       rating_imdb: data.rating.imdb,
       rating_kp: data.rating.kp,
       poster: data.poster.url,
+      backdrop: data.backdrop.url,
       year: data.year,
     } as Movie;
   };
