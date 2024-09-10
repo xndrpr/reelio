@@ -12,6 +12,7 @@ import {
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Portal } from "@/shared/components/portal";
 import { Tab } from "@/shared/components/tabs";
+import KinoboxPlayer from "@/shared/components/kino-box";
 
 const MoviePage = ({ params }: { params: { id: string } }) => {
   const { data: movie, isPending } = useGetMovie(parseInt(params.id));
@@ -57,7 +58,7 @@ const MoviePage = ({ params }: { params: { id: string } }) => {
           <BackArrow />
         </BackButton>
       </Portal>
-      <Player>{isPending ? "Загрузка..." : movie?.title}</Player>
+      <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
       <TabsContainer>
         <StyledTabs
           activeTab={activeTab}
