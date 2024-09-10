@@ -13,10 +13,6 @@ export const Container = styled.div`
   gap: 12px;
   padding-top: 60px;
   height: 100%;
-
-  @media (max-width: ${breakPoint2}px) {
-    transform: rotate(90deg);
-  }
 `;
 
 export const BackButton = styled(Link)<{ $isRotate?: boolean }>`
@@ -33,10 +29,6 @@ export const BackButton = styled(Link)<{ $isRotate?: boolean }>`
   align-items: center;
 
   cursor: pointer;
-
-  @media (max-width: ${breakPoint2}px) {
-    transform: ${(props) => props.$isRotate && css`rotate(90deg)`};
-  }
 `;
 
 export const Player = styled.div`

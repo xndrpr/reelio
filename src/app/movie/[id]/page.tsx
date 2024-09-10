@@ -39,19 +39,6 @@ const MoviePage = ({ params }: { params: { id: string } }) => {
     };
   }, []);
 
-  if (isMobile)
-    return (
-      <>
-        <Portal>
-          <BackButton $isRotate={false} href="/">
-            <BackArrow />
-          </BackButton>
-        </Portal>
-
-        <Player>Rotate your screen please</Player>
-      </>
-    );
-
   return (
     <Container>
       <Portal>
