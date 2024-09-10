@@ -3,21 +3,23 @@
 import React, { useState } from "react";
 import { CustomTabs, HeaderSC } from "./styled";
 import { SearchBar } from "../search-bar";
-import { IHeaderState, useHeader } from "@/hooks/use-header";
+import { HeaderState, useHeader } from "@/hooks/use-header";
+import { SearchState } from "@/hooks/use-search";
 
 interface Props {
-  header: IHeaderState;
+  headerState: HeaderState;
+  searchState: SearchState;
 }
 
-export const Header = ({ header }: Props) => {
+export const Header = ({ headerState, searchState }: Props) => {
   return (
     <HeaderSC>
       <CustomTabs
-        tabs={header.tabs}
-        activeTab={header.activeTab}
-        setActiveTab={header.setActiveTab}
+        tabs={headerState.tabs}
+        activeTab={headerState.activeTab}
+        setActiveTab={headerState.setActiveTab}
       />
-      <SearchBar />
+      <SearchBar state={searchState} />
     </HeaderSC>
   );
 };

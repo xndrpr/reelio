@@ -10,7 +10,7 @@ const createQueryFn = (query: string) => {
     );
     const data = await res.json();
 
-    return data.map((doc: any) => ({
+    const result = data.map((doc: any) => ({
       id: doc.id,
       title: doc.name,
       rating_imdb: doc.rating.imdb,
@@ -18,6 +18,9 @@ const createQueryFn = (query: string) => {
       poster: doc.poster.url,
       year: doc.year,
     })) as Movie[];
+    console.log(result);
+
+    return result;
   };
 };
 
@@ -26,9 +29,9 @@ export const useGetSearch = (
   queryOptions?: QueryOptions<Movie[], Error>
 ) => {
   return useQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [QUERY_KEY, query],
     queryFn: createQueryFn(query),
-    enabled: !!query,
+    enabled: Boolean(query),
     ...queryOptions,
   });
 };

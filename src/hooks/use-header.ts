@@ -1,13 +1,13 @@
 import { Tab } from "@/shared/components/tabs";
 import { useState } from "react";
 
-export interface IHeaderState {
+export interface HeaderState {
   tabs: Tab[];
   activeTab: number;
   setActiveTab: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function useHeader(): IHeaderState {
+export function useHeader(): HeaderState {
   const [activeTab, setActiveTab] = useState(0);
   const tabs: Tab[] = [
     { title: "Фильмы" },

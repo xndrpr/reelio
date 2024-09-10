@@ -26,7 +26,7 @@ export const MovieCard = ({ movie }: Props) => {
           priority={true}
           width={200}
           height={280}
-          src={movie.preview_poster}
+          src={movie.preview_poster || movie.poster}
           alt="poster"
         />
         <TitleContainer>
@@ -35,14 +35,14 @@ export const MovieCard = ({ movie }: Props) => {
         </TitleContainer>
       </HoverContainer>
       <RatingContainer>
-        {movie.rating_imdb && (
+        {movie.rating_imdb ? (
           <RatingBadge
             backgroundColor={imdbColor}
             color={bgColor}
             rating={movie.rating_imdb}
             icon={<ImdbIcon>IMDB</ImdbIcon>}
           />
-        )}
+        ) : null}
         {movie.rating_kp ? (
           <RatingBadge
             backgroundColor={kpColor}
