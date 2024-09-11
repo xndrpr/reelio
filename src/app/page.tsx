@@ -4,7 +4,7 @@ import { useHeader } from "@/hooks/use-header";
 import { Header } from "@/shared/components/header";
 import Movies from "@/components/movies";
 import { useSearch } from "@/hooks/use-search";
-import { CardsContainer, LoadMoreButtonContainer } from "./styled";
+import { CardsContainer } from "./styled";
 import { MovieCard } from "./movie-card";
 import { Helmet } from "react-helmet";
 

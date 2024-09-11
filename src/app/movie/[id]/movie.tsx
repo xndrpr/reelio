@@ -2,16 +2,29 @@
 
 import { useGetMovie } from "@/hooks/api/use-get-movie";
 import React from "react";
-import { BackButton, Container } from "./styled";
+import {
+  BackButton,
+  Container,
+  Player,
+  StyledTabs,
+  TabsContainer,
+} from "./styled";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Portal } from "@/shared/components/portal";
+import { Tab } from "@/shared/components/tabs";
+import KinoboxPlayer from "@/shared/components/kino-box";
+import { Movie as MovieType } from "@/types/api/get-movies-result";
 
 interface Props {
-  id: number;
+  movie: MovieType;
 }
 
-const Movie = ({ id }: Props) => {
-  const { data: movie } = useGetMovie(id);
+const Movie = ({ movie }: Props) => {
+  const [activeTab, setActiveTab] = React.useState(0);
+  const tabs: Tab[] = [
+    { title: "Смотреть" },
+    { title: "О фильме", isDisabled: true },
+  ];
 
   return (
     <Container>
@@ -20,6 +33,14 @@ const Movie = ({ id }: Props) => {
           <BackArrow />
         </BackButton>
       </Portal>
+      <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
+      <TabsContainer>
+        <StyledTabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabs={tabs}
+        />
+      </TabsContainer>
     </Container>
   );
 };

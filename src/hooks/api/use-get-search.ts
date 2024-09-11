@@ -6,7 +6,7 @@ import { Movie } from "@/types/api/get-movies-result";
 const createQueryFn = (query: string) => {
   return async () => {
     const res = await fetch(
-      `http://192.168.1.4:6100/api/movies/search?query=${query}&offset=1&limit=10`
+      `http://localhost:6100/api/movies/search?query=${query}&offset=1&limit=10`
     );
     const data = await res.json();
 

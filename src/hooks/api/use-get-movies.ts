@@ -17,7 +17,7 @@ const fetchMovies = async ({
   type: number;
 }) => {
   const res = await fetch(
-    `http://192.168.1.4:6100/api/movies?offset=${pageParam}&limit=${LIMIT}&type=${
+    `http://localhost:6100/api/movies?offset=${pageParam}&limit=${LIMIT}&type=${
       type + 1
     }`
   );
