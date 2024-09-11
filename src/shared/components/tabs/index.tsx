@@ -3,7 +3,6 @@ import { Tab, TabsSC } from "./styled";
 
 export interface Tab {
   title: string;
-  link?: string;
   isDisabled?: boolean;
 }
 

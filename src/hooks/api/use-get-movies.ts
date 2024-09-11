@@ -7,7 +7,7 @@ enum MovieType {
   Cartoon,
 }
 const QUERY_KEY = "getMovies";
-const LIMIT = 25;
+const LIMIT = 10;
 
 const fetchMovies = async ({
   pageParam = 1,
@@ -39,11 +39,11 @@ const fetchMovies = async ({
 
 export const useGetMovies = (type: MovieType) => {
   return useInfiniteQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [QUERY_KEY, type],
     queryFn: ({ pageParam = 1 }) => fetchMovies({ pageParam, type }),
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.data.length > 0) {
-        return pages.length * LIMIT + 1;
+        return pages.length * 10 + 1;
       }
       return undefined;
     },

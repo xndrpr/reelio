@@ -39,7 +39,7 @@ export const SearchBar = ({ state }: Props) => {
       <SearchInput
         value={state.value}
         onChange={(e) => state.setValue(e.target.value)}
-        placeholder="Найти фильм или сериал"
+        placeholder="Найти фильм, сериал, мультфильм, или аниме"
       />
     </SearchContainer>
   );
