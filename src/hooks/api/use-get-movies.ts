@@ -7,7 +7,7 @@ enum MovieType {
   Cartoon,
 }
 const QUERY_KEY = "getMovies";
-const LIMIT = 10;
+const LIMIT = 25;
 
 const fetchMovies = async ({
   pageParam = 1,
