@@ -2,11 +2,12 @@
 
 import { useHeader } from "@/hooks/use-header";
 import { useSearch } from "@/hooks/use-search";
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "@/shared/components/header";
 import Movies from "@/components/movies";
 import { CardsContainer } from "./styled";
 import { MovieCard } from "./movie-card";
+import { useSearchParams } from "next/navigation";
 
 export const Home = () => {
   const header = useHeader();

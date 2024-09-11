@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkTab, Tab, TabsSC } from "./styled";
+import { Tab, TabsSC } from "./styled";
 
 export interface Tab {
   title: string;
@@ -21,27 +21,16 @@ export const Tabs = ({ className, activeTab, setActiveTab, tabs }: Props) => {
       $tabsCount={tabs.length}
       $activeTab={activeTab}
     >
-      {tabs.map((tab, index) => {
-        return tab.link ? (
-          <LinkTab
-            key={index}
-            $isActive={activeTab === index}
-            $isDisabled={tab.isDisabled || false}
-            href={tab.link}
-          >
-            {tab.title}
-          </LinkTab>
-        ) : (
-          <Tab
-            key={index}
-            $isActive={activeTab === index}
-            $isDisabled={tab.isDisabled || false}
-            onClick={() => !tab.isDisabled && setActiveTab(index)}
-          >
-            {tab.title}
-          </Tab>
-        );
-      })}
+      {tabs.map((tab, index) => (
+        <Tab
+          key={index}
+          $isActive={activeTab === index}
+          $isDisabled={tab.isDisabled || false}
+          onClick={() => !tab.isDisabled && setActiveTab(index)}
+        >
+          {tab.title}
+        </Tab>
+      ))}
     </TabsSC>
   );
 };
