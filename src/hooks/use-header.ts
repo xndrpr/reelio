@@ -1,3 +1,5 @@
+"use client";
+
 import { Tab } from "@/shared/components/tabs";
 import { useState } from "react";
 

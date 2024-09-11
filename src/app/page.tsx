@@ -6,7 +6,7 @@ import Movies from "@/components/movies";
 import { useSearch } from "@/hooks/use-search";
 import { CardsContainer, LoadMoreButtonContainer } from "./styled";
 import { MovieCard } from "./movie-card";
-import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const header = useHeader();
@@ -14,6 +14,13 @@ export default function Home() {
 
   return (
     <main>
+      <Helmet>
+        <title>Гли - Фильмы, сериалы, мультфильмы, аниме бесплатно.</title>
+        <meta
+          name="description"
+          content="Смотреть фильмы, сериалы, аниме, мультфильмы бесплатно быстро и в хорошем качестве без рекламы"
+        />
+      </Helmet>
       <Header searchState={search} headerState={header} />
       {search.result && search.result.length > 0 ? (
         <CardsContainer>

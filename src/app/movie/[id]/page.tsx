@@ -1,61 +1,25 @@
-"use client";
-
-import { useGetMovie } from "@/hooks/api/use-get-movie";
-import React, { useCallback, useEffect, useMemo } from "react";
 import {
-  BackButton,
-  Backdrop,
-  Container,
-  Player,
-  StyledTabs,
-  TabsContainer,
-} from "./styled";
-import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import { Portal } from "@/shared/components/portal";
-import { Tab } from "@/shared/components/tabs";
-import KinoboxPlayer from "@/shared/components/kino-box";
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import React from "react";
+import Movie from "./movie";
 
-const MoviePage = ({ params }: { params: { id: string } }) => {
-  const { data: movie, isPending } = useGetMovie(parseInt(params.id));
-  const [activeTab, setActiveTab] = React.useState(0);
-  const tabs: Tab[] = [
-    { title: "Смотреть" },
-    { title: "О фильме", isDisabled: true },
-  ];
-
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+export default async function MoviesPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const queryClient = new QueryClient();
+  queryClient.prefetchQuery({
+    queryKey: [MOVIE_QUERY_KEY, parseInt(params.id)],
+    queryFn: () => getMovie(parseInt(params.id)),
+  });
 
   return (
-    <Container>
-      <Portal>
-        <BackButton href="/">
-          <BackArrow />
-        </BackButton>
-      </Portal>
-      <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
-      <TabsContainer>
-        <StyledTabs
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          tabs={tabs}
-        />
-      </TabsContainer>
-    </Container>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Movie id={parseInt(params.id)} />
+    </HydrationBoundary>
   );
-};
-
-export default MoviePage;
+}
