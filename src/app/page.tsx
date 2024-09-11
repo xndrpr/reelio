@@ -6,9 +6,8 @@ import Movies from "@/components/movies";
 import { useSearch } from "@/hooks/use-search";
 import { CardsContainer, LoadMoreButtonContainer } from "./styled";
 import { MovieCard } from "./movie-card";
-import { useEffect } from "react";
 
-export default function Home() {
+export default function HomePage() {
   const header = useHeader();
   const search = useSearch();
 

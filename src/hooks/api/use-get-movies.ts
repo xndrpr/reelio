@@ -7,7 +7,7 @@ enum MovieType {
   Cartoon,
 }
 const QUERY_KEY = "getMovies";
-const LIMIT = 10;
+const LIMIT = 25;
 
 const fetchMovies = async ({
   pageParam = 1,
@@ -17,7 +17,7 @@ const fetchMovies = async ({
   type: number;
 }) => {
   const res = await fetch(
-    `http://192.168.1.4:6100/api/movies?offset=${pageParam}&limit=${LIMIT}&type=${
+    `http://localhost:6100/api/movies?offset=${pageParam}&limit=${LIMIT}&type=${
       type + 1
     }`
   );
@@ -39,7 +39,7 @@ const fetchMovies = async ({
 
 export const useGetMovies = (type: MovieType) => {
   return useInfiniteQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [QUERY_KEY, type],
     queryFn: ({ pageParam = 1 }) => fetchMovies({ pageParam, type }),
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.data.length > 0) {

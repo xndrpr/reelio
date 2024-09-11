@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { Container } from "./styled";
 import { Movie } from "@/types/api/get-movies-result";
@@ -10,6 +12,14 @@ function KinoboxPlayer({ movie }: Props) {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    const originalLog = console.log;
+    const originalDebug = console.debug;
+    const originalInfo = console.info;
+
+    console.log = () => {};
+    console.debug = () => {};
+    console.info = () => {};
+
     const script = document.createElement("script");
     script.src = "https://kinobox.tv/kinobox.min.js";
     script.async = true;
@@ -28,12 +38,20 @@ function KinoboxPlayer({ movie }: Props) {
             },
           },
         });
+
+        console.log = originalLog;
+        console.debug = originalDebug;
+        console.info = originalInfo;
       }
     };
 
     return () => {
       try {
         document.body.removeChild(script);
+
+        console.log = originalLog;
+        console.debug = originalDebug;
+        console.info = originalInfo;
       } catch (e) {}
     };
   }, [movie.backdrop, movie.id, movie.poster]);

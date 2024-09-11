@@ -1,61 +1,47 @@
-"use client";
-
-import { useGetMovie } from "@/hooks/api/use-get-movie";
-import React, { useCallback, useEffect, useMemo } from "react";
 import {
-  BackButton,
-  Backdrop,
-  Container,
-  Player,
-  StyledTabs,
-  TabsContainer,
-} from "./styled";
-import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import { Portal } from "@/shared/components/portal";
-import { Tab } from "@/shared/components/tabs";
-import KinoboxPlayer from "@/shared/components/kino-box";
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import React from "react";
+import Movie from "./movie";
+import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
 
-const MoviePage = ({ params }: { params: { id: string } }) => {
-  const { data: movie, isPending } = useGetMovie(parseInt(params.id));
-  const [activeTab, setActiveTab] = React.useState(0);
-  const tabs: Tab[] = [
-    { title: "Смотреть" },
-    { title: "О фильме", isDisabled: true },
-  ];
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const id = parseInt(params.id);
+  const queryClient = new QueryClient();
+  const movie = await queryClient
+    .fetchQuery({
+      queryKey: [MOVIE_QUERY_KEY, id],
+      queryFn: () => createMovieFn(id)(),
+    })
+    .catch();
 
-  const [isMobile, setIsMobile] = React.useState(false);
+  return {
+    title: `Glee - ${movie?.title}`,
+    description: `Смотреть ${movie?.title} бесплатно в хорошем качестве, без рекламы, на русском языке`,
+  };
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+export default async function MoviesPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const id = parseInt(params.id);
+  const queryClient = new QueryClient();
+  const movie = await queryClient
+    .fetchQuery({
+      queryKey: [MOVIE_QUERY_KEY, id],
+      queryFn: () => createMovieFn(id)(),
+    })
+    .catch();
 
   return (
-    <Container>
-      <Portal>
-        <BackButton href="/">
-          <BackArrow />
-        </BackButton>
-      </Portal>
-      <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
-      <TabsContainer>
-        <StyledTabs
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          tabs={tabs}
-        />
-      </TabsContainer>
-    </Container>
+    <>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Movie movie={movie} />
+      </HydrationBoundary>
+    </>
   );
-};
-
-export default MoviePage;
+}
