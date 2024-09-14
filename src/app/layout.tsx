@@ -11,6 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Glee",
   description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
+  openGraph: {
+    title: "Glee",
+    description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
+    images: [
+      {
+        url: "/og.png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
