@@ -13,13 +13,11 @@ import Link from "next/link";
 
 export const Container = styled.div`
   --content-padding: 40px;
-  --self-padding: 60px;
 
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-top: 60px;
-  height: calc(100dvh - var(--self-padding) - var(--content-padding));
+  height: calc(100dvh - var(--content-padding) * 2);
 
   @media (max-width: ${breakPoint2}px) {
     --content-padding: 16px;
@@ -31,9 +29,6 @@ export const Container = styled.div`
 `;
 
 export const BackButton = styled(Link)`
-  position: fixed;
-  inset: 50px;
-
   background: ${darkPurple};
   border-radius: 50%;
   height: 50px;
@@ -42,6 +37,8 @@ export const BackButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin: 1rem;
 
   cursor: pointer;
 

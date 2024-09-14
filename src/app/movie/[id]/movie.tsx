@@ -28,11 +28,9 @@ const Movie = ({ movie }: Props) => {
 
   return (
     <Container>
-      <Portal>
-        <BackButton href="/">
-          <BackArrow />
-        </BackButton>
-      </Portal>
+      <BackButton href="/">
+        <BackArrow />
+      </BackButton>
       <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
       <TabsContainer>
         <StyledTabs
