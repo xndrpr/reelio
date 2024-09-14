@@ -20,10 +20,8 @@ export const SearchBar = ({ state }: Props) => {
   }, [data, state]);
 
   useEffect(() => {
-    console.log(state.value.length);
     if (state.value.length === 0) {
       state.setResult([]);
-      console.log(state.result);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.value]);
