@@ -12,10 +12,10 @@ export const createMovieFn = (id: number) => {
     return {
       id: data.id,
       title: data.name,
-      rating_imdb: data.rating.imdb,
-      rating_kp: data.rating.kp,
-      poster: data.poster.url,
-      backdrop: data.backdrop.url,
+      rating_imdb: data.rating?.imdb,
+      rating_kp: data.rating?.kp,
+      poster: data.poster?.url,
+      backdrop: data.backdrop?.url,
       year: data.year,
     } as Movie;
   };
