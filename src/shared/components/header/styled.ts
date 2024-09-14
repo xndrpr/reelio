@@ -8,7 +8,7 @@ export const CustomTabs = styled(Tabs)`
   min-width: 500px;
   height: 40px;
 
-  @media (max-width: ${breakPoint2}px) {
+  @media (max-width: 100%) {
     width: 100%;
     min-width: unset;
   }
