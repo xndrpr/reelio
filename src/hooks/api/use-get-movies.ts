@@ -24,8 +24,8 @@ const fetchMovies = async ({
   const data = await res.json();
 
   return {
-    total: data.length,
-    data: data.map((doc: any) => ({
+    total: data.data.length,
+    data: data.data.map((doc: any) => ({
       id: doc.id,
       title: doc.name,
       rating_imdb: doc.rating.imdb,
@@ -34,6 +34,7 @@ const fetchMovies = async ({
       preview_poster: doc.poster.previewUrl || doc.poster.url,
       year: doc.year,
     })),
+    pages: data.pages,
   };
 };
 
@@ -43,7 +44,7 @@ export const useGetMovies = (type: MovieType) => {
     queryFn: ({ pageParam = 1 }) => fetchMovies({ pageParam, type }),
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.data.length > 0) {
-        return pages.length * 10 + 1;
+        return pages.length + 1;
       }
       return undefined;
     },

@@ -12,13 +12,14 @@ interface Props {
 export default function Movies({ type }: Props) {
   const { data, isPending, fetchNextPage } = useGetMovies(type);
   const movies: Movie[] = data?.pages.flatMap((page) => page.data) || [];
+  const pagesCount: number = data?.pages[0]?.pages || 0;
 
   return (
     <CardsContainer>
       {isPending
         ? "Загрузка..."
         : movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
-      {!isPending && (
+      {!isPending && pagesCount > (data?.pages.length || 0) && (
         <LoadMoreButtonContainer onClick={async () => await fetchNextPage()}>
           Загрузить еще
         </LoadMoreButtonContainer>

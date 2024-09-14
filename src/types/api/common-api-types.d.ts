@@ -6,4 +6,5 @@ export interface ErrorModelActionResultModel {
 export interface Data<T> {
   total: number;
   data: T[];
+  pages: number;
 }
