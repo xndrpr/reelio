@@ -20,6 +20,15 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     title: `Glee - ${movie?.title}`,
     description: `Смотреть ${movie?.title} бесплатно в хорошем качестве, без рекламы, на русском языке`,
+    openGraph: {
+      title: `Glee - ${movie?.title}`,
+      description: `Смотреть ${movie?.title} бесплатно в хорошем качестве`,
+      images: [
+        {
+          url: movie?.poster || "",
+        },
+      ],
+    },
   };
 }
 
