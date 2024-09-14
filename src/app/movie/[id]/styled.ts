@@ -30,6 +30,7 @@ export const Container = styled.div`
 
 export const BackButton = styled.button`
   background: ${darkPurple};
+  border: none;
   border-radius: 50%;
   height: 50px;
   width: 50px;
