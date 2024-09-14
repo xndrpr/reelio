@@ -27,7 +27,7 @@ export const HeaderSC = styled.div`
   gap: 20px;
   align-items: center;
 
-  @media (max-width: ${breakPoint2}px) {
+  @media (max-width: 1100px) {
     flex-direction: column;
     gap: 8px;
   }
