@@ -12,6 +12,7 @@ import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
 import KinoboxPlayer from "@/shared/components/kino-box";
 import { Movie as MovieType } from "@/types/api/get-movies-result";
+import { useRouter } from "next/navigation";
 
 interface Props {
   movie: MovieType;
@@ -23,10 +24,11 @@ const Movie = ({ movie }: Props) => {
     { title: "Смотреть" },
     { title: "О фильме", isDisabled: true },
   ];
+  const router = useRouter();
 
   return (
     <Container>
-      <BackButton href="/">
+      <BackButton onClick={router.back}>
         <BackArrow />
       </BackButton>
       <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>

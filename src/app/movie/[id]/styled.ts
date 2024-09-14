@@ -28,7 +28,7 @@ export const Container = styled.div`
   }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.button`
   background: ${darkPurple};
   border-radius: 50%;
   height: 50px;
