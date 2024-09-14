@@ -32,3 +32,7 @@ export const HeaderSC = styled.div`
     gap: 8px;
   }
 `;
+
+export const HiddenVersion = styled.div`
+  display: none;
+`;
