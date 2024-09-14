@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from "react";
-import { SearchContainer, SearchInput } from "./styled";
+import { ClearButton, SearchContainer, SearchInput } from "./styled";
 import { SearchIcon } from "@/assets/icons/tsx-icons/search";
 import { useGetSearch } from "@/hooks/api/use-get-search";
 import { RotatingLines } from "react-loader-spinner";
 import { SearchState } from "@/hooks/use-search";
+import { CrossIcon } from "@/assets/icons/tsx-icons/cross-icon";
 
 interface Props {
   state: SearchState;
@@ -43,6 +44,11 @@ export const SearchBar = ({ state }: Props) => {
         onChange={(e) => state.setValue(e.target.value)}
         placeholder="Найти фильм, сериал, мультфильм, или аниме"
       />
+      {state.value.length > 0 && (
+        <ClearButton onClick={() => state.setValue("")}>
+          <CrossIcon />
+        </ClearButton>
+      )}
     </SearchContainer>
   );
 };

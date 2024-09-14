@@ -42,3 +42,21 @@ export const SearchIconSC = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export const ClearButton = styled.button`
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: ${fgColor};
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+`;
