@@ -28,7 +28,12 @@ const Movie = ({ movie }: Props) => {
 
   return (
     <Container>
-      <BackButton onClick={router.back}>
+      <BackButton
+        onClick={() => {
+          router.back();
+          router.back();
+        }}
+      >
         <BackArrow />
       </BackButton>
       <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
