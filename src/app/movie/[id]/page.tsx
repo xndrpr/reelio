@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     .catch();
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
     title: `Glee - ${movie?.title}`,
     description: `Смотреть ${movie?.title} бесплатно в хорошем качестве, без рекламы, на русском языке`,
     openGraph: {

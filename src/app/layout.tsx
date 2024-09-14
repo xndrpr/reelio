@@ -9,6 +9,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
   title: "Glee",
   description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
   openGraph: {
