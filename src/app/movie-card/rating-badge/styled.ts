@@ -23,3 +23,11 @@ export const Container = styled.div<{
   -webkit-user-select: none;
   -webkit-user-drag: none;
 `;
+
+export const Rating = styled.span`
+  height: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

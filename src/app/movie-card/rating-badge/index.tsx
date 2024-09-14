@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./styled";
+import { Container, Rating } from "./styled";
 
 interface Props {
   backgroundColor: string;
@@ -17,7 +17,7 @@ export const RatingBadge = ({
   return (
     <Container $backgroundColor={backgroundColor} $color={color}>
       {icon}
-      {rating}
+      <Rating>{rating}</Rating>
     </Container>
   );
 };
