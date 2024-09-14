@@ -20,6 +20,10 @@ export const SearchBar = ({ state }: Props) => {
   }, [data, state]);
 
   useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
     if (state.value.length === 0) {
       state.setResult([]);
     }

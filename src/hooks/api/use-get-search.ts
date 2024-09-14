@@ -10,16 +10,15 @@ const createQueryFn = (query: string) => {
     );
     const data = await res.json();
 
-    const result = data.map((doc: any) => ({
+    return data.map((doc: any) => ({
       id: doc.id,
       title: doc.name,
-      rating_imdb: doc.rating.imdb,
-      rating_kp: doc.rating.kp,
-      poster: doc.poster.url,
+      rating_imdb: doc.rating?.imdb,
+      rating_kp: doc.rating?.kp,
+      poster: doc.poster?.url,
+      preview_poster: doc.poster?.previewUrl || doc.poster?.url,
       year: doc.year,
-    })) as Movie[];
-
-    return result;
+    }));
   };
 };
 

@@ -16,10 +16,6 @@ function KinoboxPlayer({ movie }: Props) {
     const originalDebug = console.debug;
     const originalInfo = console.info;
 
-    console.log = () => {};
-    console.debug = () => {};
-    console.info = () => {};
-
     const script = document.createElement("script");
     script.src = "https://kinobox.tv/kinobox.min.js";
     script.async = true;
