@@ -13,14 +13,16 @@ export const SearchBar = ({ state }: Props) => {
   const { isLoading, data } = useGetSearch(state.debouncedQuery);
 
   useEffect(() => {
-    if (data) {
+    if (data && state.value.length > 0) {
       state.setResult(data);
     }
   }, [data, state]);
 
   useEffect(() => {
-    if (state.value === "") {
+    console.log(state.value.length);
+    if (state.value.length === 0) {
       state.setResult([]);
+      console.log(state.result);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.value]);
