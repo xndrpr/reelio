@@ -6,7 +6,7 @@ export const MOVIE_QUERY_KEY = "getMovie";
 
 export const createMovieFn = (id: number) => {
   return async () => {
-    const res = await fetch(`http://localhost:6100/api/movies/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movies/${id}`);
     const data = await res.json();
 
     return {

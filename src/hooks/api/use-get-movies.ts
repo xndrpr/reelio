@@ -17,9 +17,9 @@ const fetchMovies = async ({
   type: number;
 }) => {
   const res = await fetch(
-    `http://localhost:6100/api/movies?offset=${pageParam}&limit=${LIMIT}&type=${
-      type + 1
-    }`
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }/movies?offset=${pageParam}&limit=${LIMIT}&type=${type + 1}`
   );
   const data = await res.json();
 
