@@ -5,6 +5,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Movies from "./movies";
+import { Pagination } from "@/shared/components/pagination";
 
 interface Props {
   type: number;
@@ -20,10 +21,17 @@ export default async function MoviesPage({ type, offset }: Props) {
     })
     .catch();
 
+  console.log(offset);
+
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Movies movies={movies.data} />
+        <Pagination
+          currentPage={offset}
+          onPageChange={(page) => {}}
+          pages={movies.pages}
+        />
       </HydrationBoundary>
     </>
   );

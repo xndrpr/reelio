@@ -9,6 +9,9 @@ import GoogleAnalytics from "@/components/google-analytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/icon.png",
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
   title: "Glee",
   description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
@@ -30,9 +33,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
         <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
       )}

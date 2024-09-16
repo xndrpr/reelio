@@ -1,7 +1,7 @@
 import Movies from "@/components/movies";
 import { Header } from "@/shared/components/header";
 
-export default function CartoonPage({
+export default function CartoonsPage({
   searchParams,
 }: {
   searchParams: {
