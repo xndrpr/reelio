@@ -27,8 +27,7 @@ export const MovieCard = ({ movie }: Props) => {
       encoded = base62chars[id % 62] + encoded;
       id = Math.floor(id / 62);
     }
-    const random = Math.random().toString(36).substring(2, 6);
-    return "gl" + random + encoded + "lg" || "0";
+    return "gl" + encoded + "lg" || "0";
   }
 
   return (
