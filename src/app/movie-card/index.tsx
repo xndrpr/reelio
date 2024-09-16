@@ -19,9 +19,21 @@ interface Props {
 }
 
 export const MovieCard = ({ movie }: Props) => {
+  function encodeBase62(id: number) {
+    const base62chars =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let encoded = "";
+    while (id > 0) {
+      encoded = base62chars[id % 62] + encoded;
+      id = Math.floor(id / 62);
+    }
+    const random = Math.random().toString(36).substring(2, 6);
+    return "gl" + random + encoded + "lg" || "0";
+  }
+
   return (
     <Container>
-      <HoverContainer href={`/movie/${movie.id}`}>
+      <HoverContainer href={`/movie/${encodeBase62(movie.id)}`}>
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>
