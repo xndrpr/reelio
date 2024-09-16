@@ -4,7 +4,6 @@ import {
   Container,
   HoverContainer,
   ImdbIcon,
-  Poster,
   RatingContainer,
   Title,
   TitleContainer,
@@ -13,6 +12,7 @@ import {
 import { RatingBadge } from "./rating-badge";
 import { bgColor, fgColor, imdbColor, kpColor } from "@/shared/variables";
 import { KpIcon } from "@/assets/icons/tsx-icons/kp-icon";
+import { SmartPoster } from "./smart-poster";
 
 interface Props {
   movie: Movie;
@@ -22,12 +22,7 @@ export const MovieCard = ({ movie }: Props) => {
   return (
     <Container>
       <HoverContainer href={`/movie/${movie.id}`}>
-        <Poster
-          width={200}
-          height={280}
-          src={movie.preview_poster || movie.poster}
-          alt="poster"
-        />
+        <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>
           <Year>{movie.year}</Year>

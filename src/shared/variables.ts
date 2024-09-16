@@ -17,3 +17,6 @@ export const radius = 12;
 export const breakPoint1 = 900;
 export const breakPoint2 = 780;
 export const breakPoint3 = 500;
+
+export const skeletonBaseColor = "#ebebeb";
+export const skeletonHighlightColor = "#f5f5f5";

@@ -11,18 +11,6 @@ export const Container = styled.div`
   gap: 4px;
 `;
 
-export const Poster = styled(Image)`
-  border-radius: 16px;
-
-  width: 100%;
-  height: auto;
-  aspect-ratio: 0.75;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-user-drag: none;
-`;
-
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
