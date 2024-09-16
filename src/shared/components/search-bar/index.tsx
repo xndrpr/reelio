@@ -1,16 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import { ClearButton, SearchContainer, SearchInput } from "./styled";
 import { SearchIcon } from "@/assets/icons/tsx-icons/search";
 import { useGetSearch } from "@/hooks/api/use-get-search";
 import { RotatingLines } from "react-loader-spinner";
-import { SearchState } from "@/hooks/use-search";
 import { CrossIcon } from "@/assets/icons/tsx-icons/cross-icon";
+import { useSearch } from "@/hooks/use-search";
 
-interface Props {
-  state: SearchState;
-}
-
-export const SearchBar = ({ state }: Props) => {
+export const SearchBar = () => {
+  const state = useSearch();
   const { isLoading, data } = useGetSearch(state.debouncedQuery);
 
   useEffect(() => {

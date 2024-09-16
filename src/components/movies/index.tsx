@@ -1,29 +1,30 @@
-"use client";
-
-import { MovieCard } from "@/app/movie-card";
-import { CardsContainer, LoadMoreButtonContainer } from "@/app/styled";
-import { useGetMovies } from "@/hooks/api/use-get-movies";
-import { Movie } from "@/types/api/get-movies-result";
+import { fetchMovies, MOVIES_QUERY_KEY } from "@/hooks/api/use-get-movies";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import Movies from "./movies";
 
 interface Props {
   type: number;
+  offset: number;
 }
 
-export default function Movies({ type }: Props) {
-  const { data, isPending, fetchNextPage } = useGetMovies(type);
-  const movies: Movie[] = data?.pages.flatMap((page) => page.data) || [];
-  const pagesCount: number = data?.pages[0]?.pages || 0;
+export default async function MoviesPage({ type, offset }: Props) {
+  const queryClient = new QueryClient();
+  const movies = await queryClient
+    .fetchQuery({
+      queryKey: [MOVIES_QUERY_KEY, type],
+      queryFn: () => fetchMovies(offset, type)(),
+    })
+    .catch();
 
   return (
-    <CardsContainer>
-      {isPending
-        ? "Загрузка..."
-        : movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
-      {!isPending && pagesCount > (data?.pages.length || 0) && (
-        <LoadMoreButtonContainer onClick={async () => await fetchNextPage()}>
-          Загрузить еще
-        </LoadMoreButtonContainer>
-      )}
-    </CardsContainer>
+    <>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Movies movies={movies.data} />
+      </HydrationBoundary>
+    </>
   );
 }

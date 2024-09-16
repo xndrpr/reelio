@@ -9,7 +9,9 @@ export interface Tab {
 interface Props {
   className?: string;
   activeTab: number;
-  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
+  setActiveTab:
+    | React.Dispatch<React.SetStateAction<number>>
+    | ((tab: number) => void);
   tabs: Tab[];
 }
 

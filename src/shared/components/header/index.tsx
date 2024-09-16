@@ -1,25 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { CustomTabs, HeaderSC, HiddenVersion } from "./styled";
 import { SearchBar } from "../search-bar";
-import { HeaderState, useHeader } from "@/hooks/use-header";
-import { SearchState } from "@/hooks/use-search";
+import { Tab } from "../tabs";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  headerState: HeaderState;
-  searchState: SearchState;
+  activeTab: number;
 }
 
-export const Header = ({ headerState, searchState }: Props) => {
+export const Header = ({ activeTab }: Props) => {
+  const router = useRouter();
+  const tabs: Tab[] = [
+    { title: "Фильмы" },
+    { title: "Сериалы" },
+    { title: "Мультфильмы" },
+    { title: "Аниме" },
+  ];
+  const [tab, setTab] = React.useState(activeTab);
+  const setActiveTab = async (tab: number) => {
+    if (tab === 0) {
+      setTab(0);
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      router.push("/movies");
+    }
+
+    if (tab === 1) {
+      setTab(1);
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      router.push("/series");
+    }
+
+    if (tab === 2) {
+      setTab(2);
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      router.push("/cartoons");
+    }
+
+    if (tab === 3) {
+      setTab(3);
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      router.push("/anime");
+    }
+  };
+
   return (
     <HeaderSC>
-      <CustomTabs
-        tabs={headerState.tabs}
-        activeTab={headerState.activeTab}
-        setActiveTab={headerState.setActiveTab}
-      />
-      <SearchBar state={searchState} />
+      <CustomTabs tabs={tabs} activeTab={tab} setActiveTab={setActiveTab} />
+      <SearchBar />
       <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
     </HeaderSC>
   );

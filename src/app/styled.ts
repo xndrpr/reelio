@@ -1,4 +1,6 @@
-import { breakPoint3, fgColor, lightPurple } from "@/shared/variables";
+"use client";
+
+import { breakPoint3 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
 export const CardsContainer = styled.div`

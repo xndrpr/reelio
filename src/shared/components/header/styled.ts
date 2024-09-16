@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs } from "@/shared/components/tabs";
-import { breakPoint2, breakPoint3 } from "@/shared/variables";
+import { breakPoint3 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
 export const CustomTabs = styled(Tabs)`

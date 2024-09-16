@@ -1,7 +1,8 @@
+"use client";
+
 import { fgColor } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import Link from "next/link";
 
 export const Container = styled.div`
   width: 100%;

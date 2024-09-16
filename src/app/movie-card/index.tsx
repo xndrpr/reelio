@@ -23,7 +23,6 @@ export const MovieCard = ({ movie }: Props) => {
     <Container>
       <HoverContainer href={`/movie/${movie.id}`}>
         <Poster
-          priority={true}
           width={200}
           height={280}
           src={movie.preview_poster || movie.poster}

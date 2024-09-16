@@ -1,3 +1,5 @@
+"use client";
+
 import { darkPurple, fgColor, radius } from "@/shared/variables";
 import styled from "@emotion/styled";
 

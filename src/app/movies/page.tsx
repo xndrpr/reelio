@@ -1,7 +1,7 @@
 import Movies from "@/components/movies";
 import { Header } from "@/shared/components/header";
 
-export default function HomePage({
+export default function MoviesPage({
   searchParams,
 }: {
   searchParams: { offset: number };
