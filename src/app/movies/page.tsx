@@ -4,12 +4,12 @@ import { Header } from "@/shared/components/header";
 export default function MoviesPage({
   searchParams,
 }: {
-  searchParams: { offset: number };
+  searchParams: { offset: string };
 }) {
   return (
     <main>
       <Header activeTab={0} />
-      <Movies offset={searchParams.offset || 1} type={0} />
+      <Movies offset={searchParams.offset} type={0} />
     </main>
   );
 }

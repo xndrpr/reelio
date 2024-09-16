@@ -5,13 +5,13 @@ export default function AnimePage({
   searchParams,
 }: {
   searchParams: {
-    offset: number;
+    offset: string;
   };
 }) {
   return (
     <main>
       <Header activeTab={3} />
-      <Movies offset={searchParams.offset || 1} type={3} />
+      <Movies offset={searchParams.offset} type={3} />
     </main>
   );
 }

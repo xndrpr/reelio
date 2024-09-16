@@ -9,7 +9,7 @@ import { Pagination } from "@/shared/components/pagination";
 
 interface Props {
   type: number;
-  offset: number;
+  offset: string;
 }
 
 export default async function MoviesPage({ type, offset }: Props) {
@@ -17,18 +17,16 @@ export default async function MoviesPage({ type, offset }: Props) {
   const movies = await queryClient
     .fetchQuery({
       queryKey: [MOVIES_QUERY_KEY, type],
-      queryFn: () => fetchMovies(offset, type)(),
+      queryFn: () => fetchMovies(parseInt(offset) || 1, type)(),
     })
     .catch();
-
-  console.log(offset);
 
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Movies movies={movies.data} />
         <Pagination
-          currentPage={offset}
+          currentPage={parseInt(offset) || 1}
           onPageChange={(page) => {}}
           pages={movies.pages}
         />

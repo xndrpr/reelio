@@ -9,7 +9,7 @@ interface Props {
 export default function Movies({ movies }: Props) {
   return (
     <CardsContainer>
-      {movies.map((movie) => (
+      {movies?.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </CardsContainer>

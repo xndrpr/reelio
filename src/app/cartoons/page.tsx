@@ -5,13 +5,13 @@ export default function CartoonsPage({
   searchParams,
 }: {
   searchParams: {
-    offset: number;
+    offset: string;
   };
 }) {
   return (
     <main>
       <Header activeTab={2} />
-      <Movies offset={searchParams.offset || 1} type={2} />
+      <Movies offset={searchParams.offset} type={2} />
     </main>
   );
 }

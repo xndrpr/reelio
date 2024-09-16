@@ -5,13 +5,13 @@ export default function SeriesPage({
   searchParams,
 }: {
   searchParams: {
-    offset: number;
+    offset: string;
   };
 }) {
   return (
     <main>
       <Header activeTab={1} />
-      <Movies offset={searchParams.offset || 1} type={1} />
+      <Movies offset={searchParams.offset} type={1} />
     </main>
   );
 }

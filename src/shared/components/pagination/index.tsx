@@ -8,20 +8,33 @@ interface Props {
 }
 
 export const Pagination = ({ pages, currentPage }: Props) => {
+  const LIMIT = 3;
+  const min = currentPage > LIMIT ? currentPage - LIMIT : 1;
+  const max = currentPage + LIMIT;
+
+  const pagesArray = Array.from(Array(pages).keys())
+    .slice(min, max)
+    .filter((page) => page > 0);
+
   return (
     <Container>
-      {[...Array(pages)].slice(0, 10).map((_, index) => {
-        return (
+      <Page href={`?offset=1`} $isActive={currentPage === 1}>
+        1
+      </Page>
+      {!pagesArray.includes(1) ? "..." : ""}
+      {pagesArray
+        .filter((page) => page !== 1)
+        .map((page) => (
           <Page
-            href={`?offset=${index + 1}`}
-            $isActive={currentPage === index + 1}
-            key={index}
+            key={page}
+            href={`?offset=${page}`}
+            $isActive={page === currentPage && page !== 1 && page !== pages}
           >
-            {index + 1}
+            {page}
           </Page>
-        );
-      })}
-      <Page href={`?offset=${pages}`} $isActive={pages === currentPage}>
+        ))}
+      {!pagesArray.includes(pages - 1) ? "..." : ""}
+      <Page href={`?offset=${pages}`} $isActive={currentPage === pages}>
         {pages}
       </Page>
     </Container>
