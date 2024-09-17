@@ -49,9 +49,16 @@ export const BackButton = styled.button`
   }
 `;
 
+export const Title = styled.h1`
+  font-size: 24px;
+  text-align: center;
+`;
+
 export const Player = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
   align-items: center;
   flex-grow: 1;

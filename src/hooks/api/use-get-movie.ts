@@ -15,6 +15,7 @@ export const createMovieFn = (id: number) => {
       return {
         id: data.id,
         title: data.name,
+        description: data.description,
         rating_imdb: data.rating?.imdb,
         rating_kp: data.rating?.kp,
         poster: data.poster?.url,

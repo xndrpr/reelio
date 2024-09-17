@@ -7,6 +7,7 @@ import {
   Player,
   StyledTabs,
   TabsContainer,
+  Title,
 } from "./styled";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
@@ -36,7 +37,12 @@ const Movie = ({ movie }: Props) => {
       >
         <BackArrow />
       </BackButton>
-      <Player>{movie?.id && <KinoboxPlayer movie={movie} />}</Player>
+      <Player>
+        <Title>
+          {movie?.title} ({movie?.year})
+        </Title>
+        {movie?.id && <KinoboxPlayer movie={movie} />}
+      </Player>
       <TabsContainer>
         <StyledTabs
           activeTab={activeTab}
