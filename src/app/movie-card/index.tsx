@@ -36,7 +36,7 @@ export const MovieCard = ({ movie }: Props) => {
 
   return (
     <Container>
-      <HoverContainer href={`/movie/${encodeBase62(movie.id)}`}>
+      <HoverContainer href={`/movie/${movie.id}`}>
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>

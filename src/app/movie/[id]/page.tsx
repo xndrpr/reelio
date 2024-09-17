@@ -50,9 +50,9 @@ function decodeBase62(encoded: string) {
 export default async function MoviesPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }) {
-  const id = decodeBase62(params.id.slice(2, -2));
+  const id = params.id;
   const queryClient = new QueryClient();
   const movie = await queryClient
     .fetchQuery({
@@ -60,6 +60,10 @@ export default async function MoviesPage({
       queryFn: () => createMovieFn(id)(),
     })
     .catch();
+
+  if (!movie) {
+    return null;
+  }
 
   return (
     <>
