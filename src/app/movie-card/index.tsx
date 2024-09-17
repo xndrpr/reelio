@@ -30,6 +30,10 @@ export const MovieCard = ({ movie }: Props) => {
     return "gl" + encoded + "lg" || "0";
   }
 
+  if (!movie.poster && !movie.preview_poster) {
+    return null;
+  }
+
   return (
     <Container>
       <HoverContainer href={`/movie/${encodeBase62(movie.id)}`}>

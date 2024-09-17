@@ -1,48 +1,36 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { ClearButton, SearchContainer, SearchInput } from "./styled";
-import { SearchIcon } from "@/assets/icons/tsx-icons/search";
-import { useGetSearch } from "@/hooks/api/use-get-search";
-import { RotatingLines } from "react-loader-spinner";
 import { CrossIcon } from "@/assets/icons/tsx-icons/cross-icon";
-import { useSearch } from "@/hooks/use-search";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const SearchBar = () => {
-  const state = useSearch();
-  const { isLoading, data } = useGetSearch(state.debouncedQuery);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [value, setValue] = React.useState(searchParams.get("query") || "");
 
-  useEffect(() => {
-    if (data && state.value.length > 0) {
-      state.setResult(data);
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      router.push(`/search?query=${value}&offset=1`);
     }
-  }, [data, state]);
-
-  useEffect(() => {
-    if (state.value.length === 0) {
-      state.setResult([]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.value]);
-
-  useEffect(() => {
-    state.setIsLoading(isLoading);
-  }, [isLoading, state]);
+  };
 
   return (
     <SearchContainer>
-      {isLoading ? (
-        <RotatingLines width="15px" strokeColor="#fff" />
-      ) : (
-        <SearchIcon />
-      )}
       <SearchInput
-        value={state.value}
-        onChange={(e) => state.setValue(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         placeholder="Найти фильм, сериал, мультфильм, или аниме"
+        onKeyDown={onKeyDown}
       />
-      {state.value.length > 0 && (
-        <ClearButton onClick={() => state.setValue("")}>
+      {value.length > 0 && (
+        <ClearButton
+          onClick={() => {
+            setValue("");
+            router.push(`/`);
+          }}
+        >
           <CrossIcon />
         </ClearButton>
       )}
