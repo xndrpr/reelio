@@ -25,8 +25,6 @@ export default async function SearchPage({
     })
     .catch();
 
-  console.log(movies);
-
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
