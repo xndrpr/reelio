@@ -14,6 +14,7 @@ import { Tab } from "@/shared/components/tabs";
 import KinoboxPlayer from "@/shared/components/kino-box";
 import { Movie as MovieType } from "@/types/api/get-movies-result";
 import { useRouter } from "next/navigation";
+import slug from "slug";
 
 interface Props {
   movie: MovieType;

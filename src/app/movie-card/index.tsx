@@ -13,30 +13,20 @@ import { RatingBadge } from "./rating-badge";
 import { bgColor, fgColor, imdbColor, kpColor } from "@/shared/variables";
 import { KpIcon } from "@/assets/icons/tsx-icons/kp-icon";
 import { SmartPoster } from "./smart-poster";
+import slug from "slug";
 
 interface Props {
   movie: Movie;
 }
 
 export const MovieCard = ({ movie }: Props) => {
-  function encodeBase62(id: number) {
-    const base62chars =
-      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let encoded = "";
-    while (id > 0) {
-      encoded = base62chars[id % 62] + encoded;
-      id = Math.floor(id / 62);
-    }
-    return "gl" + encoded + "lg" || "0";
-  }
-
   if (!movie.poster && !movie.preview_poster) {
     return null;
   }
 
   return (
     <Container>
-      <HoverContainer href={`/movie/${movie.id}`}>
+      <HoverContainer href={`/movie/${movie.id}-${slug(movie.title)}`}>
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>

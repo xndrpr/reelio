@@ -34,26 +34,12 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-function decodeBase62(encoded: string) {
-  const base62chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let decoded = 0;
-
-  for (let i = 0; i < encoded.length; i++) {
-    const char = encoded[i];
-    const index = base62chars.indexOf(char);
-    decoded = decoded * 62 + index;
-  }
-
-  return decoded;
-}
-
 export default async function MoviesPage({
   params,
 }: {
-  params: { id: number };
+  params: { id: string };
 }) {
-  const id = params.id;
+  const id = parseInt(params.id.split("-")[0]);
   const queryClient = new QueryClient();
   const movie = await queryClient
     .fetchQuery({
