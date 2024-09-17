@@ -12,6 +12,7 @@ export const SmartPoster = ({ poster }: Props) => {
     <>
       {loading && <b>Loading...</b>}
       <Poster
+        priority
         width={200}
         height={280}
         src={poster}
