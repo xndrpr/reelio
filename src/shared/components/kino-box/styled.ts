@@ -10,7 +10,7 @@ export const Container = styled.div`
   --content-padding: 80px;
 
   width: 100%;
-  max-width: calc(100% - (var(--content-padding) * 2));
+  max-width: calc(100% - (var(--content-padding) * 4));
   aspect-ratio: 16/9;
 
   border: 4px solid ${darkPurple};
