@@ -52,7 +52,7 @@ export default async function MoviesPage({
 }: {
   params: { id: string };
 }) {
-  const id = decodeBase62(params.id.slice(6, -2));
+  const id = decodeBase62(params.id.slice(2, -2));
   const queryClient = new QueryClient();
   const movie = await queryClient
     .fetchQuery({
