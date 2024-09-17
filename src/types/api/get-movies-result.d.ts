@@ -1,6 +1,7 @@
 import { Data } from "./common-api-types";
 
 interface Movie {
+  type: string;
   id: number;
   title: string;
   description: string;

@@ -22,12 +22,11 @@ export const fetchMovies = (offset: number, type: number) => {
       total: data?.data?.length || 0,
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
-        title: doc?.name,
-        rating_imdb: doc?.rating?.imdb,
-        rating_kp: doc?.rating?.kp,
-        poster: doc?.poster?.url,
-        preview_poster: doc?.poster?.previewUrl || doc.poster?.url,
-        year: doc?.year,
+        title: doc?.title,
+        rating_imdb: Math.round(doc?.vote_average * 10) / 10,
+        poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+        year: doc?.release_date?.slice(0, 4),
+        type: "movie",
       })),
       pages: data?.pages || 0,
     };

@@ -25,7 +25,10 @@ export default async function MoviesPage({ type, offset }: Props) {
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Movies movies={movies.data} />
-        <Pagination currentPage={parseInt(offset) || 1} pages={movies.pages} />
+        <Pagination
+          currentPage={parseInt(offset) || 1}
+          pages={parseInt((movies.pages / 20).toFixed(0))}
+        />
       </HydrationBoundary>
     </>
   );

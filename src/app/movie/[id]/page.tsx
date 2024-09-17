@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id)(),
+      queryFn: () => createMovieFn(id, "movie")(),
     })
     .catch();
 
@@ -44,7 +44,7 @@ export default async function MoviesPage({
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id)(),
+      queryFn: () => createMovieFn(id, "movie")(),
     })
     .catch();
 

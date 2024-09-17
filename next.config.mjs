@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "image.openmoviedb.com",
+        hostname: "image.tmdb.org",
         port: "",
         pathname: "/**"
       }
