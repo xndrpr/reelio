@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import React from "react";
-import Movie from "./movie";
+import Movie from "./tv";
 import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 0)(),
+      queryFn: () => createMovieFn(id, 1)(),
     })
     .catch();
 
@@ -34,17 +34,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function MoviesPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function TvPage({ params }: { params: { id: string } }) {
   const id = parseInt(params.id.split("-")[0]);
   const queryClient = new QueryClient();
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 0)(),
+      queryFn: () => createMovieFn(id, 1)(),
     })
     .catch();
 

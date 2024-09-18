@@ -1,33 +1,26 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-enum MovieType {
-  Movie,
-  Series,
-  Anime,
-  Cartoon,
-}
 export const MOVIES_QUERY_KEY = "getMovies";
-const LIMIT = 25;
 
 export const fetchMovies = (offset: number, type: number) => {
   return async () => {
     const res = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }/movies?offset=${offset}&limit=${LIMIT}&type=${type + 1}`
+      `${process.env.NEXT_PUBLIC_API_URL}/movies?offset=${offset}&type=${type}`
     );
     const data = await res.json();
+    console;
 
     return {
       total: data?.data?.length || 0,
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
-        title: doc?.name,
-        rating_imdb: doc?.rating?.imdb,
-        rating_kp: doc?.rating?.kp,
-        poster: doc?.poster?.url,
-        preview_poster: doc?.poster?.previewUrl || doc.poster?.url,
-        year: doc?.year,
+        title: doc?.title || doc?.name,
+        rating_imdb: Math.round(doc?.vote_average * 10) / 10,
+        poster:
+          doc?.poster_path &&
+          `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+        year: doc?.release_date?.slice(0, 4),
+        type: type === 0 || type === 2 ? "movie" : "tv",
       })),
       pages: data?.pages || 0,
     };
