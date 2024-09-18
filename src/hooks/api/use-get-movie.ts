@@ -4,26 +4,26 @@ import { QueryOptions, useQuery } from "@tanstack/react-query";
 
 export const MOVIE_QUERY_KEY = "getMovie";
 
-export const createMovieFn = (id: number, type: string) => {
+export const createMovieFn = (id: number, type: number) => {
   return async () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}?type=${type}`
       );
       const data = await res.json();
-      console.log(data);
-      console.log(
-        `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}?type=${type}`
-      );
 
       return {
         id: data?.id,
-        title: data?.title,
+        title: data?.title || data?.name,
         rating_imdb: Math.round(data?.vote_average * 10) / 10,
         poster: `https://image.tmdb.org/t/p/w500${data?.poster_path}`,
-        year: data?.release_date?.slice(0, 4),
+        year:
+          data?.release_date?.slice(0, 4) || data?.first_air_date?.slice(0, 4),
+        end_year: data?.last_air_date?.slice(0, 4),
         description: data?.overview,
-        type: "movie",
+        backdrop:
+          data?.backdrop_path &&
+          `https://image.tmdb.org/t/p/w1280${data?.backdrop_path}`,
       } as Movie;
     } catch {
       return null;
@@ -33,7 +33,7 @@ export const createMovieFn = (id: number, type: string) => {
 
 export const useGetMovie = (
   id: number,
-  type: string,
+  type: number,
   queryOptions?: QueryOptions<Movie | null, ErrorModelActionResultModel>
 ) => {
   return useQuery({

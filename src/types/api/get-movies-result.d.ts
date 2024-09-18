@@ -9,6 +9,7 @@ interface Movie {
   preview_poster: string;
   backdrop: string;
   year: number;
+  end_year?: number;
   rating_imdb: number;
   rating_kp: number;
 }

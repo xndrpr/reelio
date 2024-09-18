@@ -20,9 +20,8 @@ interface Props {
 }
 
 export const MovieCard = ({ movie }: Props) => {
-  if (!movie.poster && !movie.preview_poster) {
-    return null;
-  }
+  if (!movie) return null;
+  if (!movie.poster && !movie.preview_poster) return null;
 
   return (
     <Container>

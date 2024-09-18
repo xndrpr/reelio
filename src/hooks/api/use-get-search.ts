@@ -1,5 +1,4 @@
-import { QueryOptions, useQuery } from "@tanstack/react-query";
-import { Movie } from "@/types/api/get-movies-result";
+import { useQuery } from "@tanstack/react-query";
 
 export const SEARCH_QUERY_KEY = "getSearch";
 
@@ -14,12 +13,13 @@ export const searchMovies = (query: string, offset: number) => {
       total: data?.data?.length || 0,
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
-        title: doc?.name,
-        rating_imdb: doc?.rating?.imdb,
-        rating_kp: doc?.rating?.kp,
-        poster: doc?.poster?.url,
-        preview_poster: doc?.poster?.previewUrl || doc.poster?.url,
-        year: doc?.year,
+        title: doc?.title || doc?.name,
+        rating_imdb: Math.round(doc?.vote_average * 10) / 10,
+        poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+        year:
+          doc?.release_date?.slice(0, 4) || doc?.first_air_date?.slice(0, 4),
+        description: doc?.overview,
+        type: doc?.media_type,
       })),
       pages: data?.pages || 0,
     };

@@ -20,7 +20,7 @@ function KinoboxPlayer({ movie }: Props) {
     script.onload = () => {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
-          search: { kinopoisk: movie.id },
+          search: { tmdb: movie.id },
           menu: {
             enabled: false,
           },
