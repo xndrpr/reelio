@@ -46,10 +46,7 @@ export const AboutTv = ({ movie }: Props) => {
   return (
     <Container $bg={movie?.backdrop}>
       <BackButton
-        onClick={() => {
-          router.back();
-          router.back();
-        }}
+        onClick={() => router.replace(`${pathname.replace("about", "")}`)}
       >
         <BackArrow />
       </BackButton>

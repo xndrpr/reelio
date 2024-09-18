@@ -38,9 +38,7 @@ export const AboutMovie = ({ movie }: Props) => {
   return (
     <Container $bg={movie?.backdrop}>
       <BackButton
-        onClick={() => {
-          router.replace(`${pathname.replace("about", "")}`);
-        }}
+        onClick={() => router.replace(`${pathname.replace("about", "")}`)}
       >
         <BackArrow />
       </BackButton>

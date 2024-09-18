@@ -35,12 +35,7 @@ const Tv = ({ movie }: Props) => {
 
   return (
     <Container $bg={movie?.backdrop}>
-      <BackButton
-        onClick={() => {
-          router.back();
-          router.back();
-        }}
-      >
+      <BackButton onClick={() => router.push("/series")}>
         <BackArrow />
       </BackButton>
       <Player>
