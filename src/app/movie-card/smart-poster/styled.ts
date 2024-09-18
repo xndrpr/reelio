@@ -13,6 +13,8 @@ export const Poster = styled(Image)`
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
+
+  object-fit: cover;
 `;
 
 export const SkeletonPoster = styled.div`
