@@ -5,12 +5,18 @@ export const SEARCH_QUERY_KEY = "getSearch";
 export const searchMovies = (query: string, offset: number) => {
   return async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/movies/search?query=${query}&offset=${offset}&limit=10`
+      `${process.env.NEXT_PUBLIC_API_URL}/movies/search?query=${query}&offset=${offset}&limit=10`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          secret: `${process.env.SECRET}`,
+        },
+      }
     );
     const data = await res.json();
 
-    return {
-      total: data?.data?.length || 0,
+    const a = {
+      total: data.total || 0,
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
         title: doc?.title || doc?.name,
@@ -21,14 +27,16 @@ export const searchMovies = (query: string, offset: number) => {
         description: doc?.overview,
         type: doc?.media_type,
       })),
-      pages: data?.pages || 0,
+      page: data?.page || 0,
     };
+    console.log(a);
+    return a;
   };
 };
 
 export const useGetSearch = (query: string, offset: number) => {
   return useQuery({
-    queryKey: [SEARCH_QUERY_KEY, query],
+    queryKey: query ? [SEARCH_QUERY_KEY, query] : [SEARCH_QUERY_KEY],
     queryFn: searchMovies(query, offset),
   });
 };

@@ -33,7 +33,7 @@ export default async function SearchPage({
         <Pagination
           currentPage={parseInt(searchParams.offset) || 1}
           query={searchParams.query}
-          pages={movies.pages}
+          pages={movies.total}
         />
       </HydrationBoundary>
     </>

@@ -8,7 +8,13 @@ export const createMovieFn = (id: number, type: number) => {
   return async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}?type=${type}`
+        `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}?type=${type}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            secret: `${process.env.SECRET}`,
+          },
+        }
       );
       const data = await res.json();
 

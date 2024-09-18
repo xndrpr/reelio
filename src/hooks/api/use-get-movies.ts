@@ -5,7 +5,13 @@ export const MOVIES_QUERY_KEY = "getMovies";
 export const fetchMovies = (offset: number, type: number) => {
   return async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/movies?offset=${offset}&type=${type}`
+      `${process.env.NEXT_PUBLIC_API_URL}/movies?offset=${offset}&type=${type}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          secret: `${process.env.SECRET}`,
+        },
+      }
     );
     const data = await res.json();
 
@@ -23,7 +29,7 @@ export const fetchMovies = (offset: number, type: number) => {
         end_year: data?.last_air_date?.slice(0, 4),
         type: type === 0 || type === 2 ? "movie" : "tv",
       })),
-      pages: data?.pages || 0,
+      pages: data?.total || 0,
     };
   };
 };
