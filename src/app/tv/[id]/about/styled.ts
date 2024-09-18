@@ -57,20 +57,17 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
 
-  @media (max-width: 1000px) {
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-  }
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  gap: 20px;
 `;
 
 export const Poster = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  height: 100%;
 `;
 
 export const PosterImage = styled(Image)`
@@ -101,12 +98,10 @@ export const Info = styled.h3`
 export const Description = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   background: ${darkPurple80Opcity};
   color: ${fgColor};
   text-align: left;
   padding: 20px;
 
-  height: 100%;
   border-radius: 24px;
 `;
