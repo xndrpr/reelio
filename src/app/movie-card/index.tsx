@@ -33,20 +33,12 @@ export const MovieCard = ({ movie }: Props) => {
         </TitleContainer>
       </HoverContainer>
       <RatingContainer>
-        {movie.rating_imdb ? (
+        {movie.rating ? (
           <RatingBadge
             backgroundColor={imdbColor}
             color={bgColor}
-            rating={movie.rating_imdb}
+            rating={movie.rating}
             icon={<ImdbIcon>IMDB</ImdbIcon>}
-          />
-        ) : null}
-        {movie.rating_kp ? (
-          <RatingBadge
-            backgroundColor={kpColor}
-            color={fgColor}
-            rating={parseFloat(movie.rating_kp.toFixed(1))}
-            icon={<KpIcon />}
           />
         ) : null}
       </RatingContainer>

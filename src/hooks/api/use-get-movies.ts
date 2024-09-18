@@ -14,7 +14,7 @@ export const fetchMovies = (offset: number, type: number) => {
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
         title: doc?.title || doc?.name,
-        rating_imdb: Math.round(doc?.vote_average * 10) / 10,
+        rating: Math.round(doc?.vote_average * 10) / 10,
         poster:
           doc?.poster_path &&
           `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,

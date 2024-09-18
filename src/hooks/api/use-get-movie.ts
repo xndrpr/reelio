@@ -15,7 +15,8 @@ export const createMovieFn = (id: number, type: number) => {
       return {
         id: data?.id,
         title: data?.title || data?.name,
-        rating_imdb: Math.round(data?.vote_average * 10) / 10,
+        original_title: data?.original_title || data?.original_name,
+        rating: Math.round(data?.vote_average * 10) / 10,
         poster: `https://image.tmdb.org/t/p/w500${data?.poster_path}`,
         year:
           data?.release_date?.slice(0, 4) || data?.first_air_date?.slice(0, 4),
@@ -24,6 +25,7 @@ export const createMovieFn = (id: number, type: number) => {
         backdrop:
           data?.backdrop_path &&
           `https://image.tmdb.org/t/p/w1280${data?.backdrop_path}`,
+        seasons_count: data?.seasons?.length,
       } as Movie;
     } catch {
       return null;

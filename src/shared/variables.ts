@@ -2,6 +2,7 @@ export const bgColor = "#0E1017";
 export const fgColor = "#DBDBDB";
 
 export const darkPurple = "#171720";
+export const darkPurple80Opcity = "rgba(23, 23, 32, 0.8)";
 export const mediumPurple = "#20202A";
 export const lightPurple = "#232331";
 export const extraLightPurple = "#3B4785";

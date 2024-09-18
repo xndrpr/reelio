@@ -5,7 +5,7 @@ import { breakPoint2, breakPoint3, darkPurple } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
 
-export const Container = styled.div`
+export const Container = styled.div<{ $bg: string }>`
   --content-padding: 40px;
 
   display: flex;
@@ -20,6 +20,20 @@ export const Container = styled.div`
   @media (max-width: ${breakPoint3}px) {
     --content-padding: 12px;
   }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${(props) => props.$bg});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+  }
 `;
 
 export const BackButton = styled.button`
@@ -32,6 +46,7 @@ export const BackButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   margin: 1rem;
 
@@ -68,6 +83,7 @@ export const TabsContainer = styled.div`
 
 export const StyledTabs = styled(Tabs)`
   width: 225px;
+  z-index: 1;
 `;
 
 export const Backdrop = styled(Image)`
