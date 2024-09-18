@@ -27,10 +27,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       description: `Смотреть ${movie?.title} бесплатно в хорошем качестве`,
       images: [
         {
-          url: movie?.backdrop || "",
-        },
-        {
-          url: movie?.poster || "",
+          url: movie?.backdrop || movie?.poster || "",
         },
       ],
     },
