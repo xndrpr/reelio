@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { BackButton, Container, StyledTabs, TabsContainer } from "../styled";
+import { BackButton, StyledTabs, TabsContainer } from "../styled";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
 import { Movie as MovieType } from "@/types/api/get-movies-result";
 import { usePathname, useRouter } from "next/navigation";
 import {
   About,
+  Container,
   Description,
   Info,
   Poster,

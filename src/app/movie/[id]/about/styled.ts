@@ -1,5 +1,6 @@
 import {
   breakPoint2,
+  breakPoint3,
   darkGrey,
   darkPurple,
   darkPurple80Opcity,
@@ -8,6 +9,38 @@ import {
 } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
+
+export const Container = styled.div<{ $bg: string }>`
+  --content-padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: calc(100dvh - var(--content-padding) * 2);
+
+  @media (max-width: ${breakPoint2}px) {
+    --content-padding: 16px;
+    height: 100%;
+  }
+
+  @media (max-width: ${breakPoint3}px) {
+    --content-padding: 12px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${(props) => props.$bg});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+  }
+`;
 
 export const About = styled.div`
   width: 100%;
@@ -20,15 +53,16 @@ export const About = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 55%;
+  height: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
 
-  @media (max-width: ${breakPoint2}px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
     align-items: flex-start;
+    height: 100%;
   }
 `;
 
