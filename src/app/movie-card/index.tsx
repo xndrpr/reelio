@@ -9,8 +9,7 @@ import {
   Year,
 } from "./styled";
 import { RatingBadge } from "./rating-badge";
-import { bgColor, fgColor, imdbColor, kpColor } from "@/shared/variables";
-import { KpIcon } from "@/assets/icons/tsx-icons/kp-icon";
+import { bgColor, imdbColor } from "@/shared/variables";
 import { SmartPoster } from "./smart-poster";
 import slug from "slug";
 import { Movie } from "@/types/movie";
@@ -26,7 +25,9 @@ export const MovieCard = ({ movie }: Props) => {
   return (
     <Container>
       <HoverContainer
-        href={`/${movie.type || "movie"}/${movie.tmdbId}-${slug(movie.title)}`}
+        href={`/${
+          movie.seasons_count && movie.seasons_count > 0 ? "tv" : "movie"
+        }/${movie.tmdbId}-${slug(movie.title)}`}
       >
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
