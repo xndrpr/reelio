@@ -20,6 +20,7 @@ export const fetchMovies = (offset: number, type: number) => {
       total: data?.total || 0,
       data: data?.data?.map((doc: any) => ({
         ...doc,
+        tmdbId: doc?.tmdbId || doc?.id,
         title: doc?.title || doc?.name,
         rating: Math.round(doc?.vote_average * 10) / 10,
         poster:
