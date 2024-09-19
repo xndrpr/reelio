@@ -26,7 +26,10 @@ export const MovieCard = ({ movie }: Props) => {
     <Container>
       <HoverContainer
         href={`/${
-          movie.seasons_count && movie.seasons_count > 0 ? "tv" : "movie"
+          (movie.seasons_count && movie.seasons_count > 0) ||
+          movie.type === "tv"
+            ? "tv"
+            : "movie"
         }/${movie.tmdbId}-${slug(movie.title)}`}
       >
         <SmartPoster poster={movie.preview_poster || movie.poster} />
