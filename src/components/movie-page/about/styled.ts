@@ -106,4 +106,6 @@ export const Description = styled.div`
   padding: 20px;
 
   border-radius: 24px;
+
+  white-space: pre-wrap;
 `;
