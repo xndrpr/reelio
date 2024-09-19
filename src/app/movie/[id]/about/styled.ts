@@ -16,11 +16,10 @@ export const Container = styled.div<{ $bg: string }>`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: calc(100dvh - var(--content-padding) * 2);
+  height: 100%;
 
   @media (max-width: ${breakPoint2}px) {
     --content-padding: 16px;
-    height: 100%;
   }
 
   @media (max-width: ${breakPoint3}px) {
@@ -29,7 +28,7 @@ export const Container = styled.div<{ $bg: string }>`
 
   &:after {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -37,7 +36,7 @@ export const Container = styled.div<{ $bg: string }>`
     background-image: url(${(props) => props.$bg});
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     opacity: 0.1;
   }
 `;
