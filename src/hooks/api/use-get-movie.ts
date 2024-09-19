@@ -14,8 +14,7 @@ export const createMovieFn = (id: number, type: number) => {
             "Content-Type": "application/json",
             secret: `${process.env.SECRET}`,
           },
-          cache: "no-cache",
-          // next: { revalidate: 60 * 60 },
+          next: { revalidate: 60 * 60 },
         }
       );
       const data = await res.json();
@@ -29,6 +28,7 @@ export const createMovieFn = (id: number, type: number) => {
           data?.release_date?.slice(0, 4) || data?.first_air_date?.slice(0, 4),
         end_year: data?.last_air_date?.slice(0, 4),
         description: data?.overview,
+        custom_description: data?.custom_description,
         backdrop:
           data?.backdrop_path &&
           `https://image.tmdb.org/t/p/w1280${data?.backdrop_path}`,
