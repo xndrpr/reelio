@@ -16,7 +16,7 @@ export const searchMovies = (query: string, offset: number) => {
     );
     const data = await res.json();
 
-    return {
+    const result = {
       data: data?.data?.map((doc: any) => ({
         ...doc,
         title: doc?.title || doc?.name,
@@ -28,6 +28,12 @@ export const searchMovies = (query: string, offset: number) => {
         type: doc?.media_type || parseInt(doc?.type) === 0 ? "movie" : "tv",
       })),
     };
+    const unique = result.data.filter(
+      (v: { tmdbId: any }, i: any, a: any[]) =>
+        a.findIndex((t: { tmdbId: any }) => t.tmdbId === v.tmdbId) === i
+    );
+
+    return { ...result, data: unique };
   };
 };
 
