@@ -14,10 +14,12 @@ export const createMovieFn = (id: number, type: number) => {
             "Content-Type": "application/json",
             secret: `${process.env.SECRET}`,
           },
-          next: { revalidate: 60 * 60 * 4 },
+          next: { revalidate: 60 * 60 },
         }
       );
       const data = await res.json();
+
+      console.log(data);
 
       return {
         id: data?.id,
