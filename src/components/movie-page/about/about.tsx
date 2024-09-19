@@ -1,11 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  BackButton,
-  StyledTabs,
-  TabsContainer,
-} from "../../../app/tv/[id]/styled";
+
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
 import { usePathname, useRouter } from "next/navigation";
@@ -21,6 +17,7 @@ import {
   Wrapper,
 } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
+import { BackButton, StyledTabs, TabsContainer } from "../styled";
 
 interface Props {
   movie: Movie;
