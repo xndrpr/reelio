@@ -5,7 +5,7 @@ export const SEARCH_QUERY_KEY = "getSearch";
 export const searchMovies = (query: string, offset: number) => {
   return async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/movies/search?query=${query}&offset=${offset}&limit=10`,
+      `${process.env.API_URL}/movies/search?query=${query}&offset=${offset}&limit=10`,
       {
         headers: {
           "Content-Type": "application/json",
