@@ -25,7 +25,7 @@ export const searchMovies = (query: string, offset: number) => {
         year:
           doc?.release_date?.slice(0, 4) || doc?.first_air_date?.slice(0, 4),
         description: doc?.overview,
-        type: doc?.media_type,
+        type: doc?.type === 0 ? "movie" : "tv" || doc?.media_type,
       })),
     };
   };
