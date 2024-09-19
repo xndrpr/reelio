@@ -58,3 +58,8 @@ export const Tab = styled.div<{ $isActive: boolean; $isDisabled: boolean }>`
   opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   cursor: ${(props) => (props.$isDisabled ? "not-allowed" : "pointer")};
 `;
+
+export const TabLink = styled.a`
+  text-decoration: none;
+  color: ${fgColor};
+`;

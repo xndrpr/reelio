@@ -4,8 +4,9 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import React from "react";
-import Movie from "./movie";
 import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
+import MoviePage from "@/components/movie-page/movie-page";
+import { MovieType } from "@/types/movie";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -20,10 +21,18 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
     title: `Glee - ${movie?.title}`,
-    description: `Смотреть ${movie?.title} ${movie?.year} бесплатно в хорошем качестве, без рекламы, на русском языке. ${movie?.description}`,
-    keywords: ["фильм", "фильмы", "кино", "кинотеатр", "кинотеатры", "кино"],
+    description: `Смотреть ${movie?.title} ${movie?.year} бесплатно в хорошем качестве, без рекламы, на русском языке. `,
+    keywords: [
+      movie?.title,
+      "фильм",
+      "фильмы",
+      "кино",
+      "кинотеатр",
+      "кинотеатры",
+      "кино",
+    ],
     openGraph: {
-      title: `Glee - ${movie?.title}`,
+      title: `${movie?.title}`,
       description: `Смотреть ${movie?.title} бесплатно в хорошем качестве`,
       images: [
         {
@@ -55,7 +64,7 @@ export default async function MoviesPage({
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Movie movie={movie} />
+        <MoviePage type={MovieType.MOVIE} movie={movie} />
       </HydrationBoundary>
     </>
   );

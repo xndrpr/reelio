@@ -1,6 +1,10 @@
 "use client";
 
 import React from "react";
+import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
+import { Tab } from "@/shared/components/tabs";
+import KinoboxPlayer from "@/shared/components/kino-box";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BackButton,
   Container,
@@ -9,18 +13,21 @@ import {
   TabsContainer,
   Title,
 } from "./styled";
-import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import { Tab } from "@/shared/components/tabs";
-import KinoboxPlayer from "@/shared/components/kino-box";
-import { Movie as MovieType } from "@/types/api/get-movies-result";
-import { usePathname, useRouter } from "next/navigation";
+import { Movie, MovieType } from "@/types/movie";
 
 interface Props {
-  movie: MovieType;
+  movie: Movie;
+  type: MovieType;
 }
 
-const Tv = ({ movie }: Props) => {
-  const tabs: Tab[] = [{ title: "Смотреть" }, { title: "О сериале" }];
+const MoviePage = ({ movie, type }: Props) => {
+  const tabs: Tab[] = [
+    { title: "Смотреть", isLink: true },
+    {
+      title: type === MovieType.MOVIE ? "О фильме" : "О сериале",
+      isLink: true,
+    },
+  ];
   const router = useRouter();
   const pathname = usePathname();
   const [tab, setTab] = React.useState(0);
@@ -35,7 +42,11 @@ const Tv = ({ movie }: Props) => {
 
   return (
     <Container $bg={movie?.backdrop}>
-      <BackButton onClick={() => router.push("/series")}>
+      <BackButton
+        onClick={() =>
+          router.push(`/${type === MovieType.MOVIE ? "movies" : "series"}`)
+        }
+      >
         <BackArrow />
       </BackButton>
       <Player>
@@ -52,4 +63,4 @@ const Tv = ({ movie }: Props) => {
   );
 };
 
-export default Tv;
+export default MoviePage;

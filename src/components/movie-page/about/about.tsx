@@ -1,10 +1,13 @@
 "use client";
 
 import React from "react";
-import { BackButton, StyledTabs, TabsContainer } from "../styled";
+import {
+  BackButton,
+  StyledTabs,
+  TabsContainer,
+} from "../../../app/tv/[id]/styled";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
-import { Movie as MovieType } from "@/types/api/get-movies-result";
 import { usePathname, useRouter } from "next/navigation";
 import {
   About,
@@ -17,13 +20,21 @@ import {
   Title,
   Wrapper,
 } from "./styled";
+import { Movie } from "@/types/movie";
 
 interface Props {
-  movie: MovieType;
+  movie: Movie;
 }
 
-export const AboutTv = ({ movie }: Props) => {
-  const tabs: Tab[] = [{ title: "Смотреть" }, { title: "О сериале" }];
+export const AboutMovie = ({ movie }: Props) => {
+  const tabs: Tab[] = [
+    { title: "Смотреть", isLink: true },
+    {
+      title:
+        movie.type === "movie" || movie.type === 0 ? "О фильме" : "О сериале",
+      isLink: true,
+    },
+  ];
   const router = useRouter();
   const pathname = usePathname();
   const [tab, setTab] = React.useState(1);
@@ -55,13 +66,17 @@ export const AboutTv = ({ movie }: Props) => {
             <Title>{movie?.title}</Title>
             <SubTitle>{movie?.original_title}</SubTitle>
             <Info>
-              {movie.year} {movie.end_year ? ` - ${movie.end_year}` : ""} ∙{" "}
-              {movie.seasons_count}{" "}
-              {movie.seasons_count === 1
-                ? "сезон"
-                : movie.seasons_count || 0 < 5
-                ? "сезона"
-                : "сезонов"}
+              {movie.year} {movie.end_year ? ` - ${movie.end_year}` : ""}
+              {movie.type === "series" || movie.type === 1
+                ? `∙ ${movie.seasons_count} `
+                : null}
+              {movie.type === "series" || movie.type === 1
+                ? movie.seasons_count === 1
+                  ? "сезон"
+                  : movie.seasons_count || 0 < 5
+                  ? "сезона"
+                  : "сезонов"
+                : null}
             </Info>
           </Poster>
           <Description>{movie?.description}</Description>

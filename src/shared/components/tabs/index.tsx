@@ -1,9 +1,10 @@
 import React from "react";
-import { Tab, TabsSC } from "./styled";
+import { Tab, TabLink, TabsSC } from "./styled";
 
 export interface Tab {
   title: string;
   isDisabled?: boolean;
+  isLink?: boolean;
 }
 
 interface Props {
@@ -29,7 +30,13 @@ export const Tabs = ({ className, activeTab, setActiveTab, tabs }: Props) => {
           $isDisabled={tab.isDisabled || false}
           onClick={() => !tab.isDisabled && setActiveTab(index)}
         >
-          {tab.title}
+          {tab.isLink ? (
+            <TabLink onClick={(e) => e.preventDefault()} href={tab.title}>
+              {tab.title}
+            </TabLink>
+          ) : (
+            <>{tab.title}</>
+          )}
         </Tab>
       ))}
     </TabsSC>

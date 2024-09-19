@@ -16,7 +16,7 @@ export const Container = styled.div<{ $bg: string }>`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 100%;
+  min-height: calc(100dvh - var(--content-padding) * 2);
 
   @media (max-width: ${breakPoint2}px) {
     --content-padding: 16px;
@@ -49,6 +49,9 @@ export const About = styled.div`
   align-items: center;
   padding: 0px calc(100% / 4 / 2);
   z-index: 1;
+
+  flex-grow: 1;
+  margin-bottom: auto;
 `;
 
 export const Wrapper = styled.div`

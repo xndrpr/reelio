@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import React from "react";
 import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
-import { AboutTv } from "./about-tv";
+import { AboutMovie } from "@/components/movie-page/about/about";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 1)(),
+      queryFn: () => createMovieFn(id, 0)(),
     })
     .catch();
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function AboutTvPage({
+export default async function AboutPage({
   params,
 }: {
   params: { id: string };
@@ -44,7 +44,7 @@ export default async function AboutTvPage({
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 1)(),
+      queryFn: () => createMovieFn(id, 0)(),
     })
     .catch();
 
@@ -55,7 +55,7 @@ export default async function AboutTvPage({
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <AboutTv movie={movie} />
+        <AboutMovie movie={movie} />
       </HydrationBoundary>
     </>
   );
