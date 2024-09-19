@@ -1,4 +1,4 @@
-import { Movie } from "@/types/api/get-movies-result";
+import { Movie } from "@/types/movie";
 import { useDebounce } from "@uidotdev/usehooks";
 import React from "react";
 

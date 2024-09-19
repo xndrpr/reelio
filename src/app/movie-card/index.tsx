@@ -1,4 +1,3 @@
-import { Movie } from "@/types/api/get-movies-result";
 import React from "react";
 import {
   Container,
@@ -14,6 +13,7 @@ import { bgColor, fgColor, imdbColor, kpColor } from "@/shared/variables";
 import { KpIcon } from "@/assets/icons/tsx-icons/kp-icon";
 import { SmartPoster } from "./smart-poster";
 import slug from "slug";
+import { Movie } from "@/types/movie";
 
 interface Props {
   movie: Movie;

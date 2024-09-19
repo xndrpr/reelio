@@ -1,5 +1,5 @@
 import { ErrorModelActionResultModel } from "@/types/api/common-api-types";
-import { Movie } from "@/types/api/get-movies-result";
+import { Movie } from "@/types/movie";
 import { QueryOptions, useQuery } from "@tanstack/react-query";
 
 export const MOVIE_QUERY_KEY = "getMovie";

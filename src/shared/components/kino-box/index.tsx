@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { Container } from "./styled";
-import { Movie } from "@/types/api/get-movies-result";
+import { Movie } from "@/types/movie";
 
 interface Props {
   movie: Movie;
