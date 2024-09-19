@@ -125,8 +125,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
   }
 
-  for (let i = 1; i <= 500; i++) {
-    console.log(`${i} / 500`);
+  for (let i = 1; i <= 100; i++) {
+    console.log(`${i} / 100`);
     const res = await fetch(
       `${process.env.API_URL}/movies?offset=${i}&type=${3}`,
       {
