@@ -4,7 +4,7 @@ import React from "react";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
 import { Tab } from "@/shared/components/tabs";
 import KinoboxPlayer from "@/shared/components/kino-box";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   BackButton,
   Container,
@@ -21,22 +21,29 @@ interface Props {
 }
 
 const MoviePage = ({ movie, type }: Props) => {
+  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${movie.id}`;
+  const aboutUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+    movie.id
+  }/about`;
+
   const tabs: Tab[] = [
-    { title: "Смотреть", isLink: true },
+    {
+      title: "Смотреть",
+      href: watchUrl,
+    },
     {
       title: type === MovieType.MOVIE ? "О фильме" : "О сериале",
-      isLink: true,
+      href: aboutUrl,
     },
   ];
   const router = useRouter();
-  const pathname = usePathname();
   const [tab, setTab] = React.useState(0);
 
   const changeTab = async (tab: number) => {
     if (tab === 1) {
       setTab(1);
       await new Promise((resolve) => setTimeout(resolve, 200));
-      router.replace(`${pathname}/about`);
+      router.replace(aboutUrl);
     }
   };
 

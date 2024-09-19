@@ -6,6 +6,7 @@ import {
 import React from "react";
 import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
 import { AboutMovie } from "@/components/movie-page/about/about";
+import { MovieType } from "@/types/movie";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -55,7 +56,7 @@ export default async function AboutPage({
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <AboutMovie movie={movie} />
+        <AboutMovie type={MovieType.MOVIE} movie={movie} />
       </HydrationBoundary>
     </>
   );

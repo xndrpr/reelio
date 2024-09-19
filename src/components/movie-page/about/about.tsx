@@ -20,23 +20,29 @@ import {
   Title,
   Wrapper,
 } from "./styled";
-import { Movie } from "@/types/movie";
+import { Movie, MovieType } from "@/types/movie";
 
 interface Props {
   movie: Movie;
+  type: MovieType;
 }
 
-export const AboutMovie = ({ movie }: Props) => {
+export const AboutMovie = ({ movie, type }: Props) => {
+  const pathname = usePathname();
+
+  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${movie.id}`;
+  const aboutUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+    movie.id
+  }/about`;
+
   const tabs: Tab[] = [
-    { title: "Смотреть", isLink: true },
+    { title: "Смотреть", href: watchUrl },
     {
-      title:
-        movie.type === "movie" || movie.type === 0 ? "О фильме" : "О сериале",
-      isLink: true,
+      title: type === MovieType.MOVIE ? "О фильме" : "О сериале",
+      href: aboutUrl,
     },
   ];
   const router = useRouter();
-  const pathname = usePathname();
   const [tab, setTab] = React.useState(1);
 
   const changeTab = async (tab: number) => {
@@ -67,10 +73,10 @@ export const AboutMovie = ({ movie }: Props) => {
             <SubTitle>{movie?.original_title}</SubTitle>
             <Info>
               {movie.year} {movie.end_year ? ` - ${movie.end_year}` : ""}
-              {movie.type === "series" || movie.type === 1
+              {type === MovieType.TV && movie.seasons_count
                 ? `∙ ${movie.seasons_count} `
                 : null}
-              {movie.type === "series" || movie.type === 1
+              {type === MovieType.TV && movie.seasons_count
                 ? movie.seasons_count === 1
                   ? "сезон"
                   : movie.seasons_count || 0 < 5
@@ -79,7 +85,9 @@ export const AboutMovie = ({ movie }: Props) => {
                 : null}
             </Info>
           </Poster>
-          <Description>{movie?.description}</Description>
+          <Description>
+            {movie.custom_description || movie?.description}
+          </Description>
         </Wrapper>
       </About>
       <TabsContainer>

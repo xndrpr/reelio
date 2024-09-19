@@ -13,10 +13,10 @@ interface Props {
 export const Header = ({ activeTab }: Props) => {
   const router = useRouter();
   const tabs: Tab[] = [
-    { title: "Фильмы", isLink: true },
-    { title: "Сериалы", isLink: true },
-    { title: "Мультфильмы", isLink: true },
-    { title: "Аниме", isLink: true },
+    { title: "Фильмы", href: "/movies" },
+    { title: "Сериалы", href: "/series" },
+    { title: "Мультфильмы", href: "/cartoons" },
+    { title: "Аниме", href: "/anime" },
   ];
   const [tab, setTab] = React.useState(activeTab);
   const setActiveTab = async (tab: number) => {

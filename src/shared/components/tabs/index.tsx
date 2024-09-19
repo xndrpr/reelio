@@ -4,7 +4,7 @@ import { Tab, TabLink, TabsSC } from "./styled";
 export interface Tab {
   title: string;
   isDisabled?: boolean;
-  isLink?: boolean;
+  href?: string;
 }
 
 interface Props {
@@ -30,8 +30,8 @@ export const Tabs = ({ className, activeTab, setActiveTab, tabs }: Props) => {
           $isDisabled={tab.isDisabled || false}
           onClick={() => !tab.isDisabled && setActiveTab(index)}
         >
-          {tab.isLink ? (
-            <TabLink onClick={(e) => e.preventDefault()} href={tab.title}>
+          {tab.href ? (
+            <TabLink onClick={(e) => e.preventDefault()} href={tab.href}>
               {tab.title}
             </TabLink>
           ) : (
