@@ -14,6 +14,7 @@ export const createMovieFn = (id: number, type: number) => {
             "Content-Type": "application/json",
             secret: `${process.env.SECRET}`,
           },
+          next: { revalidate: 60 * 60 * 4 },
         }
       );
       const data = await res.json();

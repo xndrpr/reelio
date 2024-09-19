@@ -11,12 +11,14 @@ export const fetchMovies = (offset: number, type: number) => {
           "Content-Type": "application/json",
           secret: `${process.env.SECRET}`,
         },
+        cache: "no-cache",
+        // next: { revalidate: 60 * 30 },
       }
     );
     const data = await res.json();
 
     return {
-      total: data?.data?.length || 0,
+      total: data?.total || 0,
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
         title: doc?.title || doc?.name,
@@ -29,7 +31,6 @@ export const fetchMovies = (offset: number, type: number) => {
         end_year: data?.last_air_date?.slice(0, 4),
         type: type === 0 || type === 2 ? "movie" : "tv",
       })),
-      pages: data?.total || 0,
     };
   };
 };

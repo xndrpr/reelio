@@ -11,7 +11,7 @@ export const SearchBar = () => {
   const [value, setValue] = React.useState(searchParams.get("query") || "");
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && value.length > 0) {
       router.push(`/search?query=${value}&offset=1`);
     }
   };

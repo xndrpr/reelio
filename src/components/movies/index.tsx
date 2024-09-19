@@ -27,7 +27,14 @@ export default async function MoviesPage({ type, offset }: Props) {
         <Movies movies={movies.data} />
         <Pagination
           currentPage={parseInt(offset) || 1}
-          pages={parseInt((movies.total > 500 ? 500 : movies.total).toFixed(0))}
+          pages={parseInt(
+            (movies.total > 1000
+              ? type === 0 || type === 1
+                ? 1000
+                : 789
+              : movies.total
+            ).toFixed(0)
+          )}
         />
       </HydrationBoundary>
     </>

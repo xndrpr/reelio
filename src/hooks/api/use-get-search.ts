@@ -11,12 +11,12 @@ export const searchMovies = (query: string, offset: number) => {
           "Content-Type": "application/json",
           secret: `${process.env.SECRET}`,
         },
+        next: { revalidate: 60 * 15 },
       }
     );
     const data = await res.json();
 
-    const a = {
-      total: data.total || 0,
+    return {
       data: data?.data?.map((doc: any) => ({
         id: doc?.id,
         title: doc?.title || doc?.name,
@@ -27,10 +27,7 @@ export const searchMovies = (query: string, offset: number) => {
         description: doc?.overview,
         type: doc?.media_type,
       })),
-      page: data?.page || 0,
     };
-    console.log(a);
-    return a;
   };
 };
 

@@ -3,7 +3,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { Pagination } from "@/shared/components/pagination";
 import Movies from "@/components/movies/movies";
 import { SEARCH_QUERY_KEY, searchMovies } from "@/hooks/api/use-get-search";
 import { Header } from "@/shared/components/header";
@@ -30,11 +29,6 @@ export default async function SearchPage({
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Header activeTab={0} />
         <Movies movies={movies.data} />
-        <Pagination
-          currentPage={parseInt(searchParams.offset) || 1}
-          query={searchParams.query}
-          pages={movies.total}
-        />
       </HydrationBoundary>
     </>
   );
