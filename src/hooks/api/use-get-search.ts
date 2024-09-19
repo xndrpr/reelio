@@ -18,7 +18,7 @@ export const searchMovies = (query: string, offset: number) => {
 
     return {
       data: data?.data?.map((doc: any) => ({
-        id: doc?.id,
+        ...doc,
         title: doc?.title || doc?.name,
         rating: Math.round(doc?.vote_average * 10) / 10,
         poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,

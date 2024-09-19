@@ -30,9 +30,11 @@ interface Props {
 export const AboutMovie = ({ movie, type }: Props) => {
   const pathname = usePathname();
 
-  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${movie.id}`;
+  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+    movie.tmdbId
+  }`;
   const aboutUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
-    movie.id
+    movie.tmdbId
   }/about`;
 
   const tabs: Tab[] = [

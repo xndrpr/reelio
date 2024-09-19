@@ -20,7 +20,7 @@ function KinoboxPlayer({ movie }: Props) {
     script.onload = () => {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
-          search: { tmdb: movie.id },
+          search: { tmdb: movie.tmdbId },
           menu: {
             enabled: false,
           },
@@ -38,7 +38,7 @@ function KinoboxPlayer({ movie }: Props) {
         document.body.removeChild(script);
       } catch (e) {}
     };
-  }, [movie.backdrop, movie.id, movie.poster]);
+  }, [movie.backdrop, movie.tmdbId, movie.poster]);
 
   return <Container ref={containerRef} className="kinobox_player"></Container>;
 }

@@ -19,7 +19,7 @@ export const createMovieFn = (id: number, type: number) => {
       );
       const data = await res.json();
       return {
-        id: data?.id,
+        ...data,
         title: data?.title || data?.name,
         original_title: data?.original_title || data?.original_name,
         rating: Math.round(data?.vote_average * 10) / 10,
