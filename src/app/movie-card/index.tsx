@@ -25,7 +25,9 @@ export const MovieCard = ({ movie }: Props) => {
 
   return (
     <Container>
-      <HoverContainer href={`/${movie.type}/${movie.id}-${slug(movie.title)}`}>
+      <HoverContainer
+        href={`/${movie.type || "movie"}/${movie.id}-${slug(movie.title)}`}
+      >
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>
