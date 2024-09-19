@@ -22,6 +22,8 @@ export const MovieCard = ({ movie }: Props) => {
   if (!movie) return null;
   if (!movie.poster && !movie.preview_poster) return null;
 
+  console.log(movie);
+
   return (
     <Container>
       <HoverContainer

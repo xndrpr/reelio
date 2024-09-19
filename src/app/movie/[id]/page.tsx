@@ -50,15 +50,22 @@ export default async function MoviesPage({
 }) {
   const id = parseInt(params.id.split("-")[0]);
   const queryClient = new QueryClient();
-  const movie = await queryClient
+  let movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
       queryFn: () => createMovieFn(id, 0)(),
     })
     .catch();
 
-  if (!movie) {
-    return null;
+  if (!movie || (movie as any).statusCode) {
+    movie = await queryClient.fetchQuery({
+      queryKey: [MOVIE_QUERY_KEY, id],
+      queryFn: () => createMovieFn(id, 1)(),
+    });
+
+    if (!movie || (movie as any).statusCode) {
+      return null;
+    }
   }
 
   return (
