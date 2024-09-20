@@ -12,8 +12,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
           "Content-Type": "application/json",
           secret: `${process.env.SECRET}`,
         },
-        cache: "no-cache",
-        // next: { revalidate: 60 * 30 },
+        next: { revalidate: 60 * 30 },
       }
     );
     const data = await res.json();
