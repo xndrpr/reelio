@@ -12,7 +12,8 @@ export const fetchMovies = (offset: number, type: MovieType) => {
           "Content-Type": "application/json",
           secret: `${process.env.SECRET}`,
         },
-        next: { revalidate: 60 * 30 },
+        cache: "no-cache",
+        // next: { revalidate: 60 * 30 },
       }
     );
     const data = await res.json();
@@ -21,7 +22,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
       total: data?.total || 0,
       data: data?.data?.map((doc: any) => ({
         ...doc,
-        tmdbId: doc?.tmdbId || doc?.id,
+        tmdb_id: doc?.tmdb_id || doc?.id,
         title: doc?.title || doc?.name,
         rating: Math.round(doc?.vote_average * 10) / 10,
         poster:
@@ -30,7 +31,6 @@ export const fetchMovies = (offset: number, type: MovieType) => {
         year:
           doc?.release_date?.slice(0, 4) || doc?.first_air_date?.slice(0, 4),
         end_year: data?.last_air_date?.slice(0, 4),
-        type: doc.type,
       })),
     };
 

@@ -21,11 +21,12 @@ interface Props {
 export const MovieCard = ({ movie }: Props) => {
   if (!movie) return null;
   if (!movie.poster && !movie.preview_poster) return null;
+  console.log(movie.type);
 
   return (
     <Container>
       <HoverContainer
-        href={`/${movie.type}/${movie.tmdbId}-${slug(movie.title)}`}
+        href={`/${movie.type}/${movie.tmdb_id}-${slug(movie.title)}`}
       >
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>

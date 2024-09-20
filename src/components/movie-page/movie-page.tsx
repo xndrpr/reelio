@@ -22,10 +22,10 @@ interface Props {
 
 const MoviePage = ({ movie, type }: Props) => {
   const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.tmdbId
+    movie.tmdb_id
   }`;
   const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.tmdbId
+    movie.tmdb_id
   }/about`;
 
   const tabs: Tab[] = [
@@ -63,7 +63,7 @@ const MoviePage = ({ movie, type }: Props) => {
           {movie?.title} ({movie?.year}
           {movie.end_year ? ` - ${movie.end_year}` : ""})
         </Title>
-        {movie?.tmdbId && <KinoboxPlayer movie={movie} />}
+        {movie?.tmdb_id && <KinoboxPlayer movie={movie} />}
       </Player>
       <TabsContainer>
         <StyledTabs activeTab={tab} setActiveTab={changeTab} tabs={tabs} />

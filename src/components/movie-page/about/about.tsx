@@ -28,10 +28,10 @@ export const AboutMovie = ({ movie, type }: Props) => {
   const pathname = usePathname();
 
   const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.tmdbId
+    movie.tmdb_id
   }`;
   const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.tmdbId
+    movie.tmdb_id
   }/about`;
 
   const tabs: Tab[] = [

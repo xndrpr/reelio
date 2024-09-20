@@ -28,9 +28,10 @@ export const searchMovies = (query: string, offset: number) => {
         type: doc.type,
       })),
     };
+    console.log(result);
     const unique = result.data.filter(
-      (v: { tmdbId: any }, i: any, a: any[]) =>
-        a.findIndex((t: { tmdbId: any }) => t.tmdbId === v.tmdbId) === i
+      (v: { tmdb_id: any }, i: any, a: any[]) =>
+        a.findIndex((t: { tmdb_id: any }) => t.tmdb_id === v.tmdb_id) === i
     );
 
     return { ...result, data: unique };

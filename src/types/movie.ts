@@ -8,8 +8,8 @@ export enum MovieType {
 export interface Movie {
   type: MovieType;
   id: string;
-  tmdbId: number;
-  imdbId?: string;
+  tmdb_id: number;
+  imdb_id?: string;
   title: string;
   original_title: string;
   description: string;
