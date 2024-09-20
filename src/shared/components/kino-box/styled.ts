@@ -3,9 +3,6 @@ import {
   breakPoint2,
   breakPoint3,
   darkPurple,
-  fgColor,
-  lightPurple,
-  mediumPurple,
 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
