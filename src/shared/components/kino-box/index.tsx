@@ -20,13 +20,58 @@ function KinoboxPlayer({ movie }: Props) {
     script.onload = () => {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
-          search: { tmdb: movie.tmdbId },
+          search: {
+            tmdb: movie.tmdbId,
+            kinopoisk: 666,
+            imdb: movie.imdbId,
+            title: movie.title,
+          },
           menu: {
             enabled: false,
+            format: "{N} -- {T} {Q}",
+            default: "menu_button",
           },
           params: {
             all: {
               poster: movie.backdrop || movie.poster,
+            },
+          },
+          players: {
+            alloha: {
+              enable: true,
+              position: 1,
+            },
+            voidboost: {
+              enable: true,
+              position: 2,
+            },
+            kodik: {
+              enable: true,
+              position: 3,
+            },
+            ashdi: {
+              enable: true,
+              position: 4,
+            },
+            cdnmovies: {
+              enable: true,
+              position: 5,
+            },
+            vibix: {
+              enable: true,
+              position: 6,
+            },
+            videocdn: {
+              enable: true,
+              position: 7,
+            },
+            hdvb: {
+              enable: true,
+              position: 8,
+            },
+            collaps: {
+              enable: true,
+              position: 9,
             },
           },
         });
@@ -38,7 +83,7 @@ function KinoboxPlayer({ movie }: Props) {
         document.body.removeChild(script);
       } catch (e) {}
     };
-  }, [movie.backdrop, movie.tmdbId, movie.poster]);
+  }, [movie.backdrop, movie.tmdbId, movie.poster, movie.imdbId, movie.title]);
 
   return <Container ref={containerRef} className="kinobox_player"></Container>;
 }

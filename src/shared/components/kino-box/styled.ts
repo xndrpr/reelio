@@ -3,6 +3,9 @@ import {
   breakPoint2,
   breakPoint3,
   darkPurple,
+  fgColor,
+  lightPurple,
+  mediumPurple,
 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
@@ -26,5 +29,6 @@ export const Container = styled.div`
 
   @media (max-width: ${breakPoint3}px) {
     --content-padding: 12px;
+    max-width: unset;
   }
 `;
