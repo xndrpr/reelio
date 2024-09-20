@@ -6,9 +6,10 @@ import {
 } from "@tanstack/react-query";
 import Movies from "./movies";
 import { Pagination } from "@/shared/components/pagination";
+import { MovieType } from "@/types/movie";
 
 interface Props {
-  type: number;
+  type: MovieType;
   offset: string;
 }
 
@@ -29,7 +30,7 @@ export default async function MoviesPage({ type, offset }: Props) {
           currentPage={parseInt(offset) || 1}
           pages={parseInt(
             (movies.total > 1000
-              ? type === 0 || type === 1
+              ? type === MovieType.Movie || type === MovieType.TV
                 ? 1000
                 : 789
               : movies.total

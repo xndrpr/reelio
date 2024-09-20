@@ -22,17 +22,10 @@ export const MovieCard = ({ movie }: Props) => {
   if (!movie) return null;
   if (!movie.poster && !movie.preview_poster) return null;
 
-  console.log(movie);
-
   return (
     <Container>
       <HoverContainer
-        href={`/${
-          (movie.seasons_count && movie.seasons_count > 0) ||
-          movie.type === "tv"
-            ? "tv"
-            : "movie"
-        }/${movie.tmdbId}-${slug(movie.title)}`}
+        href={`/${movie.type}/${movie.tmdbId}-${slug(movie.title)}`}
       >
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>

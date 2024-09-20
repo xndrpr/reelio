@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 0)(),
+      queryFn: () => createMovieFn(id, MovieType.Movie)(),
     })
     .catch();
 
@@ -53,14 +53,14 @@ export default async function MoviesPage({
   let movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 0)(),
+      queryFn: () => createMovieFn(id, MovieType.Movie)(),
     })
     .catch();
 
   if (!movie || (movie as any).statusCode) {
     movie = await queryClient.fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 1)(),
+      queryFn: () => createMovieFn(id, MovieType.TV)(),
     });
 
     if (!movie || (movie as any).statusCode) {
@@ -71,7 +71,7 @@ export default async function MoviesPage({
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <MoviePage type={MovieType.MOVIE} movie={movie} />
+        <MoviePage type={MovieType.Movie} movie={movie} />
       </HydrationBoundary>
     </>
   );
