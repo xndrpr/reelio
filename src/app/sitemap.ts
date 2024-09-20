@@ -105,20 +105,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 const generateSitemapXML = (pages: any[]) => {
-  const urlset = pages
-    .map(
-      (page) => `
-        <url>
-          <loc>${page.url}</loc>
-          <lastmod>${page.lastModified.toISOString()}</lastmod>
-          <changefreq>${page.changeFrequency}</changefreq>
-          <priority>${page.priority}</priority>
-        </url>`
-    )
-    .join("");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${urlset}
-  </urlset>`;
+  return `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://your-domain.com/sitemap-0.xml</loc>
+    <lastmod>2024-09-20T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://your-domain.com/sitemap-1.xml</loc>
+    <lastmod>2024-09-20T12:34:56Z</lastmod>
+  </sitemap>
+  <!-- More sitemaps -->
+</sitemapindex>
+`;
 };
