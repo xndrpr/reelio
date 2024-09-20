@@ -14,6 +14,7 @@ import {
   Title,
 } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
+import slug from "slug";
 
 interface Props {
   movie: Movie;
@@ -23,10 +24,10 @@ interface Props {
 const MoviePage = ({ movie, type }: Props) => {
   const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdb_id
-  }`;
+  }-${slug(movie.title)}`;
   const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdb_id
-  }/about`;
+  }-${slug(movie.title)}/about`;
 
   const tabs: Tab[] = [
     {

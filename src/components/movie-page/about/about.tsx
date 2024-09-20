@@ -18,6 +18,7 @@ import {
 } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
 import { BackButton, StyledTabs, TabsContainer } from "../styled";
+import slug from "slug";
 
 interface Props {
   movie: Movie;
@@ -29,10 +30,10 @@ export const AboutMovie = ({ movie, type }: Props) => {
 
   const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdb_id
-  }`;
+  }-${slug(movie.title)}`;
   const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdb_id
-  }/about`;
+  }-${slug(movie.title)}/about`;
 
   const tabs: Tab[] = [
     { title: "Смотреть", href: watchUrl },
