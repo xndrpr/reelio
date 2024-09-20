@@ -36,16 +36,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const addPages = (data: any[]) => {
     try {
       data.forEach((doc: any) => {
-        if (doc?.id) {
+        if (doc?.tmdb_id) {
           const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
           pages.push({
-            url: `${baseURL}/${doc.type}/${doc.id}-${slug(doc.title) || ""}`,
+            url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
+              slug(doc.title) || ""
+            }`,
             lastModified: new Date(),
             changeFrequency: "daily",
             priority: 0.5,
           });
           pages.push({
-            url: `${baseURL}/${doc.type}/${doc.id}-${
+            url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
               slug(doc.title) || ""
             }/about`,
             lastModified: new Date(),
