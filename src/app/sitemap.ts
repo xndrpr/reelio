@@ -1,46 +1,60 @@
 import type { MetadataRoute } from "next";
+import { promises as fs } from "fs";
+import path from "path";
+
+const SITEMAP_SIZE = 50000; // Max number of URLs per sitemap
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (process.env.NODE_ENV === "development") {
     return [];
   }
+
   const pages: any[] = [];
+  const sitemapIndex: any[] = [];
 
   const fetchData = async (offset: number, type: number) => {
-    const res = await fetch(
-      `${process.env.API_URL}/movies?offset=${offset}&type=${type}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          secret: `${process.env.SECRET}`,
-        },
-        next: { revalidate: 60 * 30 },
-      }
-    );
-    const data = await res.json();
-    return data?.data || [];
+    try {
+      const res = await fetch(
+        `${process.env.API_URL}/movies?offset=${offset}&type=${type}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            secret: `${process.env.SECRET}`,
+          },
+          next: { revalidate: 60 * 30 },
+        }
+      );
+      const data = await res.json();
+      return data?.data || [];
+    } catch (e) {
+      return [];
+    }
   };
 
   const addPages = (data: any[], type: string) => {
-    data.forEach((doc: any) => {
-      if (doc?.id) {
-        const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-        const basePath =
-          doc.seasons_count && doc.seasons_count > 0 ? "tv" : "movie";
-        pages.push({
-          url: `${baseURL}/${basePath}/${doc.id}`,
-          lastModified: new Date(),
-          changeFrequency: "daily",
-          priority: 0.5,
-        });
-        pages.push({
-          url: `${baseURL}/${basePath}/${doc.id}/about`,
-          lastModified: new Date(),
-          changeFrequency: "daily",
-          priority: 0.5,
-        });
-      }
-    });
+    try {
+      data.forEach((doc: any) => {
+        if (doc?.id) {
+          const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
+          const basePath =
+            doc.seasons_count && doc.seasons_count > 0 ? "tv" : "movie";
+          pages.push({
+            url: `${baseURL}/${basePath}/${doc.id}`,
+            lastModified: new Date(),
+            changeFrequency: "daily",
+            priority: 0.5,
+          });
+          pages.push({
+            url: `${baseURL}/${basePath}/${doc.id}/about`,
+            lastModified: new Date(),
+            changeFrequency: "daily",
+            priority: 0.5,
+          });
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   for (let i = 1; i <= 500; i++) {
@@ -56,6 +70,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (i <= 100) addPages(moviesType3, "movie");
   }
 
+  const totalPages = pages.length;
+  let sitemapCount = 0;
+
+  for (let i = 0; i < totalPages; i += SITEMAP_SIZE) {
+    const sitemapPages = pages.slice(i, i + SITEMAP_SIZE);
+    const sitemapFilename = `sitemap-${sitemapCount}.xml`;
+    const sitemapURL = `${process.env.NEXT_PUBLIC_BASE_URL}/${sitemapFilename}`;
+
+    await fs.writeFile(
+      path.join(process.cwd(), "public", sitemapFilename),
+      generateSitemapXML(sitemapPages)
+    );
+
+    sitemapIndex.push({
+      url: sitemapURL,
+      lastModified: new Date(),
+    });
+
+    sitemapCount++;
+  }
+
   return [
     {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
@@ -63,30 +98,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 1,
     },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/tv`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/movies`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/cartoons`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/anime`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    ...pages.filter(Boolean),
+    ...sitemapIndex,
   ];
 }
+
+const generateSitemapXML = (pages: any[]) => {
+  const urlset = pages
+    .map(
+      (page) => `
+        <url>
+          <loc>${page.url}</loc>
+          <lastmod>${page.lastModified.toISOString()}</lastmod>
+          <changefreq>${page.changeFrequency}</changefreq>
+          <priority>${page.priority}</priority>
+        </url>`
+    )
+    .join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${urlset}
+  </urlset>`;
+};
