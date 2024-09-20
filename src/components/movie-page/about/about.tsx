@@ -27,17 +27,17 @@ interface Props {
 export const AboutMovie = ({ movie, type }: Props) => {
   const pathname = usePathname();
 
-  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+  const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdbId
   }`;
-  const aboutUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+  const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdbId
   }/about`;
 
   const tabs: Tab[] = [
     { title: "Смотреть", href: watchUrl },
     {
-      title: type === MovieType.MOVIE ? "О фильме" : "О сериале",
+      title: type === MovieType.Movie ? "О фильме" : "О сериале",
       href: aboutUrl,
     },
   ];

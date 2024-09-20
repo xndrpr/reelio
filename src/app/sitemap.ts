@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { promises as fs } from "fs";
 import path from "path";
 import slug from "slug";
+import { MovieType } from "@/types/movie";
 
 const SITEMAP_SIZE = 50000; // Max number of URLs per sitemap
 
@@ -13,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages: any[] = [];
   const sitemapIndex: any[] = [];
 
-  const fetchData = async (offset: number, type: number) => {
+  const fetchData = async (offset: number, type: MovieType) => {
     try {
       const res = await fetch(
         `${process.env.API_URL}/movies?offset=${offset}&type=${type}`,
@@ -32,21 +33,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   };
 
-  const addPages = (data: any[], type: string) => {
+  const addPages = (data: any[]) => {
     try {
       data.forEach((doc: any) => {
         if (doc?.id) {
           const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-          const basePath =
-            doc.seasons_count && doc.seasons_count > 0 ? "tv" : "movie";
           pages.push({
-            url: `${baseURL}/${basePath}/${doc.id}-${slug(doc.title) || ""}`,
+            url: `${baseURL}/${doc.type}/${doc.id}-${slug(doc.title) || ""}`,
             lastModified: new Date(),
             changeFrequency: "daily",
             priority: 0.5,
           });
           pages.push({
-            url: `${baseURL}/${basePath}/${doc.id}-${
+            url: `${baseURL}/${doc.type}/${doc.id}-${
               slug(doc.title) || ""
             }/about`,
             lastModified: new Date(),
@@ -62,15 +61,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (let i = 1; i <= 500; i++) {
     console.log(`${i} / 500`);
-    const moviesType0 = await fetchData(i, 0);
-    const moviesType1 = await fetchData(i, 1);
-    const moviesType2 = await fetchData(i, 2);
-    const moviesType3 = i <= 100 ? await fetchData(i, 3) : [];
+    const moviesType0 = await fetchData(i, MovieType.Movie);
+    const moviesType1 = await fetchData(i, MovieType.TV);
+    const moviesType2 = await fetchData(i, MovieType.Cartoon);
+    const moviesType3 = i <= 100 ? await fetchData(i, MovieType.Anime) : [];
 
-    addPages(moviesType0, "movie");
-    addPages(moviesType1, "tv");
-    addPages(moviesType2, "moviw");
-    if (i <= 100) addPages(moviesType3, "tv");
+    addPages(moviesType0);
+    addPages(moviesType1);
+    addPages(moviesType2);
+    if (i <= 100) addPages(moviesType3);
   }
 
   const totalPages = pages.length;

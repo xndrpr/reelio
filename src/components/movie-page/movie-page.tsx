@@ -21,10 +21,10 @@ interface Props {
 }
 
 const MoviePage = ({ movie, type }: Props) => {
-  const watchUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+  const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdbId
   }`;
-  const aboutUrl = `/${type === MovieType.MOVIE ? "movie" : "tv"}/${
+  const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
     movie.tmdbId
   }/about`;
 
@@ -34,7 +34,7 @@ const MoviePage = ({ movie, type }: Props) => {
       href: watchUrl,
     },
     {
-      title: type === MovieType.MOVIE ? "О фильме" : "О сериале",
+      title: type === MovieType.Movie ? "О фильме" : "О сериале",
       href: aboutUrl,
     },
   ];
@@ -53,7 +53,7 @@ const MoviePage = ({ movie, type }: Props) => {
     <Container $bg={movie?.backdrop}>
       <BackButton
         onClick={() =>
-          router.push(`/${type === MovieType.MOVIE ? "movies" : "series"}`)
+          router.push(`/${type === MovieType.Movie ? "movies" : "series"}`)
         }
       >
         <BackArrow />

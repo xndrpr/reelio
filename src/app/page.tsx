@@ -1,5 +1,6 @@
 import Movies from "@/components/movies";
 import { Header } from "@/shared/components/header";
+import { MovieType } from "@/types/movie";
 
 export default function HomePage({
   searchParams,
@@ -9,7 +10,7 @@ export default function HomePage({
   return (
     <main>
       <Header activeTab={0} />
-      <Movies offset={searchParams.offset} type={0} />
+      <Movies offset={searchParams.offset} type={MovieType.Movie} />
     </main>
   );
 }

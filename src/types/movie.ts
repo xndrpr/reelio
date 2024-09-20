@@ -1,10 +1,12 @@
 export enum MovieType {
-  MOVIE = 0,
-  TV = 1,
+  Movie = "movie",
+  TV = "tv",
+  Cartoon = "cartoon",
+  Anime = "anime",
 }
 
 export interface Movie {
-  type: string | number;
+  type: MovieType;
   id: string;
   tmdbId: number;
   imdbId?: string;

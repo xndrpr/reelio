@@ -1,5 +1,6 @@
 import Movies from "@/components/movies";
 import { Header } from "@/shared/components/header";
+import { MovieType } from "@/types/movie";
 
 export default function CartoonsPage({
   searchParams,
@@ -11,7 +12,7 @@ export default function CartoonsPage({
   return (
     <main>
       <Header activeTab={2} />
-      <Movies offset={searchParams.offset} type={2} />
+      <Movies offset={searchParams.offset} type={MovieType.Cartoon} />
     </main>
   );
 }

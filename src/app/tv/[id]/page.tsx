@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 1)(),
+      queryFn: () => createMovieFn(id, MovieType.TV)(),
     })
     .catch();
 
@@ -49,14 +49,14 @@ export default async function TvPage({ params }: { params: { id: string } }) {
   let movie = await queryClient
     .fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 1)(),
+      queryFn: () => createMovieFn(id, MovieType.TV)(),
     })
     .catch();
 
   if (!movie || (movie as any).statusCode) {
     movie = await queryClient.fetchQuery({
       queryKey: [MOVIE_QUERY_KEY, id],
-      queryFn: () => createMovieFn(id, 0)(),
+      queryFn: () => createMovieFn(id, MovieType.Movie)(),
     });
 
     if (!movie || (movie as any).statusCode) {

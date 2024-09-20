@@ -1,10 +1,10 @@
 import { ErrorModelActionResultModel } from "@/types/api/common-api-types";
-import { Movie } from "@/types/movie";
+import { Movie, MovieType } from "@/types/movie";
 import { QueryOptions, useQuery } from "@tanstack/react-query";
 
 export const MOVIE_QUERY_KEY = "getMovie";
 
-export const createMovieFn = (id: number, type: number) => {
+export const createMovieFn = (id: number, type: MovieType) => {
   return async () => {
     try {
       const res = await fetch(
@@ -42,7 +42,7 @@ export const createMovieFn = (id: number, type: number) => {
 
 export const useGetMovie = (
   id: number,
-  type: number,
+  type: MovieType,
   queryOptions?: QueryOptions<Movie | null, ErrorModelActionResultModel>
 ) => {
   return useQuery({
