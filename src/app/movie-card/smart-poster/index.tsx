@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Poster, SkeletonPoster } from "./styled";
 
 interface Props {
@@ -8,16 +8,24 @@ interface Props {
 }
 export const SmartPoster = ({ poster }: Props) => {
   const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [poster]);
+
   return (
     <>
-      {loading && <b>Loading...</b>}
+      {loading && <SkeletonPoster>Loading...</SkeletonPoster>}
       <Poster
-        priority
+        key={poster}
+        priority={true}
+        style={{ display: loading ? "none" : "block" }}
         width={200}
         height={280}
         src={poster}
         alt="poster"
         onLoad={() => setLoading(false)}
+        blurDataURL={poster}
       />
     </>
   );
