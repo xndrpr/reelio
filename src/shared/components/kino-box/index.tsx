@@ -21,9 +21,8 @@ function KinoboxPlayer({ movie }: Props) {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
           search: {
-            tmdb: movie.tmdbId,
-            kinopoisk: 666,
-            imdb: movie.imdbId,
+            tmdb: movie.tmdb_id,
+            imdb: movie.imdb_id,
             title: movie.title,
           },
           menu: {
@@ -83,7 +82,14 @@ function KinoboxPlayer({ movie }: Props) {
         document.body.removeChild(script);
       } catch (e) {}
     };
-  }, [movie.backdrop, movie.tmdbId, movie.poster, movie.imdbId, movie.title]);
+  }, [
+    movie.backdrop,
+    movie.id,
+    movie.poster,
+    movie.imdb_id,
+    movie.title,
+    movie.tmdb_id,
+  ]);
 
   return <Container ref={containerRef} className="kinobox_player"></Container>;
 }
