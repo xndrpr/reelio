@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { promises as fs } from "fs";
 import path from "path";
+import slug from "slug";
 
 const SITEMAP_SIZE = 50000; // Max number of URLs per sitemap
 
@@ -39,13 +40,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           const basePath =
             doc.seasons_count && doc.seasons_count > 0 ? "tv" : "movie";
           pages.push({
-            url: `${baseURL}/${basePath}/${doc.id}`,
+            url: `${baseURL}/${basePath}/${doc.id}-${slug(doc.title) || ""}`,
             lastModified: new Date(),
             changeFrequency: "daily",
             priority: 0.5,
           });
           pages.push({
-            url: `${baseURL}/${basePath}/${doc.id}/about`,
+            url: `${baseURL}/${basePath}/${doc.id}-${
+              slug(doc.title) || ""
+            }/about`,
             lastModified: new Date(),
             changeFrequency: "daily",
             priority: 0.5,
@@ -66,8 +69,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     addPages(moviesType0, "movie");
     addPages(moviesType1, "tv");
-    addPages(moviesType2, "mixed");
-    if (i <= 100) addPages(moviesType3, "movie");
+    addPages(moviesType2, "moviw");
+    if (i <= 100) addPages(moviesType3, "tv");
   }
 
   const totalPages = pages.length;
