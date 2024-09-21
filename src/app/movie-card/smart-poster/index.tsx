@@ -18,12 +18,12 @@ export const SmartPoster = ({ poster }: Props) => {
       {loading && <SkeletonPoster>Loading...</SkeletonPoster>}
       <Poster
         key={poster}
-        priority
         style={{ display: loading ? "none" : "block" }}
         width={200}
         height={280}
         src={poster}
         alt="poster"
+        priority
         onLoad={() => setLoading(false)}
         blurDataURL={poster}
       />
