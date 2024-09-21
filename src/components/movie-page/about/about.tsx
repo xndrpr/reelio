@@ -24,7 +24,12 @@ import {
 import { Movie, MovieType } from "@/types/movie";
 import { BackButton, StyledTabs, TabsContainer } from "../styled";
 import slug from "slug";
-import { getCountryByISO, getLangByISO, normalizeNumber } from "@/utils";
+import {
+  getCountryByISO,
+  getLangByISO,
+  normalizeNumber,
+  normalizeRuntime,
+} from "@/utils";
 
 interface Props {
   movie: Movie;
@@ -60,6 +65,7 @@ export const AboutMovie = ({ movie, type }: Props) => {
   };
 
   const originalLanguage = getLangByISO(movie.original_language);
+  const runtime = normalizeRuntime(movie.runtime);
 
   return (
     <Container $bg={movie?.backdrop}>
@@ -88,6 +94,12 @@ export const AboutMovie = ({ movie, type }: Props) => {
                   {movie?.end_year ? `-${movie?.end_year}` : ""}
                 </DetailContent>
               </Detail>
+              {runtime ? (
+                <Detail>
+                  <DetailTitle>Продолжительность: </DetailTitle>
+                  <DetailContent>{runtime}</DetailContent>
+                </Detail>
+              ) : null}
               {movie?.number_of_seasons ? (
                 <Detail>
                   <DetailTitle>Сезонов: </DetailTitle>
