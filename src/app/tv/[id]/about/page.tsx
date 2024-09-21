@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
     title: `Glee - ${movie?.title}`,
-    description: `Смотреть сериал ${movie?.title} ${movie?.year} бесплатно в хорошем качестве, без рекламы, на русском языке. ${movie?.description}`,
+    description: `Смотреть сериал ${movie?.title} ${movie?.start_year} бесплатно в хорошем качестве, без рекламы, на русском языке. ${movie?.description}`,
     keywords: ["фильм", "фильмы", "кино", "кинотеатр", "кинотеатры", "кино"],
     openGraph: {
       title: `Glee - ${movie?.title}`,

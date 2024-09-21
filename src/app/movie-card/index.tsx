@@ -30,7 +30,7 @@ export const MovieCard = ({ movie }: Props) => {
         <SmartPoster poster={movie.preview_poster || movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>
-          <Year>{movie.year}</Year>
+          <Year>{movie.start_year}</Year>
         </TitleContainer>
       </HoverContainer>
       <RatingContainer>

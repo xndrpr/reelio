@@ -61,7 +61,7 @@ const MoviePage = ({ movie, type }: Props) => {
       </BackButton>
       <Player>
         <Title>
-          {movie?.title} ({movie?.year}
+          {movie?.title} ({movie?.start_year}
           {movie.end_year ? ` - ${movie.end_year}` : ""})
         </Title>
         {movie?.tmdb_id && <KinoboxPlayer movie={movie} />}

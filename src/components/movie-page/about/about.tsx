@@ -72,7 +72,7 @@ export const AboutMovie = ({ movie, type }: Props) => {
             <Title>{movie?.title}</Title>
             <SubTitle>{movie?.original_title}</SubTitle>
             <Info>
-              {movie.year} {movie.end_year ? ` - ${movie.end_year}` : ""}
+              {movie.start_year} {movie.end_year ? ` - ${movie.end_year}` : ""}
               {type === MovieType.TV && movie.seasons_count
                 ? `∙ ${movie.seasons_count} `
                 : null}

@@ -17,7 +17,7 @@ export interface Movie {
   poster: string;
   preview_poster: string;
   backdrop: string;
-  year: number;
+  start_year: number;
   end_year?: number;
   rating: number;
   seasons_count?: number;
