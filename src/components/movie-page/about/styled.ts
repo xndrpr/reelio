@@ -9,6 +9,7 @@ import {
 } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Container = styled.div<{ $bg: string }>`
   --content-padding: 40px;
@@ -66,7 +67,7 @@ export const Wrapper = styled.div`
   gap: 20px;
 `;
 
-export const Poster = styled.div`
+export const MovieCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -92,6 +93,30 @@ export const SubTitle = styled.h2`
   font-size: 14px;
   color: ${darkGrey};
 `;
+
+export const Details = styled.div`
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const Detail = styled.div`
+  display: flex;
+  gap: 4px;
+`;
+
+export const DetailTitle = styled.h3`
+  font-size: 14px;
+  color: ${fgColor};
+  font-weight: bold;
+`;
+
+export const DetailContent = styled.p`
+  font-size: 14px;
+  color: ${lightGrey};
+`;
+
 export const Info = styled.h3`
   font-size: 14px;
   color: ${lightGrey};
@@ -108,4 +133,10 @@ export const Description = styled.div`
   border-radius: 24px;
 
   white-space: pre-wrap;
+`;
+
+export const HomePageLink = styled(Link)`
+  color: ${lightGrey};
+  font-size: 14px;
+  font-weight: bold;
 `;

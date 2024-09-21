@@ -9,8 +9,13 @@ import {
   About,
   Container,
   Description,
+  Detail,
+  DetailContent,
+  Details,
+  DetailTitle,
+  HomePageLink,
   Info,
-  Poster,
+  MovieCard,
   PosterImage,
   SubTitle,
   Title,
@@ -19,6 +24,7 @@ import {
 import { Movie, MovieType } from "@/types/movie";
 import { BackButton, StyledTabs, TabsContainer } from "../styled";
 import slug from "slug";
+import { getCountryByISO, getLangByISO, normalizeNumber } from "@/utils";
 
 interface Props {
   movie: Movie;
@@ -53,6 +59,8 @@ export const AboutMovie = ({ movie, type }: Props) => {
     }
   };
 
+  const originalLanguage = getLangByISO(movie.original_language);
+
   return (
     <Container $bg={movie?.backdrop}>
       <BackButton
@@ -62,31 +70,122 @@ export const AboutMovie = ({ movie, type }: Props) => {
       </BackButton>
       <About>
         <Wrapper>
-          <Poster>
+          <MovieCard>
             <PosterImage
               src={movie?.poster}
               alt="poster"
               width={200}
               height={300}
             />
+
             <Title>{movie?.title}</Title>
             <SubTitle>{movie?.original_title}</SubTitle>
-            <Info>
-              {movie.start_year} {movie.end_year ? ` - ${movie.end_year}` : ""}
-              {type === MovieType.TV && movie.seasons_count
-                ? `∙ ${movie.seasons_count} `
-                : null}
-              {type === MovieType.TV && movie.seasons_count
-                ? movie.seasons_count === 1
-                  ? "сезон"
-                  : movie.seasons_count || 0 < 5
-                  ? "сезона"
-                  : "сезонов"
-                : null}
-            </Info>
-          </Poster>
+            <Details>
+              <Detail>
+                <DetailTitle>Год: </DetailTitle>
+                <DetailContent>
+                  {movie?.start_year}
+                  {movie?.end_year ? `-${movie?.end_year}` : ""}
+                </DetailContent>
+              </Detail>
+              {movie?.number_of_seasons ? (
+                <Detail>
+                  <DetailTitle>Сезонов: </DetailTitle>
+                  <DetailContent>
+                    {movie?.number_of_seasons}
+                    {movie.number_of_episodes
+                      ? ` (${movie.number_of_episodes} серий)`
+                      : ""}
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              <Detail>
+                <DetailTitle>Рейтинг: </DetailTitle>
+                <DetailContent>{movie?.vote_average.toFixed(1)}</DetailContent>
+              </Detail>
+              {movie.origin_country ? (
+                <Detail>
+                  <DetailTitle>Страны происхождения: </DetailTitle>
+                  <DetailContent>
+                    {movie.origin_country
+                      .map((country: any) => getCountryByISO(country))
+                      .join(", ")}
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              {movie.production_countries ? (
+                <Detail>
+                  <DetailTitle>Страны производства: </DetailTitle>
+                  <DetailContent>
+                    {movie.production_countries
+                      .map((country: any) =>
+                        getCountryByISO(country.iso_3166_1)
+                      )
+                      .join(", ")}
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              {originalLanguage ? (
+                <Detail>
+                  <DetailTitle>Оригинальный язык: </DetailTitle>
+                  <DetailContent>{originalLanguage}</DetailContent>
+                </Detail>
+              ) : null}
+              {movie.tagline ? (
+                <Detail>
+                  <DetailTitle>Слоган: </DetailTitle>
+                  <DetailContent>{movie.tagline}</DetailContent>
+                </Detail>
+              ) : null}
+              {movie.budget ? (
+                <Detail>
+                  <DetailTitle>Бюджет: </DetailTitle>
+                  <DetailContent>
+                    ${normalizeNumber(movie.budget)}
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              {movie.revenue ? (
+                <Detail>
+                  <DetailTitle>Выручка: </DetailTitle>
+                  <DetailContent>
+                    ${normalizeNumber(movie.revenue)}
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              {movie.homepage ? (
+                <Detail>
+                  <DetailTitle>Сайт: </DetailTitle>
+                  <DetailContent>
+                    <HomePageLink
+                      href={movie.homepage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {movie.homepage}
+                    </HomePageLink>
+                  </DetailContent>
+                </Detail>
+              ) : null}
+              {movie.imdb_id ? (
+                <Detail>
+                  <DetailTitle>IMDb: </DetailTitle>
+                  <DetailContent>
+                    <HomePageLink
+                      href={`https://www.imdb.com/title/${movie.imdb_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {movie.imdb_id}
+                    </HomePageLink>
+                  </DetailContent>
+                </Detail>
+              ) : null}
+            </Details>
+          </MovieCard>
+
           <Description>
-            {movie.custom_description || movie?.description}
+            {movie.custom_description || movie?.overview}
           </Description>
         </Wrapper>
       </About>

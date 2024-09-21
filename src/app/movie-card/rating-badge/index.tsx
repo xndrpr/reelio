@@ -17,7 +17,7 @@ export const RatingBadge = ({
   return (
     <Container $backgroundColor={backgroundColor} $color={color}>
       {icon}
-      <Rating>{rating}</Rating>
+      <Rating>{rating.toFixed(1)}</Rating>
     </Container>
   );
 };

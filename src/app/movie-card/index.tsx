@@ -20,25 +20,25 @@ interface Props {
 
 export const MovieCard = ({ movie }: Props) => {
   if (!movie) return null;
-  if (!movie.poster && !movie.preview_poster) return null;
+  if (!movie.poster) return null;
 
   return (
     <Container>
       <HoverContainer
         href={`/${movie.type}/${movie.tmdb_id}-${slug(movie.title)}`}
       >
-        <SmartPoster poster={movie.preview_poster || movie.poster} />
+        <SmartPoster poster={movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>
           <Year>{movie.start_year}</Year>
         </TitleContainer>
       </HoverContainer>
       <RatingContainer>
-        {movie.rating ? (
+        {movie.vote_average ? (
           <RatingBadge
             backgroundColor={imdbColor}
             color={bgColor}
-            rating={movie.rating}
+            rating={movie.vote_average}
             icon={<ImdbIcon>IMDB</ImdbIcon>}
           />
         ) : null}
