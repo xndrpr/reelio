@@ -38,22 +38,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       data.forEach((doc: any) => {
         if (doc?.tmdb_id) {
           const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-          pages.push({
-            url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
-              slug(doc.title) || ""
-            }`,
-            lastModified: new Date(),
-            changeFrequency: "daily",
-            priority: 0.5,
-          });
-          pages.push({
-            url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
-              slug(doc.title) || ""
-            }/about`,
-            lastModified: new Date(),
-            changeFrequency: "daily",
-            priority: 0.5,
-          });
+          if (!pages.find((page) => page.url === `${baseURL}/${doc.tmdb_id}`)) {
+            pages.push({
+              url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
+                slug(doc.title) || ""
+              }`,
+              lastModified: new Date(),
+              changeFrequency: "daily",
+              priority: 0.5,
+            });
+          }
+          if (
+            !pages.find(
+              (page) => page.url === `${baseURL}/${doc.tmdb_id}/about`
+            )
+          ) {
+            pages.push({
+              url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
+                slug(doc.title) || ""
+              }/about`,
+              lastModified: new Date(),
+              changeFrequency: "daily",
+              priority: 0.5,
+            });
+            pages.push({
+              url: `${baseURL}/${doc.type}/${doc.tmdb_id}-${
+                slug(doc.title) || ""
+              }/about`,
+              lastModified: new Date(),
+              changeFrequency: "daily",
+              priority: 0.5,
+            });
+          }
         }
       });
     } catch (e) {

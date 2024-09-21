@@ -65,7 +65,8 @@ export const AboutMovie = ({ movie, type }: Props) => {
   };
 
   const originalLanguage = getLangByISO(movie.original_language);
-  const runtime = normalizeRuntime(movie.runtime);
+  const runtime =
+    movie.runtime && movie.runtime > 0 ? normalizeRuntime(movie.runtime) : null;
 
   return (
     <Container $bg={movie?.backdrop}>
