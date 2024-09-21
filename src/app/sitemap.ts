@@ -88,7 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (let i = 0; i < totalPages; i += SITEMAP_SIZE) {
     const sitemapPages = pages.slice(i, i + SITEMAP_SIZE);
-    const sitemapFilename = `sitemap-${sitemapCount}.xml`;
+    const sitemapFilename = `sitemap${sitemapCount}.xml`;
     const sitemapURL = `${process.env.NEXT_PUBLIC_BASE_URL}/${sitemapFilename}`;
 
     await fs.writeFile(
@@ -103,6 +103,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     sitemapCount++;
   }
+
+  const sitemapIndexFilename = "sitemap.xml";
+  await fs.writeFile(
+    path.join(process.cwd(), "public", sitemapIndexFilename),
+    generateSitemapIndexXML(sitemapIndex)
+  );
 
   return [
     {
@@ -132,4 +138,21 @@ const generateSitemapXML = (pages: any[]) => {
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${urlset}
   </urlset>`;
+};
+
+const generateSitemapIndexXML = (sitemaps: any[]) => {
+  const sitemapindex = sitemaps
+    .map(
+      (sitemap) => `
+        <sitemap>
+          <loc>${sitemap.url}</loc>
+          <lastmod>${sitemap.lastModified.toISOString()}</lastmod>
+        </sitemap>`
+    )
+    .join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+  <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${sitemapindex}
+  </sitemapindex>`;
 };
