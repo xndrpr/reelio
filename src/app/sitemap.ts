@@ -127,8 +127,7 @@ const generateSitemapXML = (pages: any[]) => {
       (page) => `
         <url>
           <loc>${page.url}</loc>
-          <lastmod>${page.lastModified.toISOString()}</lastmod>
-          <changefreq>${page.changeFrequency}</changefreq>
+          <lastmod>${page.lastModified.toISOString().split("T")[0]}</lastmod>
           <priority>${page.priority}</priority>
         </url>`
     )
@@ -146,7 +145,7 @@ const generateSitemapIndexXML = (sitemaps: any[]) => {
       (sitemap) => `
         <sitemap>
           <loc>${sitemap.url}</loc>
-          <lastmod>${sitemap.lastModified.toISOString()}</lastmod>
+          <lastmod>${sitemap.lastModified.toISOString().split("T")[0]}</lastmod>
         </sitemap>`
     )
     .join("");
