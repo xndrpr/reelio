@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     headers: {
       secret: `${process.env.SECRET}`,
     },
+    cache: "no-cache",
   })
     .then((res) => res.json())
     .then((data) =>
