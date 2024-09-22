@@ -9,12 +9,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [];
   }
 
+  console.log("Generating sitemap...");
   const pages = await fetch(`${process.env.API_URL}/movies/sitemap`, {
     headers: {
       secret: `${process.env.SECRET}`,
     },
     cache: "no-cache",
   })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
     .then((res) => res.json())
     .then((data) =>
       data.map((doc: any) => ({
@@ -29,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let sitemapCount = 0;
 
   for (let i = 0; i < totalPages; i += SITEMAP_SIZE) {
+    console.log(i);
     const sitemapPages = pages.slice(i, i + SITEMAP_SIZE);
     const sitemapFilename = `sitemap${sitemapCount}.xml`;
     const sitemapURL = `${process.env.NEXT_PUBLIC_BASE_URL}/${sitemapFilename}`;
