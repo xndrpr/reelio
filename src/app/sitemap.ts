@@ -5,7 +5,6 @@ import path from "path";
 const SITEMAP_SIZE = 50000;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  return [];
   if (process.env.NODE_ENV === "development") {
     return [];
   }

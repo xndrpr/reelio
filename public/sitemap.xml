@@ -3,10 +3,10 @@
     
         <sitemap>
           <loc>http://localhost:3000/sitemap0.xml</loc>
-          <lastmod>2024-09-22</lastmod>
+          <lastmod>2024-09-23</lastmod>
         </sitemap>
         <sitemap>
           <loc>http://localhost:3000/sitemap1.xml</loc>
-          <lastmod>2024-09-22</lastmod>
+          <lastmod>2024-09-23</lastmod>
         </sitemap>
   </sitemapindex>
