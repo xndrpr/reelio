@@ -16,18 +16,42 @@ export const searchMovies = (query: string, offset: number) => {
     );
     const data = await res.json();
 
-    const result = {
-      data: data?.map((doc: any) => ({
-        ...doc,
-        title: doc?.title || doc?.name,
-        rating: Math.round(doc?.vote_average * 10) / 10,
-        poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
-        year:
-          doc?.release_date?.slice(0, 4) || doc?.first_air_date?.slice(0, 4),
-        description: doc?.overview,
-        type: doc.type,
-      })),
-    };
+    let result;
+
+    if (data?.data) {
+      result = {
+        data: data.data
+          ?.map((doc: any) => ({
+            ...doc,
+            title: doc?.title || doc?.name,
+            rating: Math.round(doc?.vote_average * 10) / 10,
+            poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+            year:
+              doc?.release_date?.slice(0, 4) ||
+              doc?.first_air_date?.slice(0, 4),
+            description: doc?.overview,
+            type: doc.type,
+          }))
+          .filter((doc: any) => doc?.tmdb_id && doc.title && doc.poster),
+      };
+    } else {
+      result = {
+        data: data
+          ?.map((doc: any) => ({
+            ...doc,
+            title: doc?.title || doc?.name,
+            rating: Math.round(doc?.vote_average * 10) / 10,
+            poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+            year:
+              doc?.release_date?.slice(0, 4) ||
+              doc?.first_air_date?.slice(0, 4),
+            description: doc?.overview,
+            type: doc.type,
+          }))
+          .filter((doc: any) => doc?.tmdb_id && doc.title && doc.poster),
+      };
+    }
+
     console.log(result);
     const unique = result.data.filter(
       (v: { tmdb_id: any }, i: any, a: any[]) =>
