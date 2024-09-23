@@ -26,6 +26,7 @@ export const SmartPoster = ({ poster }: Props) => {
         priority
         onLoad={() => setLoading(false)}
         blurDataURL={poster}
+        loading="eager"
       />
     </>
   );
