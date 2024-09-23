@@ -17,7 +17,7 @@ export const searchMovies = (query: string, offset: number) => {
     const data = await res.json();
 
     const result = {
-      data: data?.data?.map((doc: any) => ({
+      data: data?.map((doc: any) => ({
         ...doc,
         title: doc?.title || doc?.name,
         rating: Math.round(doc?.vote_average * 10) / 10,
