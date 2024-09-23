@@ -7,6 +7,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { SkeletonTheme } from "react-loading-skeleton";
+import ReactGA from "react-ga4";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -31,6 +32,7 @@ function getQueryClient() {
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
+  ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || "");
 
   return (
     <SkeletonTheme
