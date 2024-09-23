@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
 import { ContentWrapper } from "./layout-styled";
-import "./global.css";
-import Head from "next/head";
 import GoogleAnalytics from "@/components/google-analytics";
+import { GlobalStyles } from "./global-styles";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +37,8 @@ export default function RootLayout({
       )}
       <body className={inter.className}>
         <Providers>
+          <GlobalStyles />
+
           <ContentWrapper>{children}</ContentWrapper>
         </Providers>
       </body>
