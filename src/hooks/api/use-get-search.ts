@@ -25,7 +25,7 @@ export const searchMovies = (query: string, offset: number) => {
             ...doc,
             title: doc?.title || doc?.name,
             rating: Math.round(doc?.vote_average * 10) / 10,
-            poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+            poster: `https://image.tmdb.org/t/p/w300${doc?.poster_path}`,
             year:
               doc?.release_date?.slice(0, 4) ||
               doc?.first_air_date?.slice(0, 4),
@@ -41,7 +41,7 @@ export const searchMovies = (query: string, offset: number) => {
             ...doc,
             title: doc?.title || doc?.name,
             rating: Math.round(doc?.vote_average * 10) / 10,
-            poster: `https://image.tmdb.org/t/p/w500${doc?.poster_path}`,
+            poster: `https://image.tmdb.org/t/p/w300${doc?.poster_path}`,
             year:
               doc?.release_date?.slice(0, 4) ||
               doc?.first_air_date?.slice(0, 4),

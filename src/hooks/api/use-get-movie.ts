@@ -23,7 +23,7 @@ export const createMovieFn = (id: number, type: MovieType) => {
         title: data?.title || data?.name,
         original_title: data?.original_title || data?.original_name,
         rating: Math.round(data?.vote_average * 10) / 10,
-        poster: `https://image.tmdb.org/t/p/w500${data?.poster_path}`,
+        poster: `https://image.tmdb.org/t/p/w300${data?.poster_path}`,
         description: data?.overview,
         custom_description: data?.custom_description,
         backdrop:

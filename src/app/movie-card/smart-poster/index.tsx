@@ -19,8 +19,8 @@ export const SmartPoster = ({ poster }: Props) => {
       <Poster
         key={poster}
         style={{ display: loading ? "none" : "block" }}
-        width={200}
-        height={280}
+        width={100}
+        height={180}
         src={poster}
         alt="poster"
         priority
