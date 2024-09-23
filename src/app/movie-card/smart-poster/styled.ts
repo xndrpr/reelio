@@ -9,6 +9,7 @@ export const Poster = styled(Image)`
   width: 100%;
   height: auto;
   aspect-ratio: 0.75;
+  object-fit: cover;
 
   user-select: none;
   -webkit-user-select: none;
