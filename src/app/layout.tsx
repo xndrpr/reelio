@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Providers from "./providers";
 import { ContentWrapper } from "./layout-styled";
 import { GlobalStyles } from "./global-styles";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,9 @@ export const metadata: Metadata = {
         url: "/og.png",
       },
     ],
+  },
+  other: {
+    "yandex-verification": "9c5ef6afb1204ea1",
   },
 };
 
