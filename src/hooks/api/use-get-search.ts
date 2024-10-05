@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 
 export const SEARCH_QUERY_KEY = "getSearch";
 
-export const searchMovies = (query: string, offset: number) => {
+export const searchMovies = (query: string) => {
   return async () => {
     const res = await fetch(
-      `${process.env.API_URL}/movies/search?query=${query}&offset=${offset}&limit=10`,
+      `${process.env.API_URL}/movies/search?query=${query}`,
       {
         headers: {
           "Content-Type": "application/json",
           secret: `${process.env.SECRET}`,
         },
         next: { revalidate: 60 * 15 },
-      }
+      },
     );
     const data = await res.json();
 
@@ -55,16 +55,16 @@ export const searchMovies = (query: string, offset: number) => {
     console.log(result);
     const unique = result.data.filter(
       (v: { tmdb_id: any }, i: any, a: any[]) =>
-        a.findIndex((t: { tmdb_id: any }) => t.tmdb_id === v.tmdb_id) === i
+        a.findIndex((t: { tmdb_id: any }) => t.tmdb_id === v.tmdb_id) === i,
     );
 
     return { ...result, data: unique };
   };
 };
 
-export const useGetSearch = (query: string, offset: number) => {
+export const useGetSearch = (query: string) => {
   return useQuery({
     queryKey: query ? [SEARCH_QUERY_KEY, query] : [SEARCH_QUERY_KEY],
-    queryFn: searchMovies(query, offset),
+    queryFn: searchMovies(query),
   });
 };

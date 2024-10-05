@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Container } from "./styled";
+import { Container, Player } from "./styled";
 import { Movie } from "@/types/movie";
 
 interface Props {
@@ -91,7 +91,12 @@ function KinoboxPlayer({ movie }: Props) {
     movie.tmdb_id,
   ]);
 
-  return <Container ref={containerRef} className="kinobox_player"></Container>;
+  //return <Container ref={containerRef} className="kinobox_player"></Container>;
+
+  const url = `https://sansa.allarknow.online/t/?token=3a4e69a3bb3a0eb3b5bf5eba7e563b&token_movie=fc4f8e05dd7f31e582e9bc7234e98b`;
+  const src = `http://localhost:6100/api/neo/get/${url.replaceAll("/", "(").replaceAll("?", ")").replaceAll("&", "!")}?secret=VupsinPupsin`;
+
+  return <Player src={src} />;
 }
 
 export default KinoboxPlayer;
