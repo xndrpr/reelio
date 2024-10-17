@@ -56,7 +56,6 @@ export const RatingContainer = styled.div`
 `;
 
 export const ImdbIcon = styled.span`
-  font-family: Roboto, sans-serif;
   font-weight: bold;
   font-size: 11px;
   height: 20px;
