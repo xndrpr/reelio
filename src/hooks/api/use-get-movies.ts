@@ -26,7 +26,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
         rating: Math.round(doc?.vote_average * 10) / 10,
         poster:
           doc?.poster_path &&
-          `https://image.tmdb.org/t/p/w300${doc?.poster_path}`,
+          `https://image.tmdb.org/t/p/w400${doc?.poster_path}`,
         year:
           doc?.release_date?.slice(0, 4) || doc?.first_air_date?.slice(0, 4),
         end_year: data?.last_air_date?.slice(0, 4),

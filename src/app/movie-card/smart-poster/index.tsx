@@ -27,7 +27,7 @@ export const SmartPoster = ({ poster }: Props) => {
         onLoad={() => setLoading(false)}
         blurDataURL={poster}
         loading="eager"
-        quality={window.innerWidth < 768 ? 40 : 80}
+        quality={window.innerWidth < 768 ? 40 : 100}
       />
     </>
   );
