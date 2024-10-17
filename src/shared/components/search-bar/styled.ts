@@ -10,7 +10,7 @@ export const SearchContainer = styled.div`
   gap: 8px;
 
   height: 40px;
-  width: 100%;
+  flex: 1;
 
   background: ${darkPurple};
   color: ${fgColor};
@@ -23,6 +23,10 @@ export const SearchContainer = styled.div`
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 export const SearchInput = styled.input`

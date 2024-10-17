@@ -1,10 +1,19 @@
 "use client";
 
 import React from "react";
-import { CustomTabs, HeaderSC, HiddenVersion } from "./styled";
+import { animated, easings, useTransition } from "@react-spring/web";
+import {
+  CustomTabs,
+  FiltersSC,
+  HeaderContent,
+  HeaderSC,
+  HiddenVersion,
+  Search,
+} from "./styled";
 import { SearchBar } from "../search-bar";
 import { Tab } from "../tabs";
 import { useRouter } from "next/navigation";
+import { Filters } from "../filters";
 
 interface Props {
   activeTab: number;
@@ -45,11 +54,32 @@ export const Header = ({ activeTab }: Props) => {
     }
   };
 
+  const [isFiltersOpen, setIsFiltersOpen] = React.useState(false);
+  const filtersTransition = useTransition<boolean, { opacity: number }>(
+    isFiltersOpen,
+    {
+      from: { opacity: 0, height: "0px" },
+      enter: { opacity: 1, height: "120px" },
+      leave: { opacity: 0, height: "0px" },
+      config: { duration: 200, easing: easings.easeInOutSine },
+    }
+  );
+
   return (
     <HeaderSC>
-      <CustomTabs tabs={tabs} activeTab={tab} setActiveTab={setActiveTab} />
-      <SearchBar />
-      <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
+      <HeaderContent>
+        <CustomTabs tabs={tabs} activeTab={tab} setActiveTab={setActiveTab} />
+        <Search>
+          <SearchBar />
+          <Filters setIsOpen={setIsFiltersOpen} isOpen={isFiltersOpen} />
+        </Search>
+        <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
+      </HeaderContent>
+
+      {filtersTransition(
+        (style, item) =>
+          item && <FiltersSC style={style}>Filters guys</FiltersSC>
+      )}
     </HeaderSC>
   );
 };
