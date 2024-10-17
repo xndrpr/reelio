@@ -55,15 +55,6 @@ export const Header = ({ activeTab }: Props) => {
   };
 
   const [isFiltersOpen, setIsFiltersOpen] = React.useState(false);
-  const filtersTransition = useTransition<boolean, { opacity: number }>(
-    isFiltersOpen,
-    {
-      from: { opacity: 0, height: "0px" },
-      enter: { opacity: 1, height: "120px" },
-      leave: { opacity: 0, height: "0px" },
-      config: { duration: 200, easing: easings.easeInOutSine },
-    }
-  );
 
   return (
     <HeaderSC>
@@ -76,10 +67,7 @@ export const Header = ({ activeTab }: Props) => {
         <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
       </HeaderContent>
 
-      {filtersTransition(
-        (style, item) =>
-          item && <FiltersSC style={style}>Filters guys</FiltersSC>
-      )}
+      <FiltersSC $isOpen={isFiltersOpen}>Filters guys</FiltersSC>
     </HeaderSC>
   );
 };
