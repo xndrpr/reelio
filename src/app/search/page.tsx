@@ -19,8 +19,7 @@ export default async function SearchPage({
   const movies = await queryClient
     .fetchQuery({
       queryKey: [SEARCH_QUERY_KEY, searchParams.query],
-      queryFn: () =>
-        searchMovies(searchParams.query, parseInt(searchParams.offset) || 1)(),
+      queryFn: () => searchMovies(searchParams.query)(),
     })
     .catch();
 
