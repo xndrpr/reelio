@@ -71,6 +71,7 @@ export const Player = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  z-index: 1;
 `;
 
 export const TabsContainer = styled.div`

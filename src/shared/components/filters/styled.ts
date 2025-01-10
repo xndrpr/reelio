@@ -1,7 +1,7 @@
 import { darkPurple } from "@/shared/variables";
 import styled from "@emotion/styled";
 
-export const FiltersSC = styled.div<{ $isOpen: boolean }>`
+export const FiltersSC = styled.div<{ $isOpened: boolean }>`
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -9,7 +9,7 @@ export const FiltersSC = styled.div<{ $isOpen: boolean }>`
   justify-content: center;
   align-items: center;
   background-color: ${darkPurple};
-  transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0deg")});
+  transform: rotate(${(props) => (props.$isOpened ? "180deg" : "0deg")});
 
   cursor: pointer;
   transition: all 0.2s ease-in-out;

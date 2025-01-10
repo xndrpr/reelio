@@ -19,14 +19,11 @@ interface Props {
 }
 
 export const MovieCard = ({ movie }: Props) => {
-  if (!movie) return null;
-  if (!movie.poster) return null;
+  if (!movie || !movie.poster || !movie.title) return null;
 
   return (
     <Container>
-      <HoverContainer
-        href={`/${movie.type}/${movie.tmdb_id}-${slug(movie.title)}`}
-      >
+      <HoverContainer href={`/${movie.type}/${movie.id}-${slug(movie.title)}`}>
         <SmartPoster poster={movie.poster} />
         <TitleContainer>
           <Title>{movie.title}</Title>

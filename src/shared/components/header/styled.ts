@@ -48,15 +48,18 @@ export const HiddenVersion = styled.div`
   display: none;
 `;
 
-export const FiltersSC = styled(animated.div)<{ $isOpen: boolean }>`
-  border-bottom: ${({ $isOpen }) => ($isOpen ? "1px" : 0)} solid ${lightPurple};
-  border-top: ${({ $isOpen }) => ($isOpen ? "1px" : 0)} solid ${lightPurple};
+export const FiltersSC = styled(animated.div, {
+  shouldForwardProp: (prop) => prop !== "$isOpened",
+})<{ $isOpened: boolean }>`
+  border-bottom: ${(props) => (props.$isOpened ? "1px" : 0)} solid
+    ${lightPurple};
+  border-top: ${(props) => (props.$isOpened ? "1px" : 0)} solid ${lightPurple};
 
-  margin-top: ${({ $isOpen }) => ($isOpen ? "12px" : "0px")};
-  padding: ${({ $isOpen }) => ($isOpen ? "8px" : "0px")};
+  margin-top: ${(props) => (props.$isOpened ? "12px" : "0px")};
+  padding: ${(props) => (props.$isOpened ? "8px" : "0px")};
 
   overflow: hidden;
-  height: ${({ $isOpen }) => ($isOpen ? "120px" : "0px")};
+  height: ${(props) => (props.$isOpened ? "120px" : "0px")};
 
   transition: all 0.2s ease-in-out;
 `;

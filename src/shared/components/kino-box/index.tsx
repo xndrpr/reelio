@@ -21,9 +21,8 @@ function KinoboxPlayer({ movie }: Props) {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
           search: {
-            tmdb: movie.tmdb_id,
+            tmdb: movie.id,
             imdb: movie.imdb_id,
-            title: movie.title,
           },
           menu: {
             enabled: false,
@@ -82,21 +81,9 @@ function KinoboxPlayer({ movie }: Props) {
         document.body.removeChild(script);
       } catch (e) {}
     };
-  }, [
-    movie.backdrop,
-    movie.id,
-    movie.poster,
-    movie.imdb_id,
-    movie.title,
-    movie.tmdb_id,
-  ]);
+  }, [movie.backdrop, movie.id, movie.poster, movie.imdb_id, movie.title]);
 
-  //return <Container ref={containerRef} className="kinobox_player"></Container>;
-
-  const url = `https://sansa.allarknow.online/t/?token=3a4e69a3bb3a0eb3b5bf5eba7e563b&token_movie=fc4f8e05dd7f31e582e9bc7234e98b`;
-  const src = `http://localhost:6100/api/neo/get/${url.replaceAll("/", "(").replaceAll("?", ")").replaceAll("&", "!")}?secret=VupsinPupsin`;
-
-  return <Player src={src} />;
+  return <Container ref={containerRef} className="kinobox_player"></Container>;
 }
 
 export default KinoboxPlayer;

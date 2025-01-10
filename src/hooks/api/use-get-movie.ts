@@ -7,16 +7,15 @@ export const MOVIE_QUERY_KEY = "getMovie";
 export const createMovieFn = (id: number, type: MovieType) => {
   return async () => {
     try {
-      const res = await fetch(
-        `${process.env.API_URL}/movies/${id}?type=${type}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            secret: `${process.env.SECRET}`,
-          },
-          next: { revalidate: 60 * 60 },
-        }
-      );
+      const url = `${process.env.API_URL}/${type}/${id}?type=${type}&language=ru-RU`;
+
+      const res = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.API_KEY}`,
+        },
+        next: { revalidate: 60 * 15 },
+      });
       const data = await res.json();
       return {
         ...data,

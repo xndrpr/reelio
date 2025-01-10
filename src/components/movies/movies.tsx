@@ -10,7 +10,7 @@ export default function Movies({ movies }: Props) {
   return (
     <CardsContainer>
       {movies?.map((movie) => (
-        <MovieCard key={movie.tmdb_id} movie={movie} />
+        <MovieCard key={movie.id} movie={movie} />
       ))}
     </CardsContainer>
   );

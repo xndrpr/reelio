@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { animated, easings, useTransition } from "@react-spring/web";
 import {
   CustomTabs,
   FiltersSC,
@@ -67,7 +66,7 @@ export const Header = ({ activeTab }: Props) => {
         <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
       </HeaderContent>
 
-      <FiltersSC $isOpen={isFiltersOpen}>Фильтры</FiltersSC>
+      <FiltersSC $isOpened={isFiltersOpen}>Фильтры</FiltersSC>
     </HeaderSC>
   );
 };

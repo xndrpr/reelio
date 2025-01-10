@@ -11,7 +11,7 @@ interface Props {
 
 export const Filters = ({ isOpen, setIsOpen }: Props & { isOpen: boolean }) => {
   return (
-    <FiltersSC $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+    <FiltersSC $isOpened={isOpen} onClick={() => setIsOpen(!isOpen)}>
       <FiltersIcon />
     </FiltersSC>
   );
