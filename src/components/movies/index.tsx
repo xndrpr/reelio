@@ -15,12 +15,10 @@ interface Props {
 
 export default async function MoviesPage({ type, offset }: Props) {
   const queryClient = new QueryClient();
-  const movies = await queryClient
-    .fetchQuery({
-      queryKey: [MOVIES_QUERY_KEY, type],
-      queryFn: () => fetchMovies(parseInt(offset) || 1, type)(),
-    })
-    .catch();
+  const movies = await queryClient.fetchQuery({
+    queryKey: [MOVIES_QUERY_KEY, type],
+    queryFn: () => fetchMovies(parseInt(offset) || 1, type)(),
+  });
 
   return (
     <>

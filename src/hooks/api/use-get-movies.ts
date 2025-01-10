@@ -10,8 +10,6 @@ function typeToId(type: MovieType): number | null {
 
 export const fetchMovies = (offset: number, type: MovieType) => {
   return async () => {
-    if (!process.env.API_KEY) return [];
-
     const tmdbType =
       type === MovieType.Cartoon || type == MovieType.Movie
         ? MovieType.Movie
