@@ -52,11 +52,7 @@ const MoviePage = ({ movie, type }: Props) => {
 
   return (
     <Container $bg={movie?.backdrop}>
-      <BackButton
-        onClick={() =>
-          router.push(`/${type === MovieType.Movie ? "movies" : "series"}`)
-        }
-      >
+      <BackButton onClick={() => router.push("/")}>
         <BackArrow />
       </BackButton>
       <Player>

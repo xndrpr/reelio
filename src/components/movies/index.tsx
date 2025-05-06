@@ -4,9 +4,10 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import Movies from "./movies";
-import { Pagination } from "@/shared/components/pagination";
 import { MovieType } from "@/types/movie";
+import GreyLogo from "@/assets/grey-logo.svg?react";
+import Image from "next/image";
+import Movies from "./movies";
 
 interface Props {
   type: MovieType;
@@ -20,21 +21,38 @@ export default async function MoviesPage({ type, offset }: Props) {
     queryFn: () => fetchMovies(parseInt(offset) || 1, type)(),
   });
 
+  const defaultBackdrop =
+    "https://image.tmdb.org/t/p/original/npD65vPa4vvn1ZHpp3o05A5vdKT.jpg";
+
   return (
     <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Movies movies={movies.data} />
-        <Pagination
-          currentPage={parseInt(offset) || 1}
-          pages={parseInt(
-            (movies.total > 1000
-              ? type === MovieType.Movie || type === MovieType.TV
-                ? 1000
-                : 789
-              : movies.total
-            ).toFixed(0)
-          )}
+      <div className="absolute top-0 left-0 w-full h-dvh -z-10">
+        <div className="absolute inset-0 w-full h-full bg-background/80 backdrop-blur-3xl"></div>
+        <Image
+          src={movies.find((mov) => mov.backdrop)?.backdrop || defaultBackdrop}
+          width={1920}
+          height={1080}
+          alt=""
+          className="w-full h-full object-cover"
         />
+      </div>
+
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <div>
+          <div className="flex gap-6 flex-col w-full justify-center items-center py-16 relative z-10">
+            <GreyLogo />
+            <div className="flex flex-col justify-center items-center gap-4 max-w-[50%] text-center">
+              <h1 className="text-3xl">Watch movies & TV Shows</h1>
+              <p>
+                Explore the captivating world of cinema and television with
+                detailed descriptions of your favorite movies and TV shows.
+                Discover plot summaries, character insights, and
+                behind-the-scenes trivia that bring each story to life.
+              </p>
+            </div>
+          </div>
+          <Movies movies={movies} />
+        </div>
       </HydrationBoundary>
     </>
   );

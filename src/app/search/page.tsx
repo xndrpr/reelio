@@ -26,7 +26,7 @@ export default async function SearchPage({
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Header activeTab={0} />
+        <Header />
         <Movies movies={movies.data} />
       </HydrationBoundary>
     </>

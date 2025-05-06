@@ -2,9 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
-import { ContentWrapper } from "./layout-styled";
-import { GlobalStyles } from "./global-styles";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,10 +10,10 @@ export const metadata: Metadata = {
     icon: "/icon.png",
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || ""),
-  title: "Glee",
+  title: "Reelio",
   description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
   openGraph: {
-    title: "Glee",
+    title: "Reelio",
     description: "Смотреть фильмы бесплатно, в хорошем качестве, без рекламы.",
     images: [
       {
@@ -38,10 +35,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <GlobalStyles />
-
           <div className="flex w-dvw justify-center items-center">
-            <ContentWrapper>{children}</ContentWrapper>
+            <div className="px-20 py-8 w-full">{children}</div>
           </div>
         </Providers>
       </body>

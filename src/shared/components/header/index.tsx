@@ -1,72 +1,41 @@
 "use client";
 
 import React from "react";
-import {
-  CustomTabs,
-  FiltersSC,
-  HeaderContent,
-  HeaderSC,
-  HiddenVersion,
-  Search,
-} from "./styled";
-import { SearchBar } from "../search-bar";
-import { Tab } from "../tabs";
-import { useRouter } from "next/navigation";
-import { Filters } from "../filters";
+import Logo from "@/assets/logo.svg?react";
+import SearchIcon from "@/assets/icons/search.svg?react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   activeTab: number;
 }
 
-export const Header = ({ activeTab }: Props) => {
+export const Header = () => {
   const router = useRouter();
-  const tabs: Tab[] = [
-    { title: "Фильмы", href: "/movies" },
-    { title: "Сериалы", href: "/series" },
-    { title: "Мультфильмы", href: "/cartoons" },
-    { title: "Аниме", href: "/anime" },
-  ];
-  const [tab, setTab] = React.useState(activeTab);
-  const setActiveTab = async (tab: number) => {
-    if (tab === 0) {
-      setTab(0);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      router.push("/movies");
-    }
+  const searchParams = useSearchParams();
+  const [value, setValue] = React.useState(searchParams.get("query") || "");
 
-    if (tab === 1) {
-      setTab(1);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      router.push("/series");
-    }
-
-    if (tab === 2) {
-      setTab(2);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      router.push("/cartoons");
-    }
-
-    if (tab === 3) {
-      setTab(3);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      router.push("/anime");
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && value.length > 0 && !value.startsWith(" ")) {
+      console.log(`/search?query=${value}&offset=1`);
+      router.push(`/search?query=${value}&offset=1`);
     }
   };
 
-  const [isFiltersOpen, setIsFiltersOpen] = React.useState(false);
-
   return (
-    <HeaderSC>
-      <HeaderContent>
-        <CustomTabs tabs={tabs} activeTab={tab} setActiveTab={setActiveTab} />
-        <Search>
-          <SearchBar />
-          <Filters setIsOpen={setIsFiltersOpen} isOpen={isFiltersOpen} />
-        </Search>
-        <HiddenVersion>{process.env.NEXT_PUBLIC_VERSION}</HiddenVersion>
-      </HeaderContent>
-
-      <FiltersSC $isOpened={isFiltersOpen}>Фильтры</FiltersSC>
-    </HeaderSC>
+    <div className="flex gap-5 w-full h-[40px]">
+      <div>
+        <Logo />
+      </div>
+      <div className="flex gap-2 justify-center items-center rounded-2xl w-full border-2 border-white/20 px-2">
+        <SearchIcon />
+        <input
+          placeholder="Search Movies, Series..."
+          className="border-none outline-none w-full"
+          onKeyDown={onKeyDown}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </div>
+    </div>
   );
 };

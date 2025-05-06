@@ -9,7 +9,7 @@ export default function HomePage({
 }) {
   return (
     <main>
-      <Header activeTab={0} />
+      <Header />
       <Movies offset={searchParams.offset} type={MovieType.Movie} />
     </main>
   );
