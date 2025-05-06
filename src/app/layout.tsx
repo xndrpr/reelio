@@ -1,3 +1,4 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
@@ -39,7 +40,9 @@ export default function RootLayout({
         <Providers>
           <GlobalStyles />
 
-          <ContentWrapper>{children}</ContentWrapper>
+          <div className="flex w-dvw justify-center items-center">
+            <ContentWrapper>{children}</ContentWrapper>
+          </div>
         </Providers>
       </body>
     </html>

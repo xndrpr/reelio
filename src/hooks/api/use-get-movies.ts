@@ -81,6 +81,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
 };
 
 export const useGetMovies = (offset: number, type: MovieType) => {
+  console.log(offset);
   return useQuery({
     queryKey: [MOVIES_QUERY_KEY, type],
     queryFn: () => fetchMovies(offset, type),

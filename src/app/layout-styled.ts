@@ -4,6 +4,8 @@ import { breakPoint1, breakPoint2, breakPoint3 } from "@/shared/variables";
 import styled from "@emotion/styled";
 
 export const ContentWrapper = styled.main`
+  width: 100%;
+  max-width: 1400px;
   padding: 40px 80px;
 
   @media (max-width: ${breakPoint1}px) {

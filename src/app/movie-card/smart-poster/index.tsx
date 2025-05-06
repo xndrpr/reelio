@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Poster, SkeletonPoster } from "./styled";
 
 interface Props {
   poster: string;
 }
 export const SmartPoster = ({ poster }: Props) => {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -27,7 +27,7 @@ export const SmartPoster = ({ poster }: Props) => {
         onLoad={() => setLoading(false)}
         blurDataURL={poster}
         loading="eager"
-        quality={window.innerWidth < 768 ? 40 : 100}
+        quality={100}
       />
     </>
   );
