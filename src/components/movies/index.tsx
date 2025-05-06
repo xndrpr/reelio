@@ -62,7 +62,7 @@ export default async function MoviesPage({ type, offset }: Props) {
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-2">
               <h2 className="font-semibold text-foreground text-2xl">
-                Trending Today
+                Популярно сегодня
               </h2>
               <div className="flex w-full h-full gap-5 overflow-x-auto scrollbar-hide">
                 {dayTrending?.map((movie) => (
@@ -72,7 +72,7 @@ export default async function MoviesPage({ type, offset }: Props) {
             </div>
             <div className="flex flex-col gap-2">
               <h2 className="font-semibold text-foreground text-2xl">
-                Trending This Week
+                Популярно на этой неделе
               </h2>
               <div className="flex w-full h-full gap-5 overflow-x-auto scrollbar-hide">
                 {weekTrending?.map((movie) => (
