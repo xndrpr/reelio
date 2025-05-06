@@ -22,10 +22,13 @@ export const SmartPoster = ({ poster }: Props) => {
         </div>
       )}
       <Image
-        className={clsx(["rounded-xl", loading && "hidden"])}
+        className={clsx([
+          "min-w-[200px] h-[300px] rounded-xl object-cover",
+          loading && "hidden",
+        ])}
         key={poster}
         width={200}
-        height={280}
+        height={300}
         src={poster}
         alt="poster"
         priority

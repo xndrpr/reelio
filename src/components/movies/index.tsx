@@ -8,6 +8,7 @@ import { MovieType } from "@/types/movie";
 import GreyLogo from "@/assets/grey-logo.svg?react";
 import Image from "next/image";
 import Movies from "./movies";
+import { MovieCard } from "@/app/movie-card";
 
 interface Props {
   type: MovieType;
@@ -16,9 +17,13 @@ interface Props {
 
 export default async function MoviesPage({ type, offset }: Props) {
   const queryClient = new QueryClient();
-  const movies = await queryClient.fetchQuery({
-    queryKey: [MOVIES_QUERY_KEY, type],
-    queryFn: () => fetchMovies(parseInt(offset) || 1, type)(),
+  const weekTrending = await queryClient.fetchQuery({
+    queryKey: [MOVIES_QUERY_KEY],
+    queryFn: () => fetchMovies(parseInt(offset) || 1, "week")(),
+  });
+  const dayTrending = await queryClient.fetchQuery({
+    queryKey: [MOVIES_QUERY_KEY],
+    queryFn: () => fetchMovies(parseInt(offset) || 1, "day")(),
   });
 
   const defaultBackdrop =
@@ -29,7 +34,10 @@ export default async function MoviesPage({ type, offset }: Props) {
       <div className="absolute top-0 left-0 w-full h-dvh -z-10">
         <div className="absolute inset-0 w-full h-full bg-background/80 backdrop-blur-3xl"></div>
         <Image
-          src={movies.find((mov) => mov.backdrop)?.backdrop || defaultBackdrop}
+          src={
+            weekTrending.find((mov) => mov.backdrop)?.backdrop ||
+            defaultBackdrop
+          }
           width={1920}
           height={1080}
           alt=""
@@ -41,17 +49,36 @@ export default async function MoviesPage({ type, offset }: Props) {
         <div>
           <div className="flex gap-6 flex-col w-full justify-center items-center py-16 relative z-10">
             <GreyLogo />
-            <div className="flex flex-col justify-center items-center gap-4 max-w-[50%] text-center">
+            <div className="flex flex-col justify-center items-center gap-4 max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] text-center min-[200px]">
               <h1 className="text-3xl">Watch movies & TV Shows</h1>
               <p>
                 Explore the captivating world of cinema and television with
                 detailed descriptions of your favorite movies and TV shows.
-                Discover plot summaries, character insights, and
-                behind-the-scenes trivia that bring each story to life.
               </p>
             </div>
           </div>
-          <Movies movies={movies} />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <h2 className="font-semibold text-foreground text-2xl">
+                Trending Today
+              </h2>
+              <div className="flex w-full h-full gap-5 overflow-x-auto scrollbar-hide">
+                {dayTrending?.map((movie) => (
+                  <MovieCard key={movie.id} movie={movie} />
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h2 className="font-semibold text-foreground text-2xl">
+                Trending This Week
+              </h2>
+              <div className="flex w-full h-full gap-5 overflow-x-auto scrollbar-hide">
+                {weekTrending?.map((movie) => (
+                  <MovieCard key={movie.id} movie={movie} />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </HydrationBoundary>
     </>

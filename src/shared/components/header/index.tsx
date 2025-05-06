@@ -22,15 +22,18 @@ export const Header = () => {
   };
 
   return (
-    <div className="flex gap-5 w-full h-[40px]">
-      <div>
+    <div className="flex flex-col justify-center items-center gap-5 w-full sm:flex-row">
+      <button
+        className="bg-none outline-none border-none cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         <Logo />
-      </div>
-      <div className="flex gap-2 justify-center items-center rounded-2xl w-full border-2 border-white/20 px-2">
+      </button>
+      <div className="flex gap-2 justify-center items-center rounded-2xl w-full h-10 border-2 border-white/20 px-2">
         <SearchIcon />
         <input
           placeholder="Search Movies, Series..."
-          className="border-none outline-none w-full"
+          className="border-none outline-none w-full h-full"
           onKeyDown={onKeyDown}
           value={value}
           onChange={(e) => setValue(e.target.value)}

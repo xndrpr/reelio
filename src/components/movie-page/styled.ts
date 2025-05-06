@@ -65,6 +65,7 @@ export const Title = styled.h1`
 
 export const Player = styled.div`
   width: 100%;
+  max-height: 80%;
   display: flex;
   flex-direction: column;
   gap: 12px;

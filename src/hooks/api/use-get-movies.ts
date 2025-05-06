@@ -3,19 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export const MOVIES_QUERY_KEY = "getMovies";
 
-function typeToId(type: MovieType): number | null {
-  if (type === MovieType.Anime) return 210024;
-  else return null;
-}
-
-export const fetchMovies = (offset: number, type: MovieType) => {
+export const fetchMovies = (offset: number, period: "day" | "week") => {
   return async (): Promise<Movie[]> => {
-    const tmdbType =
-      type === MovieType.Cartoon || type == MovieType.Movie
-        ? MovieType.Movie
-        : MovieType.TV;
-    const keyword = typeToId(type);
-
     const movie_date = `&release_date.gte=${
       offset <= 500
         ? "2010-01-01"
@@ -42,17 +31,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
         ? "2009-12-31"
         : "1990-12-31"
     }`;
-    const url = `${
-      process.env.API_URL
-    }/discover/${tmdbType}?include_adult=false&include_video=false&language=ru-RU&page=${
-      offset <= 500 ? offset : offset - 500
-    }&sort_by=vote_count.desc${keyword ? `&with_keywords=${keyword}` : ""}${
-      tmdbType === MovieType.Movie ? movie_date : tv_date
-    }${
-      type === MovieType.Cartoon || type === MovieType.Anime
-        ? "&with_genres=16"
-        : ""
-    }`;
+    const url = `${process.env.API_URL}/trending/all/${period}?include_adult=false&include_video=false&language=ru-RU&page=${offset}`;
 
     const res = await fetch(url, {
       headers: {
@@ -65,7 +44,7 @@ export const fetchMovies = (offset: number, type: MovieType) => {
     return data?.results?.map((doc: any) => ({
       ...doc,
       title: doc?.title || doc?.name,
-      type: tmdbType,
+      type: doc?.media_type,
       rating: Math.round(doc?.vote_average * 10) / 10,
       poster:
         doc?.poster_path &&
@@ -80,9 +59,9 @@ export const fetchMovies = (offset: number, type: MovieType) => {
   };
 };
 
-export const useGetMovies = (offset: number, type: MovieType) => {
+export const useGetMovies = (offset: number, period: "day" | "week") => {
   return useQuery({
-    queryKey: [MOVIES_QUERY_KEY, type],
-    queryFn: () => fetchMovies(offset, type),
+    queryKey: [MOVIES_QUERY_KEY],
+    queryFn: () => fetchMovies(offset, period),
   });
 };

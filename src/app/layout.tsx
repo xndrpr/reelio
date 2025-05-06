@@ -36,7 +36,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <div className="flex w-dvw justify-center items-center">
-            <div className="px-20 py-8 w-full">{children}</div>
+            <div className="px-6 py-6 md:px-12 md:py-6 lg:px-20 lg:py-8 w-full">
+              {children}
+            </div>
           </div>
         </Providers>
       </body>

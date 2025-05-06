@@ -27,6 +27,7 @@ export default async function SearchPage({
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Header />
+        <h1 className="text-3xl mt-12">Результаты поиска: </h1>
         <Movies movies={movies.data} />
       </HydrationBoundary>
     </>

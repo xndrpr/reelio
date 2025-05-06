@@ -14,7 +14,7 @@ export const MovieCard = ({ movie }: Props) => {
   if (!movie || !movie.poster || !movie.title) return null;
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="w-full h-full flex flex-col gap-1">
       <a
         href={`/${movie.type}/${movie.id}-${slug(movie.title)}`}
         className="text-[${fgColor}] no-underline cursor-pointer transition-opacity hover:opacity-70"
