@@ -32,7 +32,7 @@ export const Header = () => {
       <div className="flex gap-2 justify-center items-center rounded-2xl w-full h-10 border-2 border-white/20 px-2">
         <SearchIcon />
         <input
-          placeholder="Search Movies, Series..."
+          placeholder="Найти фильмы, сериал..."
           className="border-none outline-none w-full h-full"
           onKeyDown={onKeyDown}
           value={value}

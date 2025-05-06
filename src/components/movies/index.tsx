@@ -50,10 +50,12 @@ export default async function MoviesPage({ type, offset }: Props) {
           <div className="flex gap-6 flex-col w-full justify-center items-center py-16 relative z-10">
             <GreyLogo />
             <div className="flex flex-col justify-center items-center gap-4 max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] text-center min-[200px]">
-              <h1 className="text-3xl">Watch movies & TV Shows</h1>
-              <p>
-                Explore the captivating world of cinema and television with
-                detailed descriptions of your favorite movies and TV shows.
+              <h1 className="text-3xl">Смотрите фильмы и сериалы</h1>
+              <p className="text-dusty-mauve">
+                Погрузитесь в захватывающий мир фильмов и сериалов: открывайте
+                для себя тысячи увлекательных историй, читайте подробные
+                описания, следите за любимыми проектами и находите новые хиты —
+                всё это совершенно бесплатно и без ограничений.
               </p>
             </div>
           </div>
