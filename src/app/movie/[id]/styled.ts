@@ -1,6 +1,5 @@
 "use client";
 
-import { Tabs } from "@/shared/components/tabs";
 import { breakPoint2, breakPoint3, darkPurple } from "@/shared/variables";
 import styled from "@emotion/styled";
 import Image from "next/image";
@@ -79,11 +78,6 @@ export const TabsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const StyledTabs = styled(Tabs)`
-  width: 225px;
-  z-index: 1;
 `;
 
 export const Backdrop = styled(Image)`

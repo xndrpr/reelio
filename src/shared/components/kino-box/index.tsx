@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Container, Player } from "./styled";
 import { Movie } from "@/types/movie";
 
 interface Props {
@@ -35,42 +34,15 @@ function KinoboxPlayer({ movie }: Props) {
             },
           },
           players: {
-            alloha: {
-              enable: true,
-              position: 1,
-            },
-            voidboost: {
-              enable: true,
-              position: 2,
-            },
-            kodik: {
-              enable: true,
-              position: 3,
-            },
-            ashdi: {
-              enable: true,
-              position: 4,
-            },
-            cdnmovies: {
-              enable: true,
-              position: 5,
-            },
-            vibix: {
-              enable: true,
-              position: 6,
-            },
-            videocdn: {
-              enable: true,
-              position: 7,
-            },
-            hdvb: {
-              enable: true,
-              position: 8,
-            },
-            collaps: {
-              enable: true,
-              position: 9,
-            },
+            alloha: { enable: true, position: 1 },
+            voidboost: { enable: true, position: 2 },
+            kodik: { enable: true, position: 3 },
+            ashdi: { enable: true, position: 4 },
+            cdnmovies: { enable: true, position: 5 },
+            vibix: { enable: true, position: 6 },
+            videocdn: { enable: true, position: 7 },
+            hdvb: { enable: true, position: 8 },
+            collaps: { enable: true, position: 9 },
           },
         });
       }
@@ -79,11 +51,28 @@ function KinoboxPlayer({ movie }: Props) {
     return () => {
       try {
         document.body.removeChild(script);
-      } catch (e) {}
+      } catch {}
     };
   }, [movie.backdrop, movie.id, movie.poster, movie.imdb_id, movie.title]);
 
-  return <Container ref={containerRef} className="kinobox_player"></Container>;
+  return (
+    <div
+      ref={containerRef}
+      className="
+        kinobox_player
+        w-full
+        max-w-[calc(100%-320px)]
+        aspect-video
+        border-2
+        border-dusty-mauve/50
+        rounded-2xl
+        max-h-full
+        max-[1280px]:max-w-[calc(100%-240px)]
+        max-[1024px]:max-w-[calc(100%-64px)]
+        max-[768px]:max-w-unset
+      "
+    />
+  );
 }
 
 export default KinoboxPlayer;

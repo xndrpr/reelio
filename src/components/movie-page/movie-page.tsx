@@ -2,17 +2,9 @@
 
 import React from "react";
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import { Tab } from "@/shared/components/tabs";
 import KinoboxPlayer from "@/shared/components/kino-box";
 import { useRouter } from "next/navigation";
-import {
-  BackButton,
-  Container,
-  Player,
-  StyledTabs,
-  TabsContainer,
-  Title,
-} from "./styled";
+import { BackButton, Container, Player, Title } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
 import slug from "slug";
 
@@ -29,7 +21,7 @@ const MoviePage = ({ movie, type }: Props) => {
     movie.id
   }-${slug(movie.title)}/about`;
 
-  const tabs: Tab[] = [
+  const tabs = [
     {
       title: "Смотреть",
       href: watchUrl,
@@ -66,9 +58,6 @@ const MoviePage = ({ movie, type }: Props) => {
         </Title>
         {movie?.id && <KinoboxPlayer movie={movie} />}
       </Player>
-      <TabsContainer>
-        <StyledTabs activeTab={tab} setActiveTab={changeTab} tabs={tabs} />
-      </TabsContainer>
     </Container>
   );
 };

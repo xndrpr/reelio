@@ -137,3 +137,7 @@
     display: none;
   }
 }
+
+.kinobox_wrapper {
+  @apply rounded-xl bg-dusty-mauve;
+}
