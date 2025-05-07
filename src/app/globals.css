@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@source inline("scollbar-hide");
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
