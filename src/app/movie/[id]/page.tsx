@@ -7,6 +7,7 @@ import React from "react";
 import { createMovieFn, MOVIE_QUERY_KEY } from "@/hooks/api/use-get-movie";
 import MoviePage from "@/components/movie-page/movie-page";
 import { MovieType } from "@/types/movie";
+import { getVideos, VIDEOS_QUERY_KEY } from "@/hooks/api/use-get-videos";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const id = parseInt(params.id);

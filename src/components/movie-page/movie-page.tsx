@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { Movie, MovieType } from "@/types/movie";
 import Image from "next/image";
 import KinoboxPlayer from "@/shared/components/kino-box";
+import { Video } from "@/hooks/api/use-get-videos";
+import Link from "next/link";
 
 interface Props {
   movie: Movie;
@@ -35,13 +37,15 @@ const MoviePage = ({ movie, type }: Props) => {
         <BackArrowIcon />
       </button>
       <div className="flex flex-col gap-2 mt-8">
-        <Image
-          src={movie.poster}
-          width={200}
-          height={300}
-          alt="Movie Poster"
-          className=" rounded-xl"
-        />
+        <div className="flex flex-col gap-2">
+          <Image
+            src={movie.poster}
+            width={200}
+            height={300}
+            alt="Movie Poster"
+            className=" rounded-xl"
+          />
+        </div>
         <div className="flex flex-col gap-2 w-full ">
           <div className="flex flex-col gap-1">
             <h1 className="text-3xl sm:text-4xl text-foreground">
