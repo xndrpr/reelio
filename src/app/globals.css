@@ -46,6 +46,8 @@
   --color-foreground: #EDEAF7;
   --color-background: #040110;
   --color-secondary: #855EFF;
+
+  --breakpoint-xs: 500px;
 }
 
 :root {

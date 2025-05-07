@@ -7,7 +7,6 @@ import {
 import { MovieType } from "@/types/movie";
 import GreyLogo from "@/assets/grey-logo.svg?react";
 import Image from "next/image";
-import Movies from "./movies";
 import { MovieCard } from "@/app/movie-card";
 
 interface Props {
