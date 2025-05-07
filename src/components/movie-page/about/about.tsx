@@ -3,7 +3,6 @@
 import React from "react";
 
 import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import { Tab } from "@/shared/components/tabs";
 import { usePathname, useRouter } from "next/navigation";
 import {
   About,
@@ -22,7 +21,7 @@ import {
   Wrapper,
 } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
-import { BackButton, StyledTabs, TabsContainer } from "../styled";
+import { BackButton } from "../styled";
 import slug from "slug";
 import {
   getCountryByISO,
@@ -46,7 +45,7 @@ export const AboutMovie = ({ movie, type }: Props) => {
     movie.id
   }-${slug(movie.title)}/about`;
 
-  const tabs: Tab[] = [
+  const tabs = [
     { title: "Смотреть", href: watchUrl },
     {
       title: type === MovieType.Movie ? "О фильме" : "О сериале",
@@ -202,9 +201,6 @@ export const AboutMovie = ({ movie, type }: Props) => {
           </Description>
         </Wrapper>
       </About>
-      <TabsContainer>
-        <StyledTabs activeTab={tab} setActiveTab={changeTab} tabs={tabs} />
-      </TabsContainer>
     </Container>
   );
 };

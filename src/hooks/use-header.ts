@@ -1,5 +1,8 @@
-import { Tab } from "@/shared/components/tabs";
 import { useState } from "react";
+
+interface Tab {
+  title: string;
+}
 
 export interface HeaderState {
   tabs: Tab[];
@@ -9,7 +12,7 @@ export interface HeaderState {
 
 export function useHeader(): HeaderState {
   const [activeTab, setActiveTab] = useState(0);
-  const tabs: Tab[] = [
+  const tabs = [
     { title: "Фильмы" },
     { title: "Сериалы" },
     { title: "Мультфильмы" },
