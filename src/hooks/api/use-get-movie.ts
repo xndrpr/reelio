@@ -31,7 +31,9 @@ export const createMovieFn = (id: number, type: MovieType) => {
         seasons_count: data?.seasons?.length,
         start_year:
           data?.release_date?.slice(0, 4) || data?.first_air_date?.slice(0, 4),
-        end_year: data?.last_air_date?.slice(0, 4),
+        end_year: ["Ended", "Canceled"].includes(data?.status)
+          ? data?.last_air_date?.slice(0, 4)
+          : null,
       } as Movie;
     } catch {
       return null;

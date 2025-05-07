@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { BackArrow } from "@/assets/icons/tsx-icons/back-arrow";
-import KinoboxPlayer from "@/shared/components/kino-box";
+import BackArrowIcon from "@/assets/icons/back-arrow.svg?react";
+import RatingIcon from "@/assets/icons/rating.svg?react";
 import { useRouter } from "next/navigation";
-import { BackButton, Container, Player, Title } from "./styled";
 import { Movie, MovieType } from "@/types/movie";
-import slug from "slug";
+import Image from "next/image";
+import KinoboxPlayer from "@/shared/components/kino-box";
 
 interface Props {
   movie: Movie;
@@ -14,51 +14,69 @@ interface Props {
 }
 
 const MoviePage = ({ movie, type }: Props) => {
-  const watchUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.id
-  }-${slug(movie.title)}`;
-  const aboutUrl = `/${type === MovieType.Movie ? "movie" : "tv"}/${
-    movie.id
-  }-${slug(movie.title)}/about`;
-
-  const tabs = [
-    {
-      title: "Смотреть",
-      href: watchUrl,
-    },
-    {
-      title: type === MovieType.Movie ? "О фильме" : "О сериале",
-      href: aboutUrl,
-    },
-  ];
   const router = useRouter();
-  const [tab, setTab] = React.useState(0);
-
-  const changeTab = async (tab: number) => {
-    if (tab === 1) {
-      setTab(1);
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      router.replace(aboutUrl);
-    }
-  };
 
   return (
-    <Container $bg={movie?.backdrop}>
-      <BackButton onClick={() => router.push("/")}>
-        <BackArrow />
-      </BackButton>
-      <Player>
-        <Title>
-          {movie?.title} {movie.start_year ? "(" : null}
-          {movie?.start_year}
-          {movie.end_year && movie.status === "Ended"
-            ? ` - ${movie.end_year}`
-            : ""}
-          {movie.end_year ? ")" : null}
-        </Title>
-        {movie?.id && <KinoboxPlayer movie={movie} />}
-      </Player>
-    </Container>
+    <div className="relative">
+      <div className="fixed top-0 left-0 w-full h-dvh -z-10">
+        <div className="absolute inset-0 w-full h-full bg-background/80 backdrop-blur-3xl"></div>
+        <Image
+          src={movie.backdrop}
+          width={1920}
+          height={1080}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <button
+        className="mt-8 cursor-pointer hover:opacity-80 transition-all ease-in-out duration-300"
+        onClick={() => router.push("/")}
+      >
+        <BackArrowIcon />
+      </button>
+      <div className="flex flex-col gap-2 mt-8">
+        <Image
+          src={movie.poster}
+          width={200}
+          height={300}
+          alt="Movie Poster"
+          className=" rounded-xl"
+        />
+        <div className="flex flex-col gap-2 w-full ">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-3xl sm:text-4xl text-foreground">
+              {movie.title}
+            </h1>
+            <h3 className="text-sm sm:text-xl text-foreground/50 font-light">
+              {movie.original_title}
+            </h3>
+          </div>
+          <div className="flex items-center gap-1 text-rating font-semibold text-base">
+            <RatingIcon />
+            {movie.vote_average.toFixed(1)}
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-dusty-mauve text-sm sm:text-base md:text-xl capitalize">
+              {type === MovieType.TV
+                ? `${movie.start_year} – ${
+                    movie.end_year || "По настоящее время"
+                  }`
+                : `${movie.start_year}`}
+              {` • ${movie.genres
+                .map((g) => g.name.replace("НФ", "Научная Фантастика"))
+                .join(", ")}`}
+            </p>
+            <p className="text-dusty-mauve font-light max-w-[90%] sm:max-w-[50%] text-sm sm:text-base md:text-xl">
+              {movie.overview}
+            </p>
+          </div>
+
+          <div className="mt-4">
+            <KinoboxPlayer movie={movie} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

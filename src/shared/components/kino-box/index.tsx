@@ -61,15 +61,10 @@ function KinoboxPlayer({ movie }: Props) {
       className="
         kinobox_player
         w-full
-        max-w-[calc(100%-320px)]
         aspect-video
         border-2
         border-dusty-mauve/50
         rounded-2xl
-        max-h-full
-        max-[1280px]:max-w-[calc(100%-240px)]
-        max-[1024px]:max-w-[calc(100%-64px)]
-        max-[768px]:max-w-unset
       "
     />
   );
