@@ -66,7 +66,7 @@ const MoviePage = ({ movie, type }: Props) => {
                 .map((g) => g.name.replace("НФ", "Научная Фантастика"))
                 .join(", ")}`}
             </p>
-            <p className="text-dusty-mauve font-light max-w-[90%] sm:max-w-[50%] text-sm sm:text-base md:text-xl">
+            <p className="text-dusty-mauve/80 font-light max-w-[90%] sm:max-w-[50%] text-sm sm:text-base md:text-xl">
               {movie.overview}
             </p>
           </div>
